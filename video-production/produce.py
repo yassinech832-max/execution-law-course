@@ -14,6 +14,7 @@ import runpy
 import subprocess
 import sys
 import traceback
+import urllib.request
 import wave
 from pathlib import Path
 
@@ -29,6 +30,17 @@ BOLD = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
 
 def run(args, **kwargs):
     return subprocess.run([str(v) for v in args], check=True, **kwargs)
+
+def progress(unit, description):
+    token=os.environ.get('GITHUB_TOKEN')
+    if not token:return
+    repo=os.environ.get('GITHUB_REPOSITORY');sha=os.environ.get('GITHUB_SHA')
+    if not repo or not sha:return
+    payload=json.dumps({'state':'pending','context':f'course/video-{unit}','description':description[:140]}).encode()
+    request=urllib.request.Request(f'https://api.github.com/repos/{repo}/statuses/{sha}',data=payload,headers={'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Content-Type':'application/json'},method='POST')
+    try:
+        with urllib.request.urlopen(request,timeout=15) as response:response.read()
+    except Exception as exc:print('Progress update unavailable: '+type(exc).__name__,flush=True)
 
 def probe(path):
     return json.loads(subprocess.check_output(['ffprobe','-v','error','-show_format','-show_streams','-of','json',str(path)], text=True))
@@ -190,9 +202,9 @@ def slide(unit, scene, i, stage=0, thinking=False, portrait=None):
     return im
 
 async def speak(text, path):
-    import edge_tts
     metadata=path.with_suffix('.json')
     if path.exists() and metadata.exists():return json.loads(metadata.read_text())
+    import edge_tts
     boundaries=[]
     for attempt in range(2):
         try:
@@ -259,6 +271,7 @@ async def produce(unit, out):
     out.mkdir(parents=True,exist_ok=True);cache=out/'work';cache.mkdir(exist_ok=True)
     raw_parts=[];raw_total=0
     for i,scene in enumerate(unit['scenes']):
+        if i%4==0:progress(unit['id'],f'Preparing speech {i+1}/{len(unit["scenes"])}')
         parts=[]
         for n,text in enumerate(scene['parts']):
             if text is None:
@@ -278,6 +291,7 @@ async def produce(unit, out):
     spoken_target=TARGET-hold_total-gap*len(unit['scenes'])-tail
     tempo=raw_total/spoken_target
     if not .82<=tempo<=1.32:raise ValueError(f'Narration needs editorial revision: tempo={tempo:.3f}, natural_seconds={raw_total:.2f}')
+    progress(unit['id'],f'Speech complete; pacing {tempo:.3f}; composing 1200 seconds')
     audio=[];cues=[];timeline=[];clock=0
     for i,(scene,parts)in enumerate(zip(unit['scenes'],raw_parts)):
         start=clock;hold_ranges=[]
@@ -345,6 +359,7 @@ async def produce(unit, out):
     filters.append(f'[{audio_input}:a]{loud},aresample=48000[a]')
     command+=['-filter_complex',';'.join(filters),'-map',f'[{previous}]','-map','[a]','-map',f'{subtitle_input}:s','-c:v','libx264','-preset','veryfast','-tune','stillimage','-crf','24','-pix_fmt','yuv420p','-r',FPS,'-c:a','aac','-b:a','96k','-c:s','mov_text','-metadata:s:s:0','language=ara','-metadata:s:a:0','language=ara','-metadata','title='+unit['title'],'-movflags','+faststart','-t',TARGET,'-threads','2',out/'lecture.mp4']
     run(command)
+    progress(unit['id'],'Video encoded; checking duration, decoding, and captions')
     info=probe(out/'lecture.mp4');video=next(s for s in info['streams']if s['codec_type']=='video');sound=next(s for s in info['streams']if s['codec_type']=='audio')
     assert abs(float(info['format']['duration'])-TARGET)<.002,info['format']['duration']
     assert abs(float(video['duration'])-TARGET)<.002

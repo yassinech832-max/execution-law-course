@@ -11,9 +11,34 @@ concurrency:
   group: course-video-production
   cancel-in-progress: false
 jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      units: ${{ steps.queue.outputs.units }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: queue
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          queue=json.loads(Path('video-production/queue.json').read_text())
+          assert all(isinstance(n,int) and 1<=n<=5 for n in queue['units'])
+          with open(os.environ['GITHUB_OUTPUT'],'a') as output:
+              output.write('units='+json.dumps(queue['units'])+'\n')
+          PY
   render:
+    needs: plan
     runs-on: ubuntu-latest
     timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        unit: ${{ fromJSON(needs.plan.outputs.units) }}
+    env:
+      VIDEO_UNIT: ${{ matrix.unit }}
+      OUTPUT_BRANCH: video-production-unit-${{ matrix.unit }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -24,42 +49,42 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y ffmpeg fonts-dejavu-core
           python -m pip install pillow numpy edge-tts faster-whisper
-      - name: Render requested lectures sequentially
-        run: |
-          python video-production/run_queue.py
+      - name: Render and inspect the lecture
+        run: python video-production/run_queue.py "$VIDEO_UNIT"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - name: Retain finished files and production reports
         if: always()
         run: |
           mkdir -p /tmp/course-render-output
-          cp video-production/queue.json /tmp/course-render-output/queue.json
           python - <<'PY'
+          import json, os, shutil
           from pathlib import Path
-          import shutil
+          Path('/tmp/course-render-output/queue.json').write_text(json.dumps({'units':[int(os.environ['VIDEO_UNIT'])]}))
           for unit in Path('rendered').glob('unit-*'):
               dest=Path('/tmp/course-render-output')/unit.name
               dest.mkdir(parents=True,exist_ok=True)
               for file in unit.iterdir():
                   if file.is_file() and file.suffix in ['.mp4','.vtt','.srt','.jpg','.txt','.json']:
                       shutil.copy2(file,dest/file.name)
-              cache=unit/'work'
-              for file in cache.glob('speech-*'):
+              for file in (unit/'work').glob('speech-*'):
                   if file.suffix in ['.mp3','.json']:
                       (dest/'voice-cache').mkdir(exist_ok=True)
                       shutil.copy2(file,dest/'voice-cache'/file.name)
           PY
-          git fetch origin video-production-output || true
-          if git show-ref --verify --quiet refs/remotes/origin/video-production-output; then
-            git checkout -B video-production-output origin/video-production-output
+          git fetch origin "$OUTPUT_BRANCH" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/$OUTPUT_BRANCH"; then
+            git checkout -B "$OUTPUT_BRANCH" "origin/$OUTPUT_BRANCH"
           else
-            git checkout --orphan video-production-output
+            git checkout --orphan "$OUTPUT_BRANCH"
             git rm -rf --cached .
           fi
           mkdir -p media
           cp -r /tmp/course-render-output/unit-* media/ 2>/dev/null || true
           git add media
           if ! git diff --cached --quiet; then
-            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Retain rendered course lectures and duration checks'
-            git push origin HEAD:video-production-output
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Retain rendered lecture and duration checks'
+            git push origin "HEAD:$OUTPUT_BRANCH"
           fi
       - name: Record file measurements
         if: always()
