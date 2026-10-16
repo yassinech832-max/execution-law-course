@@ -13,6 +13,7 @@ const url = p => new URL(p, base).href;
   const context = await browser.newContext({viewport: {width: 1360, height: 1000}, reducedMotion: 'reduce'});
   const page = await context.newPage();
   const errors = [];
+  let stage = 'home desktop';
   page.on('pageerror', error => errors.push(error.message));
   page.on('response', response => {if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`);});
   const noOverflow = async () => assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `Page overflow: ${page.url()}`);
@@ -26,6 +27,7 @@ const url = p => new URL(p, base).href;
 
     const readingLinks = new Set();
     for (let unit = 1; unit <= 7; unit++) {
+      stage = `unit ${unit} desktop`;
       await page.goto(url(`lesson.html?unit=${unit}`));
       await page.locator('.lesson-intro h1').waitFor();
       assert.equal(await page.locator('.prompt').count(), 3);
@@ -45,6 +47,7 @@ const url = p => new URL(p, base).href;
 
     // Exercise every distinct educational source link, including both endpoints.
     for (const href of readingLinks) {
+      stage = `source ${new URL(href).search}`;
       const target = new URL(href), from = Number(target.searchParams.get('from')), to = Number(target.searchParams.get('to'));
       await page.goto(href);
       await page.locator(`#p${String(from).padStart(4, '0')}`).waitFor();
@@ -53,10 +56,11 @@ const url = p => new URL(p, base).href;
       assert.ok((await page.locator('#reading-range').innerText()).includes(String(to)));
       await page.goto(href.replace(/#.*$/, '') + `#p${String(to).padStart(4, '0')}`);
       await page.locator(`#p${String(to).padStart(4, '0')}`).waitFor();
-      assert.ok((await page.locator('.source-paragraph').last().getAttribute('id')) === `p${String(to).padStart(4, '0')}`);
+      assert.equal(await page.locator('.source-paragraph').last().getAttribute('id'), `p${String(to).padStart(4, '0')}`);
     }
 
     // Traverse all reader pages and compare the rendered text to the complete source.
+    stage = 'complete source reader';
     await page.goto(url('material.html'));
     const rendered = [];
     for (;;) {
@@ -74,6 +78,7 @@ const url = p => new URL(p, base).href;
     assert.equal(rendered[1919].id, 'p1920');
 
     // Arabic normalization, empty results, range reset, and deep links.
+    stage = 'search and deep links';
     await page.goto(url('material.html?from=471&to=539&unit=2#p0520'));
     await page.locator('#p0520').waitFor();
     assert.equal(await page.locator('#reader-return a').getAttribute('href'), 'lesson.html?unit=2');
@@ -104,17 +109,20 @@ const url = p => new URL(p, base).href;
     for (const width of [390, 768]) {
       await page.setViewportSize({width, height: 844});
       for (const [label, route] of [['home', 'index.html'], ['unit-4', 'lesson.html?unit=4'], ['reader', 'material.html?from=1201&to=1227#p1201']]) {
+        stage = `${label} width ${width}`;
         await page.goto(url(route));
         await noOverflow();
         await page.screenshot({path: path.join(output, `${label}-${width}.png`), fullPage: true});
       }
     }
+    stage = 'runtime errors';
     assert.deepEqual(errors, []);
     const report = {status: 'PASS', units: 7, questions: 21, sourceLinkDestinations: readingLinks.size,
       renderedSourceParagraphs: rendered.length, testedViewportWidths: [1360, 768, 390], consoleErrors: errors.length};
     fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify(report, null, 2));
     console.log(JSON.stringify(report, null, 2));
   } catch (error) {
+    fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify({status: 'FAIL', stage, error: error.message, stack: error.stack}, null, 2));
     await page.screenshot({path: path.join(output, 'failure.png'), fullPage: true}).catch(() => {});
     throw error;
   } finally {
