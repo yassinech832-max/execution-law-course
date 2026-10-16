@@ -9,7 +9,7 @@ permissions:
   statuses: write
 concurrency:
   group: course-video-production
-  cancel-in-progress: ${{ github.event.head_commit.message == 'Replace superseded video production queue' }}
+  cancel-in-progress: true
 jobs:
   plan:
     runs-on: ubuntu-latest
