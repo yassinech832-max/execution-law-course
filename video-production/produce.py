@@ -42,14 +42,19 @@ def load_source():
 def speakable(text):
     text = re.sub(r'^\s*\d+\s*[-–ـ]\s*', '', text)
     text = re.sub(r'\((?:مادة|المادة|م|المادتان|المادتين)\s[^)]*\)', '', text)
-    text = re.sub(r'(?:(?:نص )?المادة|المادتان|المادتين)\s+[\d\s\-–،]+', 'النص الذي يعرضه الكتاب ', text)
-    return re.sub(r'\s+', ' ', text.replace('..','.').replace('"','')).strip()
+    number=r'\d[\d\s\-–،]*(?:و\s*\d[\d\s\-–،]*)*'
+    text = re.sub(r'(?:لنص المادة|للمادة)\s+'+number, 'للنص المعروض في الكتاب، ', text)
+    text = re.sub(r'(?:(?:نص )?المادة|المادتان|المادتين)\s+'+number, 'النص المعروض في الكتاب، ', text)
+    text = re.sub(r'\(\s*\d+\s*[-–]\s*\d+\s*\)', '', text)
+    text = re.sub(r'\s*[-–—]\s*', '، ', text)
+    return re.sub(r'\s+', ' ', text.replace('..','.').replace('"','').replace('،،','،')).strip()
 
 def assemble(unit):
     source = load_source()
+    overrides={954:'منح المشتري مهلة لا تزيد على خمسة أيام للدفع مكنة تدخل في سلطة قاضي التنفيذ الجوازية، وفق النصوص التي يناقشها المؤلف. ويبين ترتيب هذه النصوص أن منح المهلة يقتصر على المشتري عند إجراء المزاد الأول، ولا ينطبق على المشتري عند إعادة البيع.'}
     for scene in unit['scenes']:
         assert 1 <= scene['refs'][0] <= scene['refs'][1] <= len(source)
-        quoted = ' '.join(speakable(source[n-1]['text']) for n in scene['ids'])
+        quoted = ' '.join(overrides.get(n,speakable(source[n-1]['text'])) for n in scene['ids'])
         body = ' '.join(v for v in [quoted,scene.get('tail','')] if v)
         scene['spoken'] = ' '.join(v for v in [scene.get('lead',''),body] if v)
         if scene.get('hold'):
