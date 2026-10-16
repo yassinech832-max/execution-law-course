@@ -48,5 +48,5 @@ jobs:
             const file = 'test-results/report.json';
             const report = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {status: 'FAIL', stage: 'setup', error: 'No browser report was produced'};
             const passed = report.status === 'PASS';
-            const description = passed ? `${report.sourceLinkDestinations} reading links; ${report.renderedSourceParagraphs} paragraphs; mobile and desktop passed` : `${report.stage}: ${report.error}`.replace(/\s+/g, ' ').slice(0, 140);
+            const description = passed ? `${report.videoFiles || 0} videos; ${report.sourceLinkDestinations} reading links; ${report.renderedSourceParagraphs} paragraphs; mobile and desktop passed` : `${report.stage}: ${report.error}`.replace(/\s+/g, ' ').slice(0, 140);
             await github.rest.repos.createCommitStatus({...context.repo, sha: context.sha, context: 'course/browser', state: passed ? 'success' : 'failure', description, target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`});

@@ -3,6 +3,7 @@
   const units = window.COURSE_UNITS;
   const book = window.BOOK_INDEX;
   const videos = window.COURSE_VIDEOS || {};
+  const unitURL = id => `lesson.html?unit=${id}&v=20261016-videos5`;
   const $ = id => document.getElementById(id);
   const el = (tag, cls, text) => {const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
   const link = (label, href, cls='') => {const a=el('a',cls,label);a.href=href;return a;};
@@ -15,12 +16,12 @@
       const row=el('article','unit-row');row.append(el('span','unit-number',String(u.id).padStart(2,'0')));
       const body=el('div');body.append(el('h3','',u.title),el('p','',u.subtitle));
       const meta=el('div','unit-meta');meta.append(el('span','tag',videos[u.id]?.status==='ready'?'فيديو 20:00 متاح':u.format==='video'?'قراءات الفيديو متاحة':'وحدة قرائية مقترحة'));
-      meta.append(el('span','tag warm',`${u.readings.length} مقاطع أساسية`));body.append(meta);row.append(body,link('افتح الوحدة',`lesson.html?unit=${u.id}`,'button'));$('unit-list').append(row);
+      meta.append(el('span','tag warm',`${u.readings.length} مقاطع أساسية`));body.append(meta);row.append(body,link('افتح الوحدة',unitURL(u.id),'button'));$('unit-list').append(row);
     });
     const ready=Object.values(videos).filter(v=>v.status==='ready').length;
     if($('media-status'))$('media-status').textContent=ready===5?'الفيديوهات الخمسة متاحة للمشاهدة والتنزيل، بمدة 20:00 دقيقة لكل ملف، مع ترجمة عربية ونص مكتوب وفصول زمنية. أسئلة التحليل والقراءات متاحة للتدريب الذاتي.':ready?`${ready} من الفيديوهات متاح للمشاهدة والتنزيل. القراءات وأسئلة التحليل متاحة لجميع الوحدات.`:'القراءات وأسئلة التحليل متاحة الآن، ويجري إعداد الفيديوهات كملفات مستقلة.';
     const mappings=[[1,2,3],[4,5,6],[7],[7],[7]];
-    book.parts.forEach((part,i)=>{const row=el('tr');row.append(el('th','',part.title));row.firstChild.scope='row';const cell=el('td');mappings[i].forEach(n=>cell.append(link('الوحدة '+n,`lesson.html?unit=${n}`)));row.append(cell);const src=el('td');src.append(link('اقرأ الباب',sourceURL(part.p,part.end)));row.append(src);$('coverage-rows').append(row);});
+    book.parts.forEach((part,i)=>{const row=el('tr');row.append(el('th','',part.title));row.firstChild.scope='row';const cell=el('td');mappings[i].forEach(n=>cell.append(link('الوحدة '+n,unitURL(n))));row.append(cell);const src=el('td');src.append(link('اقرأ الباب',sourceURL(part.p,part.end)));row.append(src);$('coverage-rows').append(row);});
     return;
   }
   const requested=new URLSearchParams(location.search).get('unit');
@@ -28,7 +29,7 @@
   const u=units.find(x=>x.id===id);
   if(!u){$('lesson-content').append(el('h1','','الوحدة غير موجودة'),link('العودة إلى المسار','index.html#units','button'));return;}
   document.title=u.title+' | التنفيذ الجبري';$('crumb').textContent=u.title;
-  units.forEach(item=>{const a=link(`${item.id}. ${item.title}`,`lesson.html?unit=${item.id}`,item.id===id?'active':'');if(item.id===id)a.setAttribute('aria-current','page');$('lesson-navigation').append(a);});
+  units.forEach(item=>{const a=link(`${item.id}. ${item.title}`,unitURL(item.id),item.id===id?'active':'');if(item.id===id)a.setAttribute('aria-current','page');$('lesson-navigation').append(a);});
   const root=$('lesson-content');
   const intro=el('header','lesson-intro');intro.append(el('span','tag',`الوحدة ${id} · ${u.format==='video'?'من المحاضرات الخمس':'قراءة مقترحة'}`),el('h1','',u.title),el('p','lead',u.overview));root.append(intro);
   const lecture=videos[id];
@@ -61,5 +62,5 @@
   notes.append(label,field,status);root.append(notes);
   const bridge=el('section','notice');bridge.append(el('p','',u.bridge));root.append(bridge);
   if(u.format==='video'&&!lecture)root.append(el('p','fine','الفيديو قيد الإعداد؛ القراءات المرتبطة بهذه الوحدة متاحة الآن.'));
-  const next=el('nav','next-row');next.setAttribute('aria-label','الانتقال بين الوحدات');if(id>1)next.append(link('الوحدة السابقة',`lesson.html?unit=${id-1}`,'button'));else next.append(link('المسار الكامل','index.html#units','button'));if(id<units.length)next.append(link('الوحدة التالية',`lesson.html?unit=${id+1}`,'button primary'));else next.append(link('العودة إلى المرجع الكامل','material.html','button primary'));root.append(next);
+  const next=el('nav','next-row');next.setAttribute('aria-label','الانتقال بين الوحدات');if(id>1)next.append(link('الوحدة السابقة',unitURL(id-1),'button'));else next.append(link('المسار الكامل','index.html#units','button'));if(id<units.length)next.append(link('الوحدة التالية',unitURL(id+1),'button primary'));else next.append(link('العودة إلى المرجع الكامل','material.html','button primary'));root.append(next);
 })();

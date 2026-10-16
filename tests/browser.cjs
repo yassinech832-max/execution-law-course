@@ -26,6 +26,7 @@ const url = p => new URL(p, base).href;
     await page.screenshot({path: path.join(output, 'home-desktop.png'), fullPage: true});
 
     const readingLinks = new Set();
+    let testedVideos=0;
     for (let unit = 1; unit <= 7; unit++) {
       stage = `unit ${unit} desktop`;
       await page.goto(url(`lesson.html?unit=${unit}`));
@@ -33,7 +34,7 @@ const url = p => new URL(p, base).href;
       assert.equal(await page.locator('.prompt').count(), 3);
       assert.equal(await page.locator('.objectives li').count(), 4);
       assert.equal(await page.locator('[aria-current="page"]').count(), 1);
-      assert.ok((await page.locator('[aria-current="page"]').getAttribute('href')).endsWith(`unit=${unit}`));
+      assert.equal(new URL(await page.locator('[aria-current="page"]').getAttribute('href'),base).searchParams.get('unit'),String(unit));
       const links = await page.locator('a[href^="material.html?from="]').evaluateAll(nodes => nodes.map(n => n.href));
       links.forEach(link => readingLinks.add(link));
       const hasVideo=await page.evaluate(id=>window.COURSE_VIDEOS?.[id]?.status==='ready',unit);
@@ -53,6 +54,7 @@ const url = p => new URL(p, base).href;
         await page.locator('#lecture-video').evaluate(async v=>{v.muted=true;await v.play();});
         await page.waitForFunction(start=>document.getElementById('lecture-video').currentTime>start+.1,expected);
         await page.locator('#lecture-video').evaluate(v=>v.pause());
+        testedVideos++;
       }
       await noOverflow();
       if (unit === 1) {
@@ -99,7 +101,7 @@ const url = p => new URL(p, base).href;
     stage = 'search and deep links';
     await page.goto(url('material.html?from=471&to=539&unit=2#p0520'));
     await page.locator('#p0520').waitFor();
-    assert.equal(await page.locator('#reader-return a').getAttribute('href'), 'lesson.html?unit=2');
+    assert.equal(new URL(await page.locator('#reader-return a').getAttribute('href'),base).searchParams.get('unit'),'2');
     await page.locator('#search').fill('صيغة');
     await page.locator('#search-form button[type=submit]').click();
     assert.ok(await page.locator('.source-paragraph').count() > 0);
@@ -135,7 +137,7 @@ const url = p => new URL(p, base).href;
     }
     stage = 'runtime errors';
     assert.deepEqual(errors, []);
-    const report = {status: 'PASS', units: 7, questions: 21, sourceLinkDestinations: readingLinks.size,
+    const report = {status: 'PASS', units: 7, questions: 21, videoFiles: testedVideos, sourceLinkDestinations: readingLinks.size,
       renderedSourceParagraphs: rendered.length, testedViewportWidths: [1360, 768, 390], consoleErrors: errors.length};
     fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify(report, null, 2));
     console.log(JSON.stringify(report, null, 2));

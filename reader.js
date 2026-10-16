@@ -26,7 +26,7 @@
   }
   $('search').value=q;$('search-form').addEventListener('submit',event=>{event.preventDefault();q=$('search').value;page=0;history.replaceState(null,'',location.pathname+location.search);updateMatches(false);});
   $('reset-reader').addEventListener('click',()=>{from=1;to=total;q='';page=0;$('search').value='';history.replaceState(null,'',location.pathname);updateMatches(false);});
-  if(unit>=1&&unit<=7){const a=el('a','button small','العودة إلى الوحدة '+unit);a.href='lesson.html?unit='+unit;$('reader-return').append(a);}
+  if(unit>=1&&unit<=7){const a=el('a','button small','العودة إلى الوحدة '+unit);a.href='lesson.html?unit='+unit+'&v=20261016-videos5';$('reader-return').append(a);}
   const toc=$('toc');toc.append(el('h2','','فهرس المرجع'));
   const headings=book.headings.filter(h=>h.level<=3);let current=toc;
   headings.forEach(h=>{if(h.level===1){const d=el('details');d.open=from>=h.p&&from<=h.end;const s=el('summary','',h.title);d.append(s);toc.append(d);current=d;}const a=el('a','',h.title);a.href=`material.html?from=${h.p}&to=${h.end}#${id(h.p)}`;if(h.level===3)a.style.paddingRight='24px';current.append(a);});
