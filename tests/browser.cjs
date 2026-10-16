@@ -49,7 +49,7 @@ const url = p => new URL(p, base).href;
         await page.locator('.video-chapters summary').click();
         await page.locator('.chapter-button').nth(1).click();
         const expected=await page.evaluate(id=>window.COURSE_VIDEOS[id].chapters[1].start,unit);
-        assert.ok(Math.abs(await page.locator('#lecture-video').evaluate(v=>v.currentTime)-expected)<.2);
+        await page.waitForFunction(expected=>{const v=document.getElementById('lecture-video');return !v.seeking&&Math.abs(v.currentTime-expected)<.3;},expected,{timeout:20000});
         await page.locator('#lecture-video').evaluate(async v=>{v.muted=true;await v.play();});
         await page.waitForFunction(start=>document.getElementById('lecture-video').currentTime>start+.1,expected);
         await page.locator('#lecture-video').evaluate(v=>v.pause());

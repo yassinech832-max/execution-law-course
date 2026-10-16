@@ -23,7 +23,7 @@ jobs:
           mkdir -p /tmp/course-preview/execution-law-course
           cp *.html *.css *.js /tmp/course-preview/execution-law-course/
           if [ -d media ]; then cp -r media /tmp/course-preview/execution-law-course/; fi
-          python3 -m http.server 8765 --bind 127.0.0.1 --directory /tmp/course-preview > /tmp/course-preview.log 2>&1 &
+          python3 tools/preview_server.py --port 8765 --directory /tmp/course-preview > /tmp/course-preview.log 2>&1 &
           for attempt in $(seq 1 30); do
             if curl --fail --silent http://127.0.0.1:8765/execution-law-course/index.html > /dev/null; then exit 0; fi
             sleep 1

@@ -9,7 +9,7 @@ permissions:
   statuses: write
 concurrency:
   group: course-video-production
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   plan:
     runs-on: ubuntu-latest
