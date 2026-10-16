@@ -5,6 +5,7 @@ All AI speech is produced before publication. The student receives ordinary file
 import argparse
 import asyncio
 import html
+import hashlib
 import json
 import math
 import os
@@ -12,6 +13,7 @@ import re
 import runpy
 import subprocess
 import sys
+import traceback
 import wave
 from pathlib import Path
 
@@ -262,7 +264,8 @@ async def produce(unit, out):
             if text is None:
                 parts.append({'hold':scene['hold']});continue
             if not text.strip():continue
-            path=cache/f'speech-{i:02}-{n:02}.mp3'
+            digest=hashlib.sha256(text.encode()).hexdigest()[:12]
+            path=cache/f'speech-{i:02}-{n:02}-{digest}.mp3'
             words=await speak(text,path)
             wav=path.with_suffix('.wav')
             run(['ffmpeg','-v','error','-y','-i',path,'-ar',SR,'-ac','1',wav])
@@ -284,7 +287,8 @@ async def produce(unit, out):
                 samples=np.zeros(round(seconds*SR),dtype=np.int16)
             else:
                 target_wav=cache/f'paced-{i:02}-{n:02}.wav'
-                run(['ffmpeg','-v','error','-y','-i',part['path'],'-af',f'atempo={tempo:.9f}',target_wav])
+                exact_samples=round(part['seconds']/tempo*SR)
+                run(['ffmpeg','-v','error','-y','-i',part['path'],'-af',f'atempo={tempo:.9f},apad=whole_len={exact_samples},atrim=end_sample={exact_samples}',target_wav])
                 samples=read_wav(target_wav)
                 ratio=(len(samples)/SR)/part['seconds']
                 words=[{'start':clock+w['start']*ratio,'end':clock+w['end']*ratio,'text':w['text']}for w in part['words']]
@@ -367,6 +371,6 @@ def main():
         return
     try:asyncio.run(produce(unit,out))
     except Exception as exc:
-        (out/'report.json').write_text(json.dumps({'status':'FAIL','unit':args.unit,'error':str(exc)},ensure_ascii=False,indent=2));raise
+        (out/'report.json').write_text(json.dumps({'status':'FAIL','unit':args.unit,'error':type(exc).__name__+': '+str(exc),'traceback':traceback.format_exc()},ensure_ascii=False,indent=2));raise
 
 if __name__=='__main__':main()

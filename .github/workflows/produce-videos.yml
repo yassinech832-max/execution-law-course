@@ -41,6 +41,11 @@ jobs:
               for file in unit.iterdir():
                   if file.is_file() and file.suffix in ['.mp4','.vtt','.srt','.jpg','.txt','.json']:
                       shutil.copy2(file,dest/file.name)
+              cache=unit/'work'
+              for file in cache.glob('speech-*'):
+                  if file.suffix in ['.mp3','.json']:
+                      (dest/'voice-cache').mkdir(exist_ok=True)
+                      shutil.copy2(file,dest/'voice-cache'/file.name)
           PY
           git fetch origin video-production-output || true
           if git show-ref --verify --quiet refs/remotes/origin/video-production-output; then

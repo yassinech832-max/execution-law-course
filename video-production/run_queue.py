@@ -1,4 +1,5 @@
 import json
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -16,10 +17,18 @@ for unit in queue['units']:
                 data=subprocess.check_output(['git','show',f'origin/video-production-output:media/unit-{unit:02}/{name}'])
                 (out/name).write_bytes(data)
         else:
+            subprocess.run(['git','fetch','origin','video-production-output'],check=True)
+            prefix=f'media/unit-{unit:02}/voice-cache/'
+            cached=subprocess.check_output(['git','ls-tree','-r','--name-only','origin/video-production-output'],text=True).splitlines()
+            work=out/'work';work.mkdir(exist_ok=True)
+            for name in cached:
+                if name.startswith(prefix) and name.endswith(('.mp3','.json')):
+                    (work/Path(name).name).write_bytes(subprocess.check_output(['git','show',f'origin/video-production-output:{name}']))
             subprocess.run([sys.executable,str(root/'video-production/produce.py'),'--unit',str(unit)],check=True)
         review(out)
     except Exception as exc:
         report=json.loads((out/'report.json').read_text())if(out/'report.json').exists()else{'unit':unit}
-        report.update(status='FAIL',error=str(exc))
+        report['status']='FAIL'
+        report.setdefault('error',str(exc))
         (out/'report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
         raise
