@@ -1,0 +1,52 @@
+name: Arabic voice production probe
+on:
+  push:
+    branches: [main]
+    paths: ['video-production/voice_probe.py', '.github/workflows/voice-probe.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+  statuses: write
+concurrency:
+  group: arabic-voice-probe
+  cancel-in-progress: false
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install edge-tts piper-tts faster-whisper
+      - run: python video-production/voice_probe.py
+      - name: Retain sample files in the course production branch
+        if: always()
+        run: |
+          mkdir -p /tmp/course-voice-output/probe
+          cp rendered/probe/*.mp3 rendered/probe/report.json /tmp/course-voice-output/probe/ 2>/dev/null || true
+          git fetch origin video-production-output || true
+          if git show-ref --verify --quiet refs/remotes/origin/video-production-output; then
+            git checkout -B video-production-output origin/video-production-output
+          else
+            git checkout --orphan video-production-output
+            git rm -rf --cached .
+          fi
+          mkdir -p media/probe
+          cp /tmp/course-voice-output/probe/* media/probe/
+          git add media/probe
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Retain Arabic speech production samples'
+          git push origin HEAD:video-production-output
+      - name: Record probe result
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const file = 'rendered/probe/report.json';
+            const report = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
+            const results = Object.entries(report.engines || {});
+            const ok = results.some(([,v]) => v.ok);
+            const description = results.length ? results.map(([k,v]) => `${k}: ${v.ok ? v.duration.toFixed(2)+'s' : v.error}`).join('; ').replace(/\s+/g,' ').slice(0,140) : 'No voice report was produced';
+            await github.rest.repos.createCommitStatus({...context.repo, sha: context.sha, state: ok ? 'success' : 'failure', context: 'course/voice-probe', description});
