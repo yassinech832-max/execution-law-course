@@ -23,16 +23,10 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y ffmpeg fonts-dejavu-core
-          python -m pip install pillow numpy edge-tts
+          python -m pip install pillow numpy edge-tts faster-whisper
       - name: Render requested lectures sequentially
         run: |
-          python - <<'PY'
-          import json, subprocess, sys
-          from pathlib import Path
-          queue=json.loads(Path('video-production/queue.json').read_text())
-          for unit in queue['units']:
-              subprocess.run([sys.executable,'video-production/produce.py','--unit',str(unit)],check=True)
-          PY
+          python video-production/run_queue.py
       - name: Retain finished files and production reports
         if: always()
         run: |
