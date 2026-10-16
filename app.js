@@ -2,6 +2,7 @@
 (() => {
   const units = window.COURSE_UNITS;
   const book = window.BOOK_INDEX;
+  const videos = window.COURSE_VIDEOS || {};
   const $ = id => document.getElementById(id);
   const el = (tag, cls, text) => {const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
   const link = (label, href, cls='') => {const a=el('a',cls,label);a.href=href;return a;};
@@ -13,9 +14,11 @@
     units.forEach(u=>{
       const row=el('article','unit-row');row.append(el('span','unit-number',String(u.id).padStart(2,'0')));
       const body=el('div');body.append(el('h3','',u.title),el('p','',u.subtitle));
-      const meta=el('div','unit-meta');meta.append(el('span','tag',u.format==='video'?'قراءات الفيديو متاحة':'وحدة قرائية مقترحة'));
+      const meta=el('div','unit-meta');meta.append(el('span','tag',videos[u.id]?.status==='ready'?'فيديو 20:00 متاح':u.format==='video'?'قراءات الفيديو متاحة':'وحدة قرائية مقترحة'));
       meta.append(el('span','tag warm',`${u.readings.length} مقاطع أساسية`));body.append(meta);row.append(body,link('افتح الوحدة',`lesson.html?unit=${u.id}`,'button'));$('unit-list').append(row);
     });
+    const ready=Object.values(videos).filter(v=>v.status==='ready').length;
+    if($('media-status'))$('media-status').textContent=ready===5?'الفيديوهات الخمسة متاحة للمشاهدة والتنزيل، بمدة 20:00 دقيقة لكل ملف، مع ترجمة عربية ونص مكتوب وفصول زمنية. أسئلة التحليل والقراءات متاحة للتدريب الذاتي.':ready?`${ready} من الفيديوهات متاح للمشاهدة والتنزيل. القراءات وأسئلة التحليل متاحة لجميع الوحدات.`:'القراءات وأسئلة التحليل متاحة الآن، ويجري إعداد الفيديوهات كملفات مستقلة.';
     const mappings=[[1,2,3],[4,5,6],[7],[7],[7]];
     book.parts.forEach((part,i)=>{const row=el('tr');row.append(el('th','',part.title));row.firstChild.scope='row';const cell=el('td');mappings[i].forEach(n=>cell.append(link('الوحدة '+n,`lesson.html?unit=${n}`)));row.append(cell);const src=el('td');src.append(link('اقرأ الباب',sourceURL(part.p,part.end)));row.append(src);$('coverage-rows').append(row);});
     return;
@@ -28,6 +31,23 @@
   units.forEach(item=>{const a=link(`${item.id}. ${item.title}`,`lesson.html?unit=${item.id}`,item.id===id?'active':'');if(item.id===id)a.setAttribute('aria-current','page');$('lesson-navigation').append(a);});
   const root=$('lesson-content');
   const intro=el('header','lesson-intro');intro.append(el('span','tag',`الوحدة ${id} · ${u.format==='video'?'من المحاضرات الخمس':'قراءة مقترحة'}`),el('h1','',u.title),el('p','lead',u.overview));root.append(intro);
+  const lecture=videos[id];
+  if(lecture?.status==='ready'){
+    const sec=el('section','lecture-player');sec.setAttribute('aria-label','فيديو الوحدة');
+    const heading=el('div','video-heading');heading.append(el('h2','','شاهد شرح الوحدة'),el('span','tag warm','20:00 دقيقة · 1080p'));sec.append(heading);
+    const video=el('video');video.id='lecture-video';video.controls=true;video.preload='metadata';video.playsInline=true;video.poster=lecture.path+'/poster.jpg';video.setAttribute('aria-label','شرح '+u.title);
+    const source=el('source');source.src=lecture.path+'/lecture.mp4';source.type='video/mp4';video.append(source);
+    const captions=el('track');captions.kind='captions';captions.src=lecture.path+'/captions.vtt';captions.srclang='ar';captions.label='العربية';captions.default=true;video.append(captions);
+    const chaptersTrack=el('track');chaptersTrack.kind='chapters';chaptersTrack.src=lecture.path+'/chapters.vtt';chaptersTrack.srclang='ar';chaptersTrack.label='فصول الفيديو';video.append(chaptersTrack);
+    video.append(document.createTextNode('يمكنك فتح ملف الفيديو من رابط التنزيل أدناه.'));sec.append(video);
+    const message=el('p','fine','ملف فيديو جاهز مع ترجمة عربية قابلة للتشغيل من زر الترجمة. الشخصية محاضر رسومي افتراضي؛ والتعليق الصوتي مولد مسبقاً.');message.setAttribute('role','status');sec.append(message);
+    video.addEventListener('error',()=>{message.textContent='تعذر تشغيل الفيديو في هذا المتصفح. استخدم رابط ملف MP4 أدناه لفتحه في مشغل آخر.';});
+    const downloads=el('div','video-downloads');const mp4=link(`تنزيل الفيديو · ${(lecture.fileBytes/1000000).toFixed(1)} MB`,lecture.path+'/lecture.mp4','button small primary');mp4.download=`execution-law-unit-${String(id).padStart(2,'0')}.mp4`;
+    downloads.append(mp4,link('النص المكتوب',lecture.path+'/transcript.txt','button small'),link('ترجمة SRT',lecture.path+'/captions.srt','button small'));sec.append(downloads);
+    const chapters=el('details','more video-chapters');chapters.append(el('summary','','انتقل إلى فصل داخل الفيديو'));const list=el('div','chapter-list');
+    for(const chapter of lecture.chapters){const b=el('button','chapter-button');b.type='button';const stamp=el('span','chapter-time',`${Math.floor(chapter.start/60).toString().padStart(2,'0')}:${Math.floor(chapter.start%60).toString().padStart(2,'0')}`);stamp.dir='ltr';b.append(stamp,el('span','',chapter.title));b.addEventListener('click',()=>{const seek=()=>{video.currentTime=Math.min(chapter.start,Math.max(0,video.duration-.1));video.focus();};if(video.readyState)seek();else{video.addEventListener('loadedmetadata',seek,{once:true});video.load();}video.scrollIntoView({behavior:'auto',block:'center'});});list.append(b);}
+    chapters.append(list);sec.append(chapters);root.append(sec);
+  }
   if(u.proposed)root.append(el('p','notice','موضوع هذه المحاضرة القرائية مقترح لتنظيم المسار؛ لم تحدد خطة المشروع المرفقة موضوعي المحاضرتين القرائيتين.'));
   const goals=el('section','block');goals.append(el('p','eyebrow','في هذه الوحدة تتدرب على'),el('h2','','أهداف التعلم المقترحة'));const ul=el('ul','objectives');u.objectives.forEach(t=>ul.append(el('li','',t)));goals.append(ul);root.append(goals);
   const topics=el('section','block');topics.append(el('h2','','محاور القراءة والتحليل'));u.topics.forEach(t=>{const item=el('article','topic');item.append(el('h3','',t.title),el('p','',t.text),link('الرجوع إلى النص الذي يقوم عليه هذا المحور',sourceURL(t.from,t.to,id),'source-link'));topics.append(item);});root.append(topics);
@@ -40,6 +60,6 @@
   field.addEventListener('input',()=>{try{localStorage.setItem(key,field.value);status.textContent='حُفظت الملاحظات على هذا المتصفح فقط.';}catch{status.textContent='تعذر الحفظ؛ انسخ ملاحظاتك قبل مغادرة الصفحة.';}});
   notes.append(label,field,status);root.append(notes);
   const bridge=el('section','notice');bridge.append(el('p','',u.bridge));root.append(bridge);
-  if(u.format==='video')root.append(el('p','fine','حالة الوسائط: هذه الوحدة مرتبطة بمادتها القرائية. الفيديو المخطط لمدة 20 دقيقة لم يُنتج أو يُنشر بعد.'));
+  if(u.format==='video'&&!lecture)root.append(el('p','fine','الفيديو قيد الإعداد؛ القراءات المرتبطة بهذه الوحدة متاحة الآن.'));
   const next=el('nav','next-row');next.setAttribute('aria-label','الانتقال بين الوحدات');if(id>1)next.append(link('الوحدة السابقة',`lesson.html?unit=${id-1}`,'button'));else next.append(link('المسار الكامل','index.html#units','button'));if(id<units.length)next.append(link('الوحدة التالية',`lesson.html?unit=${id+1}`,'button primary'));else next.append(link('العودة إلى المرجع الكامل','material.html','button primary'));root.append(next);
 })();

@@ -36,6 +36,24 @@ const url = p => new URL(p, base).href;
       assert.ok((await page.locator('[aria-current="page"]').getAttribute('href')).endsWith(`unit=${unit}`));
       const links = await page.locator('a[href^="material.html?from="]').evaluateAll(nodes => nodes.map(n => n.href));
       links.forEach(link => readingLinks.add(link));
+      const hasVideo=await page.evaluate(id=>window.COURSE_VIDEOS?.[id]?.status==='ready',unit);
+      if(hasVideo){
+        stage=`unit ${unit} video metadata`;
+        await page.waitForFunction(()=>document.getElementById('lecture-video').readyState>=1,null,{timeout:30000});
+        assert.equal(await page.locator('#lecture-video').evaluate(v=>v.duration),1200);
+        assert.equal(await page.locator('#lecture-video').evaluate(v=>v.videoWidth),1920);
+        const captions=page.locator('#lecture-video track[kind=captions]');
+        assert.equal(await captions.getAttribute('srclang'),'ar');
+        await page.waitForFunction(()=>document.querySelector('track[kind=captions]').readyState===2);
+        assert.ok(await page.locator('#lecture-video').evaluate(v=>v.textTracks[0].cues.length)>100);
+        await page.locator('.video-chapters summary').click();
+        await page.locator('.chapter-button').nth(1).click();
+        const expected=await page.evaluate(id=>window.COURSE_VIDEOS[id].chapters[1].start,unit);
+        assert.ok(Math.abs(await page.locator('#lecture-video').evaluate(v=>v.currentTime)-expected)<.2);
+        await page.locator('#lecture-video').evaluate(async v=>{v.muted=true;await v.play();});
+        await page.waitForFunction(start=>document.getElementById('lecture-video').currentTime>start+.1,expected);
+        await page.locator('#lecture-video').evaluate(v=>v.pause());
+      }
       await noOverflow();
       if (unit === 1) {
         await page.locator('#reading-notes').fill('ملاحظة اختبار · موضع المصدر 34');
