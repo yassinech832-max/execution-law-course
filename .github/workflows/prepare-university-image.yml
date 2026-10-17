@@ -13,13 +13,13 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install image verification dependency
         run: python3 -m pip install --quiet Pillow
-      - name: Fetch the university campus photograph from its official source
+      - name: Fetch the university campus photograph from Emirates News Agency
         run: |
           python3 - <<'PY' > image-prepare.log 2>&1
           from pathlib import Path
           import urllib.request,json,hashlib
           from PIL import Image
-          url='https://uaeu.ac.ae/en/vc/uod/images/crescent.jpg'
+          url='https://assets.wam.ae/resource/fxq07pzo1k70cvxpd.jpg'
           request=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'})
           with urllib.request.urlopen(request,timeout=45) as response:
               assert response.status==200
@@ -35,7 +35,7 @@ jobs:
               print('Image format:',photo.format,width,height,flush=True)
               assert width>=400 and height>=200
               if photo.format!='JPEG':photo.convert('RGB').save(image,quality=95)
-          (dest/'source.json').write_text(json.dumps({'source':url,'description':'United Arab Emirates University campus','width':width,'height':height,'sha256':hashlib.sha256(data).hexdigest()},indent=2)+'\n')
+          (dest/'source.json').write_text(json.dumps({'source':url,'publisher':'Emirates News Agency (WAM)','description':'United Arab Emirates University campus','width':width,'height':height,'sha256':hashlib.sha256(data).hexdigest()},indent=2)+'\n')
           print(json.dumps({'width':width,'height':height,'bytes':len(data)}))
           PY
       - name: Retain the original image for the course update
