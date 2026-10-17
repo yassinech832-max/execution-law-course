@@ -29,6 +29,15 @@ const url = p => new URL(p, base).href;
     await page.evaluate(() => document.fonts.ready);
     await page.locator('.portrait-feature img').evaluate(image => image.decode());
     assert.equal(await page.locator('#coverage-rows tr').count(), 5);
+    assert.ok(!(await page.locator('body').innerText()).includes('عينة'));
+    const featured = page.locator('.portrait-feature');
+    assert.equal(new URL(await featured.getAttribute('href'),base).searchParams.get('unit'),'1');
+    assert.equal(await featured.locator('.feature-time').innerText(),'20:00');
+    await featured.click();
+    await page.waitForURL(target=>target.pathname.endsWith('/lesson.html')&&target.searchParams.get('unit')==='1');
+    await page.locator('#lecture-video').waitFor();
+    await page.goto(url('index.html'));
+    await page.locator('.unit-row').last().waitFor();
     await noOverflow();
     await page.screenshot({path: path.join(output, 'home-desktop.jpg'), fullPage: true, type: 'jpeg', quality: 82});
 
@@ -39,6 +48,12 @@ const url = p => new URL(p, base).href;
       await page.goto(url(`lesson.html?unit=${unit}`));
       await page.locator('.lesson-intro h1').waitFor();
       assert.equal(await page.locator('.prompt').count(), 3);
+      assert.equal(await page.locator('.lesson-contents a').count(),4);
+      for (const target of ['readings','questions','notes','lecture']) {
+        await page.locator(`.lesson-contents a[href="#${target}"]`).click();
+        assert.equal(new URL(page.url()).hash,`#${target}`);
+        assert.ok(await page.locator(`#${target}`).evaluate(node=>{const r=node.getBoundingClientRect();return r.top>=100&&r.top<innerHeight;}), `Unit ${unit}: hidden section ${target}`);
+      }
       assert.equal(await page.locator('.objectives li').count(), 4);
       assert.equal(await page.locator('[aria-current="page"]').count(), 1);
       assert.equal(new URL(await page.locator('[aria-current="page"]').getAttribute('href'),base).searchParams.get('unit'),String(unit));
@@ -74,24 +89,11 @@ const url = p => new URL(p, base).href;
 
     assert.equal(testedVideos, 7, 'All seven units must have playable 20-minute videos');
 
-    stage = 'personal presenter sample';
+    stage = 'previous page address';
     await page.goto(url('presenter.html'));
-    await page.waitForFunction(() => document.getElementById('presenter-video').readyState >= 1);
-    assert.equal(await page.locator('#presenter-video').evaluate(video => video.duration), 60);
-    assert.equal(await page.locator('#presenter-video').evaluate(video => video.videoWidth), 1920);
-    await page.locator('#presenter-video track').evaluate(track => {track.track.mode = 'hidden';});
-    await page.waitForFunction(() => document.querySelector('#presenter-video track').readyState === 2);
-    assert.ok(await page.locator('#presenter-video').evaluate(video => video.textTracks[0].cues.length) >= 10);
-    const sampleChapter=Number(await page.locator('[data-seek]').nth(1).getAttribute('data-seek'));
-    await page.locator('[data-seek]').nth(1).click();
-    await page.waitForFunction(target => {const video = document.getElementById('presenter-video'); return !video.seeking && Math.abs(video.currentTime - target) < .3;},sampleChapter);
-    await page.locator('#presenter-video').evaluate(async video => {video.muted = true; await video.play();});
-    await page.waitForFunction(target => document.getElementById('presenter-video').currentTime > target+.1,sampleChapter);
-    await page.locator('#presenter-video').evaluate(video => video.pause());
-    await page.locator('.sample-learning summary').click();
-    assert.equal(await page.locator('.sample-learning details').getAttribute('open'), '');
-    await noOverflow();
-    await page.screenshot({path: path.join(output, 'presenter-desktop.jpg'), fullPage: true, type: 'jpeg', quality: 82});
+    await page.waitForURL(target => target.pathname.endsWith('/lesson.html') && target.searchParams.get('unit') === '1');
+    await page.locator('#lecture-video').waitFor();
+    assert.equal(await page.locator('#presenter-video').count(), 0);
 
     // Exercise every distinct educational source link, including both endpoints.
     for (const href of readingLinks) {
@@ -156,7 +158,7 @@ const url = p => new URL(p, base).href;
 
     for (const width of [390, 768]) {
       await page.setViewportSize({width, height: 844});
-      for (const [label, route] of [['home', 'index.html'], ['presenter', 'presenter.html'], ['unit-4', 'lesson.html?unit=4'], ['unit-6', 'lesson.html?unit=6'], ['unit-7', 'lesson.html?unit=7'], ['reader', 'material.html?from=1201&to=1227#p1201']]) {
+      for (const [label, route] of [['home', 'index.html'], ['unit-4', 'lesson.html?unit=4'], ['unit-6', 'lesson.html?unit=6'], ['unit-7', 'lesson.html?unit=7'], ['reader', 'material.html?from=1201&to=1227#p1201']]) {
         stage = `${label} width ${width}`;
         await page.goto(url(route));
         await noOverflow();
@@ -165,7 +167,7 @@ const url = p => new URL(p, base).href;
     }
     stage = 'runtime errors';
     assert.deepEqual(errors, []);
-    const report = {status: 'PASS', units: 7, questions: 21, videoFiles: testedVideos, presenterSampleSeconds:60, sourceLinkDestinations: readingLinks.size,
+    const report = {status: 'PASS', units: 7, questions: 21, videoFiles: testedVideos, sampleRemoved:true, sourceLinkDestinations: readingLinks.size,
       renderedSourceParagraphs: rendered.length, testedViewportWidths: [1360, 768, 390], consoleErrors: errors.length};
     fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify(report, null, 2));
     console.log(JSON.stringify(report, null, 2));

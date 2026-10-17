@@ -1,73 +1,78 @@
-name: Verify public course identity and media
+name: Verify published course
 on:
   push:
-    branches: [verify-presenter-public, verify-course-identity]
+    branches: [verify-course-final]
     paths: ['.github/workflows/check-presenter-public.yml']
   workflow_dispatch:
 permissions:
   contents: read
   statuses: write
 jobs:
-  public-sample:
+  public-course:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Check the student-facing page and real media
+      - name: Check public navigation, complete lessons and retired media
         run: |
-          python3 - <<'PY'
-          import json,time,urllib.request
+          python3 - <<'PYCODE'
+          import json,time,re,urllib.request,urllib.error
           from pathlib import Path
           base='https://yassinech832-max.github.io/execution-law-course/'
           def get(path,headers=None,limit=None):
               request=urllib.request.Request(base+path,headers=headers or {})
               with urllib.request.urlopen(request,timeout=25) as response:
                   return response.status,response.read(limit) if limit else response.read()
+          forbidden=re.compile(r'(?:أحمد|احمد)\s+خليل|ياسين\s+شامي|شامي\s+ياسين')
+          def clean(data):
+              text=re.sub(r'[\u064b-\u065f\u0670\u0640]','',data.decode())
+              assert not forbidden.search(text),'A personal name remains in published text'
           result={'status':'FAIL'}
-          for attempt in range(6):
+          for attempt in range(8):
               try:
-                  import re
-                  forbidden=re.compile(r'(?:أحمد|احمد)\s+خليل|ياسين\s+شامي|شامي\s+ياسين')
-                  def clean(data):
-                      text=data.decode();text=re.sub(r'[\u064b-\u065f\u0670\u0640]','',text)
-                      assert not forbidden.search(text),'A personal name remains in published text'
+                  revision='?v=20261017-final&check='+str(int(time.time()))
                   for page in ['index.html','presenter.html','lesson.html','material.html']:
-                      code,html=get(page+'?v=20261017-course');assert code==200;clean(html)
+                      code,html=get(page+revision);assert code==200;clean(html)
+                      assert b'presenter-sample' not in html and b'presenter.js' not in html
+                      if page=='index.html':
+                          assert 'ابدأ بالوحدة الأولى'.encode() in html and 'عينة'.encode() not in html
+                          assert b'20261017-final' in html and b'href="presenter.html"' not in html
+                      if page=='presenter.html':
+                          assert b'content="0;url=lesson.html?unit=1"' in html
+                  code,script=get('app.js'+revision);assert code==200 and b'lesson-contents' in script;clean(script)
                   code,photo=get('assets/presenter/portrait.jpg',limit=32)
                   assert code==200 and photo.startswith(bytes.fromhex('ffd8'))
                   for n in range(1,7):
-                      code,text=get(f'material-{n:02}.js?v=20261017-course');assert code==200;clean(text)
+                      code,text=get(f'material-{n:02}.js'+revision);assert code==200;clean(text)
                   for n in range(1,8):
                       prefix=f'media/unit-{n:02}/'
-                      code,raw=get(prefix+'report.json?v=20261017-course');report=json.loads(raw);clean(raw)
+                      code,raw=get(prefix+'report.json'+revision);report=json.loads(raw);clean(raw)
                       assert code==200 and report['status']=='PASS' and report['durationSeconds']==1200
                       assert report['source']=='مقرر التنفيذ الجبري' and report['speakingPortrait']['actualNeuralPortraitSeconds']>=20
                       for name in ['captions.vtt','transcript.txt']:
-                          code,text=get(prefix+name+'?v=20261017-course');assert code==200;clean(text)
-                      code,media=get(prefix+'lecture.mp4?v=20261017-course',{'Range':'bytes=0-1023'},1024)
+                          code,text=get(prefix+name+revision);assert code==200;clean(text)
+                      code,media=get(prefix+'lecture.mp4'+revision,{'Range':'bytes=0-1023'},1024)
                       assert code in [200,206] and len(media)==1024 and b'ftyp' in media[:32]
-                  code,media=get('media/presenter-sample/sample.mp4?v=20261017-course',{'Range':'bytes=0-1023'},1024)
-                  media_code=code
-                  assert code in [200,206] and len(media)==1024 and b'ftyp' in media[:32]
-                  code,caption=get('media/presenter-sample/captions.vtt?v=20261017-course');clean(caption)
-                  assert code==200 and caption.startswith(b'WEBVTT') and caption.count(b'-->')>=10
-                  code,raw=get('media/presenter-sample/report.json?v=20261017-course');clean(raw);report=json.loads(raw)
-                  assert report['status']=='PASS' and report['durationSeconds']==60 and report['actualNeuralPortraitSeconds']>0
-                  result={'status':'PASS','duration':60,'engine':report['engine'],'pageHTTP':200,'mediaHTTP':media_code,'captions':caption.count(b'-->')}
+                  for retired in ['media/presenter-sample/sample.mp4','media/presenter-sample/report.json','presenter.js']:
+                      try:get(retired+revision,limit=32)
+                      except urllib.error.HTTPError as exc:assert exc.code in [404,410],str(exc)
+                      else:raise AssertionError('Retired sample asset is still published: '+retired)
+                  result={'status':'PASS','publicLectures':7,'durationEach':1200,'sampleRemoved':True,'pageHTTP':200,'identity':'course'}
                   break
               except Exception as exc:
                   result={'status':'FAIL','error':str(exc) or type(exc).__name__,'attempt':attempt+1}
-                  if attempt<5:time.sleep(15)
-          Path('presenter-public-check.json').write_text(json.dumps(result))
+                  if attempt<7:time.sleep(10)
+          Path('course-public-check.json').write_text(json.dumps(result))
           print(json.dumps(result))
           assert result['status']=='PASS',result
-          PY
+          PYCODE
       - name: Record public access result
         if: always()
         uses: actions/github-script@v7
         with:
           script: |
             const fs=require('fs');
-            const r=fs.existsSync('presenter-public-check.json')?JSON.parse(fs.readFileSync('presenter-public-check.json','utf8')):{status:'FAIL',error:'No public check report'};
+            const file='course-public-check.json';
+            const r=fs.existsSync(file)?JSON.parse(fs.readFileSync(file,'utf8')):{status:'FAIL',error:'No public check report'};
             const passed=r.status==='PASS';
-            await github.rest.repos.createCommitStatus({...context.repo,sha:context.sha,state:passed?'success':'failure',context:'presenter/public',description:passed?`7 public lectures at 20:00; no personal names; 60s ${r.engine} portrait; ${r.captions} Arabic cues`:String(r.error).slice(0,140),target_url:`https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`});
+            await github.rest.repos.createCommitStatus({...context.repo,sha:context.sha,state:passed?'success':'failure',context:'course/public',description:passed?'7 public lectures at 20:00; trial removed; course identity and navigation passed':String(r.error).slice(0,140),target_url:`https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`});

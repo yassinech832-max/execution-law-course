@@ -14,4 +14,10 @@ for(let unit=1;unit<=7;unit++){
 }
 assert.ok(fs.existsSync(path.join(root,'assets/presenter/portrait.jpg')));
 assert.ok(!fs.existsSync(path.join(root,'assets/presenter/yassine-chami.jpg')));
+assert.ok(!fs.existsSync(path.join(root,'media/presenter-sample')),'The retired sample must not be published');
+assert.ok(!fs.existsSync(path.join(root,'presenter.js')),'The retired player must not be published');
+for(const file of ['index.html','lesson.html','material.html','app.js']){
+ const text=fs.readFileSync(path.join(root,file),'utf8');
+ assert.ok(!/عينة الشرح|عينة تعليمية|media\/presenter-sample|presenter\.js/.test(text),'Retired sample reference in '+file);
+}
 console.log(JSON.stringify({status:'PASS',identity:'course',textFiles:files.length,measuredLectures:7}));
