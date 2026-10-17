@@ -12,12 +12,12 @@
   ],
   "fps": 25,
   "voice": "ar-SA-HamedNeural",
-  "naturalSpeechSeconds": 1321.056,
-  "tempo": 1.1167,
+  "naturalSpeechSeconds": 1320.528,
+  "tempo": 1.116254,
   "plannedThinkingSeconds": 10,
   "captionCues": 227,
   "maximumDetectedSilenceSeconds": 10.9457,
-  "fileBytes": 22424808,
+  "fileBytes": 22326258,
   "source": "مقرر التنفيذ الجبري",
   "chapters": [
     {
@@ -227,24 +227,24 @@
     }
   ],
   "loudnessMeasurement": {
-    "input_i": "-21.95",
-    "input_tp": "-1.52",
-    "input_lra": "3.40",
-    "input_thresh": "-32.19",
-    "output_i": "-16.43",
+    "input_i": "-16.19",
+    "input_tp": "0.15",
+    "input_lra": "3.10",
+    "input_thresh": "-26.44",
+    "output_i": "-16.03",
     "output_tp": "-1.50",
-    "output_lra": "3.10",
-    "output_thresh": "-26.68",
+    "output_lra": "3.00",
+    "output_thresh": "-26.28",
     "normalization_type": "dynamic",
-    "target_offset": "0.43"
+    "target_offset": "0.03"
   },
   "decodeCheck": "PASS",
-  "sourceCommit": "75926738c37a58b8b004ebbb7cd4bf7b2339d9b5",
+  "sourceCommit": "ee1378ec064d1b578f056ca68089f0cf1900fb70",
   "speakingPortrait": {
     "engine": "Wav2Lip",
     "mouthMotionDifferences": [
-      5.093920098592996,
-      5.972356304132005
+      5.378744308650851,
+      6.603197425627332
     ],
     "faceBox": [
       152,
@@ -276,17 +276,17 @@
     {
       "start": 12,
       "seconds": 18,
-      "recognizedText": "مقرر التنفيذ الجبري لأستاذنا مقرر المده ونقرأ أحكامه ومعيده في سياق المرجع المرفق. سنبحث ما يعاد حصيله ومن يدخل في توزيعها ومتتبأ المرحلة ثم متتك في طريقة توزيع المباشر ومتى نحتاج إلى قائمة مؤقتة ونهاية."
+      "recognizedText": "العلمية لمقرر التنفيذ الجبري ونقرأ احكامه وموعده في سياق المرجع المرفق. سنتحف ما يعاد حصيله ومن يدخل في توزيعها وما تبدأ المحلة ثم ماتتك في طريقة توزيع المباشر وما تنحتاج إلى قائمة مؤقتة ونهاية. احتفظ."
     },
     {
       "start": 550,
       "seconds": 18,
-      "recognizedText": "تمكين المحجوز لديه من اعلان المحجوز عليه بعزمه على الوفاء. وفاء مضرئا للذمة. ويفترض هذا البحث ان الحجز اصبحتاً فيذياً وصار الحق ثابة بسند تنفيذي. فلا تنقل احكام التوزيع الى مرحلة لا تزال فيها الحماية تحفظية. ولا تفصل المدة"
+      "recognizedText": "تمكين المحجوز لديه من اعلان المحجوز عليه بعزمه على الوفاء. وفاء مضرئا للثمة. ويفترض هذا البحث ان الحجز اصبحتاً فيذياً وصار الحق ثابةً بسند تنفيذي. فلا تنقل احكام التوزيع الى مرحلةٍ لا تزال فيها الحماية تحفظية ولا تفصل المدة"
     },
     {
       "start": 1025,
       "seconds": 18,
-      "recognizedText": "الى القرار الذي حسم الاعتراض. تحذر العبارات المطلقة عند دراسة المراجعة. يورد المقرر قاعدة عدم الاعتراض ثم استثناء محدداً في الموضع نفسه. هذه القائمة نهاية وبالنظر لتسنيتها لا تقبل الاعتراض عليها بأي حال من الأحوال."
+      "recognizedText": "الى القرار الذي حسم الاعتراض. تحذر العبارات المطلقة عند دراسة المراجعة. يورد المقرر قاعدة عدم الاعتراض ثم استثناء المحددا في الموضع نفسه. هذه القائمة نهاية وبالنظر لتسنيتها لا تقبل الاعتراض عليها بأي حال من الأحوال."
     }
   ],
   "finalVideoFrameSamples": [
@@ -300,5 +300,13 @@
     1165
   ],
   "visualReviewContactSheet": "qa-frames.jpg",
-  "reviewCommit": "75926738c37a58b8b004ebbb7cd4bf7b2339d9b5"
+  "reviewCommit": "ee1378ec064d1b578f056ca68089f0cf1900fb70",
+  "introRevision": {
+    "description": "Neutral course wording without references to an instructor",
+    "durationSeconds": 37.86783333333333,
+    "speechSeconds": 37.56783333333333,
+    "naturalSeconds": 41.424,
+    "tempo": 1.1026454369207699,
+    "bodyTimingsPreserved": true
+  }
 }
