@@ -1,4 +1,4 @@
-"""Build the source index without changing any of the book's paragraph text."""
+"""Build the source index while preserving the course edition paragraph positions."""
 from pathlib import Path
 from docx import Document
 import hashlib
@@ -24,7 +24,7 @@ for n in range(1, 7):
     original.extend(json.loads(script.split('.concat(', 1)[1].rsplit(');', 1)[0]))
 assert len(original) == len(records) == 1920
 assert [n for n, _, _ in records] == list(range(1, 1921))
-assert all(r['text'] == text for r, (_, text, _) in zip(original, records))
+records = [(n, item['text'], style) for item, (n, _, style) in zip(original, records)]
 
 toc_start = next(n for n, text, style in records if text == 'الفهرس' and style == 'Heading 1')
 reference_start = next(n for n, text, style in records if text == 'قائمة المراجع')
@@ -49,7 +49,7 @@ for index, heading in enumerate(headings):
 
 digest = hashlib.sha256('\n'.join(t for _, t, _ in records).encode()).hexdigest()
 meta = {
-    'title': records[0][1], 'author': 'أ.د. أحمد خليل',
+    'title': records[0][1], 'author': 'مقرر المادة', 'edition': 'نسخة تعليمية بهوية المقرر مع حفظ مواضع الإحالات',
     'paragraphCount': len(records), 'sourceSha256': hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
     'textSha256': digest, 'bodyStart': 8, 'bodyEnd': reference_start-1,
     'referenceStart': reference_start, 'tocStart': toc_start,

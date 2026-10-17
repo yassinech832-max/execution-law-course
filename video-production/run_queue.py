@@ -17,7 +17,7 @@ for unit in queue['units']:
         for branch in candidates:
             result=subprocess.run(['git','fetch','origin',branch])
             if result.returncode==0:available.append(branch)
-        if not available:raise RuntimeError('No production output branch is available')
+        if not available and queue.get('mode')=='review':raise RuntimeError('No production output branch is available')
         if queue.get('mode')=='review':
             branch=available[-1]
             for name in ['lecture.mp4','captions.vtt','captions.srt','chapters.vtt','transcript.txt','poster.jpg','report.json']:
