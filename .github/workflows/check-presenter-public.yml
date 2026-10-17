@@ -1,3 +1,4 @@
+# Verify the deployed portrait sample after its first publication.
 name: Verify published personal presenter sample
 on:
   push:
