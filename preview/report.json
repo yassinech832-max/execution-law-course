@@ -3,7 +3,7 @@
   "units": 7,
   "questions": 21,
   "videoFiles": 7,
-  "presenterSampleSeconds": 60,
+  "sampleRemoved": true,
   "sourceLinkDestinations": 58,
   "renderedSourceParagraphs": 1920,
   "testedViewportWidths": [
