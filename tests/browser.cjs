@@ -65,6 +65,8 @@ const url = p => new URL(p, base).href;
       }
     }
 
+    assert.equal(testedVideos, 7, 'All seven units must have playable 20-minute videos');
+
     // Exercise every distinct educational source link, including both endpoints.
     for (const href of readingLinks) {
       stage = `source ${new URL(href).search}`;
@@ -128,7 +130,7 @@ const url = p => new URL(p, base).href;
 
     for (const width of [390, 768]) {
       await page.setViewportSize({width, height: 844});
-      for (const [label, route] of [['home', 'index.html'], ['unit-4', 'lesson.html?unit=4'], ['reader', 'material.html?from=1201&to=1227#p1201']]) {
+      for (const [label, route] of [['home', 'index.html'], ['unit-4', 'lesson.html?unit=4'], ['unit-6', 'lesson.html?unit=6'], ['unit-7', 'lesson.html?unit=7'], ['reader', 'material.html?from=1201&to=1227#p1201']]) {
         stage = `${label} width ${width}`;
         await page.goto(url(route));
         await noOverflow();

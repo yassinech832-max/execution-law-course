@@ -12,8 +12,8 @@ for (const file of ['book-index.js', 'course-data.js', ...Array.from({length: 6}
 }
 const {COURSE_UNITS: units, BOOK_INDEX: book, EXECUTION_MATERIAL: paragraphs} = context.window;
 assert.equal(units.length, 7);
-assert.equal(units.filter(u => u.format === 'video').length, 5);
-assert.equal(units.filter(u => u.format === 'reading' && u.proposed).length, 2);
+assert.equal(units.filter(u => u.format === 'video').length, 7);
+assert.equal(units.filter(u => u.supplementary && u.proposed).length, 2);
 assert.equal(book.parts.length, 5);
 assert.equal(paragraphs.length, book.paragraphCount);
 assert.equal(book.paragraphCount, 1920);

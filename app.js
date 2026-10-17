@@ -3,7 +3,7 @@
   const units = window.COURSE_UNITS;
   const book = window.BOOK_INDEX;
   const videos = window.COURSE_VIDEOS || {};
-  const unitURL = id => `lesson.html?unit=${id}&v=20261016-videos5`;
+  const unitURL = id => `lesson.html?unit=${id}&v=20261017-videos7`;
   const $ = id => document.getElementById(id);
   const el = (tag, cls, text) => {const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
   const link = (label, href, cls='') => {const a=el('a',cls,label);a.href=href;return a;};
@@ -19,7 +19,7 @@
       meta.append(el('span','tag warm',`${u.readings.length} مقاطع أساسية`));body.append(meta);row.append(body,link('افتح الوحدة',unitURL(u.id),'button'));$('unit-list').append(row);
     });
     const ready=Object.values(videos).filter(v=>v.status==='ready').length;
-    if($('media-status'))$('media-status').textContent=ready===5?'الفيديوهات الخمسة متاحة للمشاهدة والتنزيل، بمدة 20:00 دقيقة لكل ملف، مع ترجمة عربية ونص مكتوب وفصول زمنية. أسئلة التحليل والقراءات متاحة للتدريب الذاتي.':ready?`${ready} من الفيديوهات متاح للمشاهدة والتنزيل. القراءات وأسئلة التحليل متاحة لجميع الوحدات.`:'القراءات وأسئلة التحليل متاحة الآن، ويجري إعداد الفيديوهات كملفات مستقلة.';
+    if($('media-status'))$('media-status').textContent=ready===units.length?'الفيديوهات السبعة متاحة للمشاهدة والتنزيل، بمدة 20:00 دقيقة لكل ملف، مع ترجمة عربية ونص مكتوب وفصول زمنية. أسئلة التحليل والقراءات متاحة للتدريب الذاتي.':ready?`${ready} من الفيديوهات متاح للمشاهدة والتنزيل. القراءات وأسئلة التحليل متاحة لجميع الوحدات.`:'القراءات وأسئلة التحليل متاحة الآن، ويجري إعداد الفيديوهات كملفات مستقلة.';
     const mappings=[[1,2,3],[4,5,6],[7],[7],[7]];
     book.parts.forEach((part,i)=>{const row=el('tr');row.append(el('th','',part.title));row.firstChild.scope='row';const cell=el('td');mappings[i].forEach(n=>cell.append(link('الوحدة '+n,unitURL(n))));row.append(cell);const src=el('td');src.append(link('اقرأ الباب',sourceURL(part.p,part.end)));row.append(src);$('coverage-rows').append(row);});
     return;
@@ -31,7 +31,7 @@
   document.title=u.title+' | التنفيذ الجبري';$('crumb').textContent=u.title;
   units.forEach(item=>{const a=link(`${item.id}. ${item.title}`,unitURL(item.id),item.id===id?'active':'');if(item.id===id)a.setAttribute('aria-current','page');$('lesson-navigation').append(a);});
   const root=$('lesson-content');
-  const intro=el('header','lesson-intro');intro.append(el('span','tag',`الوحدة ${id} · ${u.format==='video'?'من المحاضرات الخمس':'قراءة مقترحة'}`),el('h1','',u.title),el('p','lead',u.overview));root.append(intro);
+  const intro=el('header','lesson-intro');intro.append(el('span','tag',`الوحدة ${id} · ${u.supplementary?'محاضرة مكملة':'محاضرة أساسية'}`),el('h1','',u.title),el('p','lead',u.overview));root.append(intro);
   const lecture=videos[id];
   if(lecture?.status==='ready'){
     const sec=el('section','lecture-player');sec.setAttribute('aria-label','فيديو الوحدة');
@@ -49,7 +49,7 @@
     for(const chapter of lecture.chapters){const b=el('button','chapter-button');b.type='button';const stamp=el('span','chapter-time',`${Math.floor(chapter.start/60).toString().padStart(2,'0')}:${Math.floor(chapter.start%60).toString().padStart(2,'0')}`);stamp.dir='ltr';b.append(stamp,el('span','',chapter.title));b.addEventListener('click',()=>{const seek=()=>{video.currentTime=Math.min(chapter.start,Math.max(0,video.duration-.1));video.focus();};if(video.readyState)seek();else{video.addEventListener('loadedmetadata',seek,{once:true});video.load();}video.scrollIntoView({behavior:'auto',block:'center'});});list.append(b);}
     chapters.append(list);sec.append(chapters);root.append(sec);
   }
-  if(u.proposed)root.append(el('p','notice','موضوع هذه المحاضرة القرائية مقترح لتنظيم المسار؛ لم تحدد خطة المشروع المرفقة موضوعي المحاضرتين القرائيتين.'));
+  if(u.supplementary)root.append(el('p','notice','محاضرة مكملة للمسار الأساسي، تجمع شرح الفيديو والقراءات الأصلية وأسئلة التحليل. ارجع إلى النص عند دراسة الشروط والمواعيد.'));
   const goals=el('section','block');goals.append(el('p','eyebrow','في هذه الوحدة تتدرب على'),el('h2','','أهداف التعلم المقترحة'));const ul=el('ul','objectives');u.objectives.forEach(t=>ul.append(el('li','',t)));goals.append(ul);root.append(goals);
   const topics=el('section','block');topics.append(el('h2','','محاور القراءة والتحليل'));u.topics.forEach(t=>{const item=el('article','topic');item.append(el('h3','',t.title),el('p','',t.text),link('الرجوع إلى النص الذي يقوم عليه هذا المحور',sourceURL(t.from,t.to,id),'source-link'));topics.append(item);});root.append(topics);
   function readingGroup(title,arr,folded=false){if(!arr.length)return;const sec=el(folded?'details':'section',folded?'more':'block');sec.append(el(folded?'summary':'h2','',title));const list=el('div','readings');arr.forEach(r=>{const item=el('article','reading');const body=el('div');body.append(el('h3','',r.title));if(r.focus)body.append(el('p','',r.focus));body.append(el('p','locator',locationLabel(r.from,r.to)));item.append(body,link('اقرأ النص',sourceURL(r.from,r.to,id),'button small'));list.append(item);});sec.append(list);root.append(sec);}
