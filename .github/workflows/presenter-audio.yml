@@ -1,0 +1,43 @@
+name: Prepare improved Arabic voice preview
+on:
+  push:
+    branches: [presenter-audio]
+    paths: ['presenter-production/prepare_voice.py', '.github/workflows/presenter-audio.yml']
+permissions:
+  contents: write
+  statuses: write
+jobs:
+  voice:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg fonts-dejavu-core
+          pip install pillow numpy edge-tts
+      - run: python presenter-production/prepare_voice.py
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Retain narration and comparison samples only
+        if: always()
+        run: |
+          mkdir -p /tmp/voice-results
+          if [ -d presenter-output/audio ]; then cp -r presenter-output/audio /tmp/voice-results/; fi
+          git fetch origin presenter-audio-results || true
+          if git show-ref --verify --quiet refs/remotes/origin/presenter-audio-results; then
+            git checkout -B presenter-audio-results origin/presenter-audio-results
+          else
+            git checkout --orphan presenter-audio-results
+            git rm -rf --cached .
+          fi
+          mkdir -p preview
+          if [ -d /tmp/voice-results/audio ]; then cp -r /tmp/voice-results/audio preview/; fi
+          git add preview
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Retain improved Arabic narration preview without any personal photograph'
+            git push origin HEAD:presenter-audio-results
+          fi
