@@ -23,7 +23,8 @@ jobs:
           import json, os
           from pathlib import Path
           queue=json.loads(Path('video-production/queue.json').read_text())
-          assert all(isinstance(n,int) and 1<=n<=5 for n in queue['units'])
+          assert queue['units'] and len(set(queue['units'])) == len(queue['units'])
+          assert all(isinstance(n,int) and 1<=n<=7 for n in queue['units'])
           with open(os.environ['GITHUB_OUTPUT'],'a') as output:
               output.write('units='+json.dumps(queue['units'])+'\n')
           PY
