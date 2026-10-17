@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "description": "Standalone Arabic course with paragraph-level source reading links",
-  "scripts": {"test": "node tests/check_course.cjs", "test:browser": "node tests/browser.cjs"},
-  "devDependencies": {"playwright": "1.62.1"}
+  "scripts": {
+    "test": "node tests/check_course.cjs && node tests/check_identity.cjs",
+    "test:browser": "node tests/browser.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
 }

@@ -1,0 +1,89 @@
+name: Refine neutral course introductions
+on:
+  push:
+    branches: [repair-course-intros]
+    paths: ['video-production/repair_intro.py', '.github/workflows/repair-course-intros.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+  statuses: write
+concurrency:
+  group: course-intro-refinement
+  cancel-in-progress: false
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        unit: [6, 7]
+    env:
+      VIDEO_UNIT: ${{ matrix.unit }}
+      OUTPUT_BRANCH: course-release-unit-${{ matrix.unit }}
+      OMP_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Prepare free CPU production
+        run: |
+          exec > >(tee production-setup.log) 2>&1
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg fonts-dejavu-core libgl1 libglib2.0-0
+          pip install setuptools==69.5.1 wheel
+          pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cpu
+          pip install numpy==1.23.5 scipy==1.10.1 librosa==0.9.2 numba==0.57.1 pillow==9.5.0 opencv-python-headless==4.8.1.78 tqdm edge-tts faster-whisper==1.1.1
+          mkdir -p engines
+          git clone --depth 1 https://github.com/Rudrabha/Wav2Lip.git engines/Wav2Lip
+      - name: Produce the finished lecture or introductory sample
+        run: |
+          exec > >(tee production-render.log) 2>&1
+          python video-production/repair_intro.py "$VIDEO_UNIT"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Retain completed files and useful failure reports
+        if: always()
+        run: |
+          mkdir -p /tmp/course-identity-output
+          python - <<'PY'
+          import json,os,shutil
+          from pathlib import Path
+          n=int(os.environ['VIDEO_UNIT']);name='presenter-sample' if n==0 else f'unit-{n:02}'
+          source=Path('presenter-output/wav2lip') if n==0 else Path('rendered')/name
+          dest=Path('/tmp/course-identity-output')/name;dest.mkdir(parents=True,exist_ok=True)
+          if source.exists():
+              for file in source.iterdir():
+                  if file.is_file() and file.suffix in ['.mp4','.srt','.vtt','.jpg','.txt','.json']:shutil.copy2(file,dest/file.name)
+          if not (dest/'report.json').exists():
+              logs='\n'.join(p.read_text()[-8000:] for p in [Path('production-setup.log'),Path('production-render.log')] if p.exists())
+              (dest/'report.json').write_text(json.dumps({'status':'FAIL','unit':n,'error':'Production did not complete','logs':logs}))
+          PY
+          git fetch origin "$OUTPUT_BRANCH" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/$OUTPUT_BRANCH"; then
+            git checkout -B "$OUTPUT_BRANCH" "origin/$OUTPUT_BRANCH"
+          else
+            git checkout --orphan "$OUTPUT_BRANCH"
+            git rm -rf --cached .
+          fi
+          mkdir -p media
+          cp -r /tmp/course-identity-output/. media/
+          git add media
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Retain course identity video and measured production review'
+            git push origin "HEAD:$OUTPUT_BRANCH"
+          fi
+      - name: Record final measurements
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs=require('fs'),n=Number(process.env.VIDEO_UNIT),name=n===0?'presenter-sample':`unit-${String(n).padStart(2,'0')}`;
+            const file=`/tmp/course-identity-output/${name}/report.json`;
+            const r=fs.existsSync(file)?JSON.parse(fs.readFileSync(file,'utf8')):{status:'FAIL',error:'No production report'};
+            const ok=r.status==='PASS';
+            const description=ok?`${r.durationSeconds.toFixed(3)}s; real portrait lips; ${r.captionCues||r.captions.length} Arabic cues; decode PASS`:String(r.error).slice(0,140);
+            await github.rest.repos.createCommitStatus({...context.repo,sha:context.sha,state:ok?'success':'failure',context:`course/video-${n}`,description});

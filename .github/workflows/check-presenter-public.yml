@@ -1,7 +1,7 @@
-name: Verify published personal presenter sample
+name: Verify public course identity and media
 on:
   push:
-    branches: [verify-presenter-public]
+    branches: [verify-presenter-public, verify-course-identity]
     paths: ['.github/workflows/check-presenter-public.yml']
   workflow_dispatch:
 permissions:
@@ -26,18 +26,34 @@ jobs:
           result={'status':'FAIL'}
           for attempt in range(6):
               try:
-                  code,html=get('presenter.html')
-                  assert code==200 and b'presenter-video' in html
-                  code,photo=get('assets/presenter/yassine-chami.jpg',limit=32)
+                  import re
+                  forbidden=re.compile(r'(?:أحمد|احمد)\s+خليل|ياسين\s+شامي|شامي\s+ياسين')
+                  def clean(data):
+                      text=data.decode();text=re.sub(r'[\u064b-\u065f\u0670\u0640]','',text)
+                      assert not forbidden.search(text),'A personal name remains in published text'
+                  for page in ['index.html','presenter.html','lesson.html','material.html']:
+                      code,html=get(page+'?v=20261017-course');assert code==200;clean(html)
+                  code,photo=get('assets/presenter/portrait.jpg',limit=32)
                   assert code==200 and photo.startswith(bytes.fromhex('ffd8'))
-                  code,media=get('media/presenter-sample/sample.mp4',{'Range':'bytes=0-1023'},1024)
+                  for n in range(1,7):
+                      code,text=get(f'material-{n:02}.js?v=20261017-course');assert code==200;clean(text)
+                  for n in range(1,8):
+                      prefix=f'media/unit-{n:02}/'
+                      code,raw=get(prefix+'report.json?v=20261017-course');report=json.loads(raw);clean(raw)
+                      assert code==200 and report['status']=='PASS' and report['durationSeconds']==1200
+                      assert report['source']=='مقرر التنفيذ الجبري' and report['speakingPortrait']['actualNeuralPortraitSeconds']>=20
+                      for name in ['captions.vtt','transcript.txt']:
+                          code,text=get(prefix+name+'?v=20261017-course');assert code==200;clean(text)
+                      code,media=get(prefix+'lecture.mp4?v=20261017-course',{'Range':'bytes=0-1023'},1024)
+                      assert code in [200,206] and len(media)==1024 and b'ftyp' in media[:32]
+                  code,media=get('media/presenter-sample/sample.mp4?v=20261017-course',{'Range':'bytes=0-1023'},1024)
+                  media_code=code
                   assert code in [200,206] and len(media)==1024 and b'ftyp' in media[:32]
-                  code,caption=get('media/presenter-sample/captions.vtt')
+                  code,caption=get('media/presenter-sample/captions.vtt?v=20261017-course');clean(caption)
                   assert code==200 and caption.startswith(b'WEBVTT') and caption.count(b'-->')>=10
-                  code,report=get('media/presenter-sample/report.json')
-                  report=json.loads(report)
+                  code,raw=get('media/presenter-sample/report.json?v=20261017-course');clean(raw);report=json.loads(raw)
                   assert report['status']=='PASS' and report['durationSeconds']==60 and report['actualNeuralPortraitSeconds']>0
-                  result={'status':'PASS','duration':60,'engine':report['engine'],'pageHTTP':200,'mediaHTTP':206 if code==206 else 200,'captions':caption.count(b'-->')}
+                  result={'status':'PASS','duration':60,'engine':report['engine'],'pageHTTP':200,'mediaHTTP':media_code,'captions':caption.count(b'-->')}
                   break
               except Exception as exc:
                   result={'status':'FAIL','error':str(exc) or type(exc).__name__,'attempt':attempt+1}
@@ -54,4 +70,4 @@ jobs:
             const fs=require('fs');
             const r=fs.existsSync('presenter-public-check.json')?JSON.parse(fs.readFileSync('presenter-public-check.json','utf8')):{status:'FAIL',error:'No public check report'};
             const passed=r.status==='PASS';
-            await github.rest.repos.createCommitStatus({...context.repo,sha:context.sha,state:passed?'success':'failure',context:'presenter/public',description:passed?`Public page and MP4 accessible; 60s ${r.engine} portrait; ${r.captions} Arabic cues`:String(r.error).slice(0,140),target_url:`https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`});
+            await github.rest.repos.createCommitStatus({...context.repo,sha:context.sha,state:passed?'success':'failure',context:'presenter/public',description:passed?`7 public lectures at 20:00; no personal names; 60s ${r.engine} portrait; ${r.captions} Arabic cues`:String(r.error).slice(0,140),target_url:`https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`});

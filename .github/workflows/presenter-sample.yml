@@ -13,17 +13,17 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - name: Reuse the measured Arabic narration
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Generate narration from the current course text
         run: |
-          git fetch origin presenter-audio-results
-          python - <<'PY'
-          import pathlib,subprocess
-          ref='origin/presenter-audio-results'; prefix='preview/audio/'
-          for name in ['narration.wav','intro.wav','captions.vtt','captions.srt','transcript.txt','audio-report.json']:
-              dest=pathlib.Path('presenter-output/audio')/name
-              dest.parent.mkdir(parents=True,exist_ok=True)
-              dest.write_bytes(subprocess.check_output(['git','show',ref+':'+prefix+name]))
-          PY
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg fonts-dejavu-core
+          pip install pillow numpy edge-tts
+          python presenter-production/sample.py audio
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - uses: actions/upload-artifact@v4
         with:
           name: presenter-audio
@@ -35,7 +35,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        engine: [wav2lip, sadtalker]
+        engine: [wav2lip]
     env:
       ENGINE: ${{ matrix.engine }}
       OMP_NUM_THREADS: '2'

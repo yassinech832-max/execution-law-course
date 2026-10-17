@@ -40,7 +40,7 @@ jobs:
           name: course-browser-review
           path: test-results/
           if-no-files-found: ignore
-      - name: Retain nonpersonal design previews for visual review
+      - name: Retain course layout previews for visual review
         if: always()
         run: |
           mkdir -p /tmp/course-design-review
@@ -56,7 +56,7 @@ jobs:
           cp -r /tmp/course-design-review/. preview/
           git add preview
           if ! git diff --cached --quiet; then
-            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Retain course layout previews without personal photographs'
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Retain course layout previews'
             git push origin HEAD:design-review
           fi
       - name: Record browser result on the commit
