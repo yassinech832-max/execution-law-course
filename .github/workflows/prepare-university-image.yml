@@ -11,9 +11,11 @@ jobs:
     timeout-minutes: 4
     steps:
       - uses: actions/checkout@v4
+      - name: Install image verification dependency
+        run: python3 -m pip install --quiet Pillow
       - name: Fetch the university campus photograph from its official source
         run: |
-          python3 - <<'PY'
+          python3 - <<'PY' > image-prepare.log 2>&1
           from pathlib import Path
           import urllib.request,json,hashlib
           from PIL import Image
@@ -34,7 +36,9 @@ jobs:
           print(json.dumps({'width':width,'height':height,'bytes':len(data)}))
           PY
       - name: Retain the original image for the course update
+        if: always()
         run: |
-          git add assets/university
+          if [ -d assets/university ]; then git add assets/university; fi
+          git add image-prepare.log
           git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Retain official UAEU campus photograph'
           git push origin HEAD:prepare-university-image
