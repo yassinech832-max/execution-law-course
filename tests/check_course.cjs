@@ -46,7 +46,7 @@ for (const heading of book.headings) {
   assert.equal(heading.title, paragraphs[heading.p - 1].text);
   assert.ok(heading.end >= heading.p && heading.end < book.tocStart);
 }
-for (const file of ['index.html', 'lesson.html', 'material.html']) {
+for (const file of ['index.html', 'lesson.html', 'material.html', 'presenter.html']) {
   const html = fs.readFileSync(path.join(root, file), 'utf8');
   assert.match(html, /lang="ar" dir="rtl"/);
   for (const [, target] of html.matchAll(/(?:src|href)="([^"#?]+)(?:[?#][^"]*)?"/g)) {

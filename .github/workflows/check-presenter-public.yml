@@ -1,0 +1,57 @@
+name: Verify published personal presenter sample
+on:
+  push:
+    branches: [verify-presenter-public]
+    paths: ['.github/workflows/check-presenter-public.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  statuses: write
+jobs:
+  public-sample:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check the student-facing page and real media
+        run: |
+          python3 - <<'PY'
+          import json,time,urllib.request
+          from pathlib import Path
+          base='https://yassinech832-max.github.io/execution-law-course/'
+          def get(path,headers=None,limit=None):
+              request=urllib.request.Request(base+path,headers=headers or {})
+              with urllib.request.urlopen(request,timeout=25) as response:
+                  return response.status,response.read(limit) if limit else response.read()
+          result={'status':'FAIL'}
+          for attempt in range(6):
+              try:
+                  code,html=get('presenter.html')
+                  assert code==200 and b'presenter-video' in html
+                  code,photo=get('assets/presenter/yassine-chami.jpg',limit=32)
+                  assert code==200 and photo.startswith(bytes.fromhex('ffd8'))
+                  code,media=get('media/presenter-sample/sample.mp4',{'Range':'bytes=0-1023'},1024)
+                  assert code in [200,206] and len(media)==1024 and b'ftyp' in media[:32]
+                  code,caption=get('media/presenter-sample/captions.vtt')
+                  assert code==200 and caption.startswith(b'WEBVTT') and caption.count(b'-->')>=10
+                  code,report=get('media/presenter-sample/report.json')
+                  report=json.loads(report)
+                  assert report['status']=='PASS' and report['durationSeconds']==60 and report['actualNeuralPortraitSeconds']>0
+                  result={'status':'PASS','duration':60,'engine':report['engine'],'pageHTTP':200,'mediaHTTP':206 if code==206 else 200,'captions':caption.count(b'-->')}
+                  break
+              except Exception as exc:
+                  result={'status':'FAIL','error':str(exc) or type(exc).__name__,'attempt':attempt+1}
+                  if attempt<5:time.sleep(15)
+          Path('presenter-public-check.json').write_text(json.dumps(result))
+          print(json.dumps(result))
+          assert result['status']=='PASS',result
+          PY
+      - name: Record public access result
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs=require('fs');
+            const r=fs.existsSync('presenter-public-check.json')?JSON.parse(fs.readFileSync('presenter-public-check.json','utf8')):{status:'FAIL',error:'No public check report'};
+            const passed=r.status==='PASS';
+            await github.rest.repos.createCommitStatus({...context.repo,sha:context.sha,state:passed?'success':'failure',context:'presenter/public',description:passed?`Public page and MP4 accessible; 60s ${r.engine} portrait; ${r.captions} Arabic cues`:String(r.error).slice(0,140),target_url:`https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`});
