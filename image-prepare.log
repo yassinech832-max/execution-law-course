@@ -1,3 +1,6 @@
+Payload: 245 b'<html><head><title>Request Rejected</title></head><body>The requested URL was rejected. Please consu'
 Traceback (most recent call last):
-  File "<stdin>", line 9, in <module>
-AssertionError
+  File "<stdin>", line 13, in <module>
+  File "/home/runner/.local/lib/python3.12/site-packages/PIL/Image.py", line 3730, in open
+    raise UnidentifiedImageError(msg)
+PIL.UnidentifiedImageError: cannot identify image file 'assets/university/uaeu-campus.jpg'
