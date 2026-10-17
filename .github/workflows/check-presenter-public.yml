@@ -76,3 +76,5 @@ jobs:
             const r=fs.existsSync(file)?JSON.parse(fs.readFileSync(file,'utf8')):{status:'FAIL',error:'No public check report'};
             const passed=r.status==='PASS';
             await github.rest.repos.createCommitStatus({...context.repo,sha:context.sha,state:passed?'success':'failure',context:'course/public',description:passed?'7 public lectures at 20:00; trial removed; course identity and navigation passed':String(r.error).slice(0,140),target_url:`https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`});
+
+# Verify the final public course after deployment.
