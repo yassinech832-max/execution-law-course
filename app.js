@@ -3,7 +3,7 @@
   const units = window.COURSE_UNITS;
   const book = window.BOOK_INDEX;
   const videos = window.COURSE_VIDEOS || {};
-  const unitURL = id => `lesson.html?unit=${id}&v=20261017-videos7`;
+  const unitURL = id => `lesson.html?unit=${id}&v=20261017-modern`;
   const $ = id => document.getElementById(id);
   const el = (tag, cls, text) => {const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
   const link = (label, href, cls='') => {const a=el('a',cls,label);a.href=href;return a;};
@@ -13,7 +13,13 @@
   if(document.body.dataset.page==='home'){
     $('paragraph-count').textContent=book.paragraphCount;
     units.forEach(u=>{
-      const row=el('article','unit-row');row.append(el('span','unit-number',String(u.id).padStart(2,'0')));
+      const row=el('article','unit-row');
+      if(videos[u.id]?.status==='ready'){
+        const cover=link('',unitURL(u.id),'unit-cover');cover.setAttribute('aria-label','شاهد '+u.title);
+        const poster=el('img');poster.src=videos[u.id].path+'/poster.jpg';poster.alt='مشهد من شرح '+u.title;poster.width=1920;poster.height=1080;poster.loading='lazy';
+        const play=el('span','cover-play','▶');play.setAttribute('aria-hidden','true');const duration=el('span','cover-time','20:00');duration.dir='ltr';cover.append(poster,play,duration);row.append(cover);
+      }
+      row.append(el('span','unit-number',String(u.id).padStart(2,'0')));
       const body=el('div');body.append(el('h3','',u.title),el('p','',u.subtitle));
       const meta=el('div','unit-meta');meta.append(el('span','tag',videos[u.id]?.status==='ready'?'فيديو 20:00 متاح':u.format==='video'?'قراءات الفيديو متاحة':'وحدة قرائية مقترحة'));
       meta.append(el('span','tag warm',`${u.readings.length} مقاطع أساسية`));body.append(meta);row.append(body,link('افتح الوحدة',unitURL(u.id),'button'));$('unit-list').append(row);

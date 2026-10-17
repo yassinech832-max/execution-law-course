@@ -21,9 +21,15 @@ const url = p => new URL(p, base).href;
     await page.goto(url('index.html'));
     await page.locator('.unit-row').last().waitFor();
     assert.equal(await page.locator('.unit-row').count(), 7);
+    assert.equal(await page.locator('.unit-cover img').count(), 7);
+    await page.locator('.unit-cover img').evaluateAll(async images => {
+      images.forEach(image => image.loading='eager');
+      await Promise.all(images.map(image => image.decode()));
+    });
+    await page.evaluate(() => document.fonts.ready);
     assert.equal(await page.locator('#coverage-rows tr').count(), 5);
     await noOverflow();
-    await page.screenshot({path: path.join(output, 'home-desktop.png'), fullPage: true});
+    await page.screenshot({path: path.join(output, 'home-desktop.jpg'), fullPage: true, type: 'jpeg', quality: 82});
 
     const readingLinks = new Set();
     let testedVideos=0;
@@ -61,7 +67,7 @@ const url = p => new URL(p, base).href;
         await page.locator('#reading-notes').fill('ملاحظة اختبار · موضع المصدر 34');
         await page.reload();
         assert.equal(await page.locator('#reading-notes').inputValue(), 'ملاحظة اختبار · موضع المصدر 34');
-        await page.screenshot({path: path.join(output, 'unit-1-desktop.png'), fullPage: true});
+        await page.screenshot({path: path.join(output, 'unit-1-desktop.jpg'), fullPage: true, type: 'jpeg', quality: 82});
       }
     }
 
@@ -134,7 +140,7 @@ const url = p => new URL(p, base).href;
         stage = `${label} width ${width}`;
         await page.goto(url(route));
         await noOverflow();
-        await page.screenshot({path: path.join(output, `${label}-${width}.png`), fullPage: true});
+        await page.screenshot({path: path.join(output, `${label}-${width}.jpg`), fullPage: true, type: 'jpeg', quality: 82});
       }
     }
     stage = 'runtime errors';
@@ -145,7 +151,7 @@ const url = p => new URL(p, base).href;
     console.log(JSON.stringify(report, null, 2));
   } catch (error) {
     fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify({status: 'FAIL', stage, error: error.message, stack: error.stack}, null, 2));
-    await page.screenshot({path: path.join(output, 'failure.png'), fullPage: true}).catch(() => {});
+    await page.screenshot({path: path.join(output, 'failure.jpg'), fullPage: true, type: 'jpeg', quality: 82}).catch(() => {});
     throw error;
   } finally {
     await browser.close();
