@@ -1,3 +1,4 @@
+# Verify the complete anonymous course release from the student-facing URL.
 name: Verify public course identity and media
 on:
   push:
