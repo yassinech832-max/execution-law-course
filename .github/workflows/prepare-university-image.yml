@@ -1,0 +1,40 @@
+name: Prepare UAEU campus image
+on:
+  push:
+    branches: [prepare-university-image]
+    paths: ['.github/workflows/prepare-university-image.yml']
+permissions:
+  contents: write
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch the university campus photograph from its official source
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import urllib.request,json,hashlib
+          from PIL import Image
+          url='https://uaeu.ac.ae/en/vc/uod/images/crescent.jpg'
+          request=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'})
+          with urllib.request.urlopen(request,timeout=45) as response:
+              assert response.status==200
+              data=response.read(8_000_001)
+          assert len(data)<8_000_000 and data.startswith(bytes.fromhex('ffd8'))
+          dest=Path('assets/university');dest.mkdir(parents=True,exist_ok=True)
+          image=dest/'uaeu-campus.jpg';image.write_bytes(data)
+          with Image.open(image) as photo:
+              photo.verify()
+          with Image.open(image) as photo:
+              width,height=photo.size
+              assert width>=600 and height>=300
+          (dest/'source.json').write_text(json.dumps({'source':url,'description':'United Arab Emirates University campus','width':width,'height':height,'sha256':hashlib.sha256(data).hexdigest()},indent=2)+'\n')
+          print(json.dumps({'width':width,'height':height,'bytes':len(data)}))
+          PY
+      - name: Retain the original image for the course update
+        run: |
+          git add assets/university
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Retain official UAEU campus photograph'
+          git push origin HEAD:prepare-university-image
