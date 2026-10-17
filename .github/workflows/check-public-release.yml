@@ -1,0 +1,65 @@
+name: Verify public course video links
+on:
+  push:
+    branches: [verify-public-videos]
+    paths: ['.github/workflows/check-public-release.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  statuses: write
+jobs:
+  public-media:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read the published pages, video ranges, and captions
+        run: |
+          python3 - <<'PY'
+          import json, time, urllib.request
+          from pathlib import Path
+          base='https://yassinech832-max.github.io/execution-law-course/'
+          def get(path, headers=None, limit=None):
+              request=urllib.request.Request(base+path,headers=headers or {})
+              with urllib.request.urlopen(request,timeout=20) as response:
+                  return response.status,response.read(limit) if limit else response.read(),dict(response.headers)
+          report={'status':'FAIL'}
+          for attempt in range(5):
+              try:
+                  status,text,_=get('video-manifest.js?v=20261017-videos7')
+                  assert status==200
+                  manifest=json.loads(text.decode().removeprefix('window.COURSE_VIDEOS=').strip().removesuffix(';'))
+                  assert len(manifest)==7
+                  movies=[]
+                  for unit in [6,7]:
+                      status,html,_=get(f'lesson.html?unit={unit}&v=20261017-videos7')
+                      assert status==200 and b'20261017-videos7' in html
+                      entry=manifest[str(unit)]
+                      assert entry['status']=='ready' and entry['durationSeconds']==1200
+                      path=entry['path']
+                      status,first,headers=get(path+'/lecture.mp4',{'Range':'bytes=0-1023'},1024)
+                      assert status in [200,206] and len(first)==1024 and b'ftyp' in first[:32]
+                      if status==206:
+                          assert headers.get('Content-Range','').endswith('/'+str(entry['fileBytes']))
+                      capstatus,captions,_=get(path+'/captions.vtt')
+                      assert capstatus==200 and captions.startswith(b'WEBVTT') and captions.count(b'-->')>100
+                      movies.append({'unit':unit,'pageHTTP':200,'videoHTTP':status,'captionsHTTP':capstatus})
+                  report={'status':'PASS','videos':movies,'manifestCount':len(manifest)}
+                  break
+              except Exception as exc:
+                  report={'status':'FAIL','error':str(exc) or type(exc).__name__,'attempt':attempt+1}
+                  if attempt<4:time.sleep(15)
+          Path('public-check.json').write_text(json.dumps(report))
+          print(json.dumps(report))
+          assert report['status']=='PASS',report
+          PY
+      - name: Record public access result
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs=require('fs');
+            const r=fs.existsSync('public-check.json')?JSON.parse(fs.readFileSync('public-check.json','utf8')):{status:'FAIL',error:'No public access report'};
+            const passed=r.status==='PASS';
+            const description=passed?`Public pages HTTP 200; 7 videos listed; MP4 HTTP ${r.videos.map(v=>v.videoHTTP).join('/')}; Arabic captions HTTP 200`:String(r.error).slice(0,140);
+            await github.rest.repos.createCommitStatus({...context.repo,sha:context.sha,state:passed?'success':'failure',context:'course/public-media',description,target_url:`https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`});
