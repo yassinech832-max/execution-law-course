@@ -1,0 +1,43 @@
+name: Compact neural head-motion comparison
+on:
+  push:
+    branches: [voice-portrait-trial-20261019]
+    paths: ['quality-trial-20261019/sad_fast.py', '.github/workflows/quality-head-motion-20261019.yml']
+permissions:
+  contents: write
+  statuses: write
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      TRIAL_MODE: sadtalker256
+      OMP_NUM_THREADS: '4'
+      MKL_NUM_THREADS: '4'
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Load the selected real narration
+        run: |
+          mkdir -p quality-output/audio
+          git fetch origin quality-audio-20261019
+          git show origin/quality-audio-20261019:preview/intro.wav > quality-output/audio/intro.wav
+      - name: Prepare free CPU head animation
+        run: |
+          exec > >(tee trial.log) 2>&1
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg libgl1 libglib2.0-0
+          pip install setuptools==69.5.1 wheel
+          pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cpu
+          pip install numpy==1.23.5 scipy==1.10.1 librosa==0.9.2 numba==0.57.1 pillow==9.5.0 opencv-python-headless==4.8.1.78 tqdm
+          mkdir -p engines
+          git clone --depth 1 https://github.com/OpenTalker/SadTalker.git engines/SadTalker
+          pip install --no-build-isolation face_alignment==1.3.5 imageio==2.19.3 imageio-ffmpeg==0.4.7 resampy==0.3.1 pydub==0.25.1 kornia==0.6.8 yacs pyyaml joblib==1.1.0 scikit-image==0.19.3 basicsr==1.4.2 facexlib==0.3.0 gfpgan av safetensors
+      - name: Render the compact head-motion trial
+        run: timeout 12m python quality-trial-20261019/sad_fast.py >> trial.log 2>&1
+      - name: Retain the real sample and diagnostics
+        if: always()
+        run: python quality-trial-20261019/retain.py
