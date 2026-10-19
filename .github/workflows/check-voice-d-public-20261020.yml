@@ -1,0 +1,60 @@
+name: Verify the published D narration and all seven media files
+on:
+  push:
+    branches: [verify-voice-d-public-20261020]
+    paths: ['.github/workflows/check-voice-d-public-20261020.yml']
+permissions:
+  contents: read
+  statuses: write
+jobs:
+  public-media:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify the live release, captions and actual video ranges
+        run: |
+          python3 - <<'PY'
+          import concurrent.futures,json,time,urllib.request
+          from pathlib import Path
+          base='https://yassinech832-max.github.io/execution-law-course/'
+          def get(path,limit=None,headers=None):
+            req=urllib.request.Request(base+path,headers={'Cache-Control':'no-cache',**(headers or {})})
+            with urllib.request.urlopen(req,timeout=25) as response:return response.status,response.read(limit),{k.lower():v for k,v in response.headers.items()}
+          report={'status':'FAIL'}
+          for attempt in range(8):
+            try:
+              nonce=str(int(time.time()));query='?v=20261020-voice-d&check='+nonce
+              status,raw,_=get('video-manifest.js'+query);assert status==200
+              manifest=json.loads(raw.decode().removeprefix('window.COURSE_VIDEOS=').strip().removesuffix(';'));assert len(manifest)==7
+              status,html,_=get('index.html'+query);assert status==200 and b'20261020-voice-d' in html
+              status,app,_=get('app.js'+query);assert status==200 and b"?v=20261020-voice-d" in app
+              def unit(n):
+                entry=manifest[str(n)];assert entry['voiceProfile']=='D' and entry['durationSeconds']==1200
+                status,html,_=get(f'lesson.html?unit={n}&v=20261020-voice-d&check={nonce}');assert status==200 and b'20261020-voice-d' in html
+                path=entry['path'];status,data,_=get(path+'/report.json'+query);r=json.loads(data)
+                assert status==200 and r['voice']=='ar-KW-FahedNeural' and r['narrationProfile']['id']=='D' and r['publishedTextPreserved'] and r['decodeCheck']=='PASS'
+                assert r['durationSeconds']==1200 and r['fileBytes']==entry['fileBytes'] and len(r['chapters'])==len(entry['chapters'])
+                status,data,headers=get(path+'/lecture.mp4'+query,1024,{'Range':'bytes=0-1023'})
+                assert status in [200,206] and len(data)==1024 and b'ftyp' in data[:32]
+                if status==206:assert headers.get('content-range','').endswith('/'+str(entry['fileBytes']))
+                else:assert int(headers['content-length'])==entry['fileBytes']
+                capstatus,captions,_=get(path+'/captions.vtt'+query)
+                assert capstatus==200 and captions.startswith(b'WEBVTT') and captions.count(b'-->')==r['captionCues']
+                return {'unit':n,'voice':'D','durationSeconds':1200,'bytes':entry['fileBytes'],'videoHTTP':status,'captionCues':r['captionCues']}
+              with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:videos=list(pool.map(unit,range(1,8)))
+              report={'status':'PASS','videos':videos,'release':'20261020-voice-d'};break
+            except Exception as exc:
+              report={'status':'FAIL','error':str(exc) or type(exc).__name__,'attempt':attempt+1}
+              if attempt<7:time.sleep(15)
+          Path('public-check.json').write_text(json.dumps(report));print(json.dumps(report));assert report['status']=='PASS',report
+          PY
+      - name: Record public verification and close production progress
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs=require('fs'),r=fs.existsSync('public-check.json')?JSON.parse(fs.readFileSync('public-check.json','utf8')):{status:'FAIL',error:'No verification report'};
+            const ok=r.status==='PASS';
+            await github.rest.repos.createCommitStatus({...context.repo,sha:context.sha,state:ok?'success':'failure',context:'course/public-voice-d',description:ok?'7 live D lectures; 20:00 each; media ranges and Arabic captions verified':String(r.error).slice(0,140)});
+            if(ok)for(const n of [1,2,3,4,5,6,7])await github.rest.repos.createCommitStatus({...context.repo,sha:'0223b0b528068e91b1d04f07d9749e7396ed9e5c',state:'success',context:`course/video-${n}`,description:'Selected D narration produced and verified on the live course'});
