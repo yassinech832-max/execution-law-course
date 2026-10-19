@@ -11,7 +11,10 @@ if log.exists():(dest/'diagnostics.txt').write_text(log.read_text()[-16000:])
 if not (dest/'report.json').exists():(dest/'report.json').write_text(json.dumps({'status':'FAIL','engine':mode,'error':'Setup or rendering did not complete','log':'diagnostics.txt'}))
 report=json.loads((dest/'report.json').read_text());branch='quality-'+mode+'-20261019'
 def run(*args,check=True):return subprocess.run(list(args),check=check)
-run('git','checkout','--orphan',branch);run('git','rm','-rf','--cached','.')
+if run('git','fetch','origin',branch,check=False).returncode==0:
+ run('git','checkout','-B',branch,'origin/'+branch);run('git','rm','-r','--ignore-unmatch','preview')
+else:
+ run('git','checkout','--orphan',branch);run('git','rm','-rf','--cached','.')
 out=root/'preview';out.mkdir(exist_ok=True)
 for file in dest.iterdir():shutil.copy2(file,out/file.name)
 run('git','add','preview')

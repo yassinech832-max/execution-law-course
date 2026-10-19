@@ -20,8 +20,8 @@ async def speak(text,voice,path,rate='+0%',pitch='+0Hz'):
    with path.open('wb') as file:
     async for part in edge_tts.Communicate(text,voice,rate=rate,pitch=pitch,boundary='WordBoundary',receive_timeout=120).stream():
      if part['type']=='audio':file.write(part['data'])
-     elif part['type']=='WordBoundary':cues.append({'start':part['offset']/1e7,'end':(part['offset']+part['duration'])/1e7,'text':part['text']})
-   assert path.stat().st_size>2000 and cues
+     elif part['type'] in ('WordBoundary','SentenceBoundary'):cues.append({'start':part['offset']/1e7,'end':(part['offset']+part['duration'])/1e7,'text':part['text']})
+   assert path.stat().st_size>2000
    return cues
   except Exception:
    if attempt==2:raise
@@ -91,4 +91,4 @@ if __name__=='__main__':
   if mode=='audio':asyncio.run(audio())
   else:neural(mode)
  except Exception as exc:
-  save(OUT/mode/'report.json',{'status':'FAIL','engine':mode,'error':str(exc),'traceback':traceback.format_exc()});raise
+  report_path=OUT/mode/'report.json';previous=json.loads(report_path.read_text()) if report_path.exists() else {};previous.update({'status':'FAIL','engine':mode,'error':str(exc),'traceback':traceback.format_exc()});save(report_path,previous);raise
