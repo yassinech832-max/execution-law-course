@@ -1,0 +1,28 @@
+name: Prepare the improved course narration excerpt
+on:
+  push:
+    branches: [voice-portrait-trial-20261019]
+    paths: ['quality-trial-20261019/demo_audio.py', '.github/workflows/quality-demo-20261019.yml']
+permissions:
+  contents: write
+jobs:
+  narration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      TRIAL_MODE: demo-audio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Generate a source-based teaching excerpt with the selected voice
+        run: |
+          exec > >(tee trial.log) 2>&1
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          pip install edge-tts requests numpy==1.26.4 faster-whisper==1.1.1 huggingface-hub==0.36.0 tokenizers==0.22.1
+          python quality-trial-20261019/demo_audio.py
+      - name: Retain the actual teaching excerpt
+        if: always()
+        run: python quality-trial-20261019/retain.py
