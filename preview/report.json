@@ -1,0 +1,6 @@
+{
+  "status": "FAIL",
+  "model": "ChatterboxMultilingual",
+  "error": "[Errno 2] No such file or directory: 'ffmpeg'",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/runner/work/execution-law-course/execution-law-course/quality-trial-20261019/neural_voice.py\", line 23, in <module>\n    subprocess.run(['ffmpeg','-v','error','-y','-i',str(OUT/'raw.wav'),'-af','loudnorm=I=-16:TP=-1.5:LRA=9','-ar','24000','-ac','1','-c:a','libmp3lame','-b:a','128k',str(OUT/'neural.mp3')],check=True)\n  File \"/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/subprocess.py\", line 548, in run\n    with Popen(*popenargs, **kwargs) as process:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/subprocess.py\", line 1026, in __init__\n    self._execute_child(args, executable, preexec_fn, close_fds,\n  File \"/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/subprocess.py\", line 1955, in _execute_child\n    raise child_exception_type(errno_num, err_msg, err_filename)\nFileNotFoundError: [Errno 2] No such file or directory: 'ffmpeg'\n"
+}
