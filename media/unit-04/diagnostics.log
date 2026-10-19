@@ -1,0 +1,348 @@
+g tokenizers-0.23.3-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.8 kB)
+Collecting onnxruntime<2,>=1.14 (from faster-whisper==1.1.1)
+  Downloading onnxruntime-1.23.2-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (5.1 kB)
+Collecting av>=11 (from faster-whisper==1.1.1)
+  Downloading av-17.1.0-cp310-cp310-manylinux_2_28_x86_64.whl.metadata (4.6 kB)
+Collecting pyyaml<7,>=5.3 (from ctranslate2<5,>=4.0->faster-whisper==1.1.1)
+  Downloading pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Collecting coloredlogs (from onnxruntime<2,>=1.14->faster-whisper==1.1.1)
+  Downloading coloredlogs-15.0.1-py2.py3-none-any.whl.metadata (12 kB)
+Collecting flatbuffers (from onnxruntime<2,>=1.14->faster-whisper==1.1.1)
+  Downloading flatbuffers-25.12.19-py2.py3-none-any.whl.metadata (1.0 kB)
+Collecting protobuf (from onnxruntime<2,>=1.14->faster-whisper==1.1.1)
+  Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+Requirement already satisfied: sympy in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from onnxruntime<2,>=1.14->faster-whisper==1.1.1) (1.14.0)
+Collecting click<9.0.0,>=8.4.2 (from huggingface-hub>=0.13->faster-whisper==1.1.1)
+  Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+Requirement already satisfied: filelock>=3.10.0 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from huggingface-hub>=0.13->faster-whisper==1.1.1) (3.32.3)
+Collecting fsspec>=2023.5.0 (from huggingface-hub>=0.13->faster-whisper==1.1.1)
+  Downloading fsspec-2026.9.0-py3-none-any.whl.metadata (10 kB)
+Collecting hf-xet<2.0.0,>=1.6.0 (from huggingface-hub>=0.13->faster-whisper==1.1.1)
+  Downloading hf_xet-1.7.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+Collecting httpx2<3,>=2.0.0 (from huggingface-hub>=0.13->faster-whisper==1.1.1)
+  Downloading httpx2-2.14.0-py3-none-any.whl.metadata (10 kB)
+Collecting tomli>=1.1.0 (from huggingface-hub>=0.13->faster-whisper==1.1.1)
+  Downloading tomli-2.5.0-py3-none-any.whl.metadata (10 kB)
+Requirement already satisfied: typing-extensions>=4.1.0 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from huggingface-hub>=0.13->faster-whisper==1.1.1) (4.16.0)
+Collecting anyio>=4.10 (from httpx2<3,>=2.0.0->huggingface-hub>=0.13->faster-whisper==1.1.1)
+  Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+Collecting httpcore2==2.14.0 (from httpx2<3,>=2.0.0->huggingface-hub>=0.13->faster-whisper==1.1.1)
+  Downloading httpcore2-2.14.0-py3-none-any.whl.metadata (27 kB)
+Collecting idna>=3.18 (from httpx2<3,>=2.0.0->huggingface-hub>=0.13->faster-whisper==1.1.1)
+  Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting truststore>=0.10 (from httpx2<3,>=2.0.0->huggingface-hub>=0.13->faster-whisper==1.1.1)
+  Downloading truststore-0.10.5-py3-none-any.whl.metadata (4.5 kB)
+Collecting h11>=0.16 (from httpcore2==2.14.0->httpx2<3,>=2.0.0->huggingface-hub>=0.13->faster-whisper==1.1.1)
+  Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting aiohttp<4.0.0,>=3.8.0 (from edge-tts)
+  Downloading aiohttp-3.14.5-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (8.3 kB)
+Collecting certifi>=2023.11.17 (from edge-tts)
+  Downloading certifi-2026.10.18-py3-none-any.whl.metadata (2.5 kB)
+Collecting tabulate<1.0.0,>=0.4.4 (from edge-tts)
+  Downloading tabulate-0.10.0-py3-none-any.whl.metadata (40 kB)
+Collecting aiohappyeyeballs>=2.5.0 (from aiohttp<4.0.0,>=3.8.0->edge-tts)
+  Downloading aiohappyeyeballs-2.7.1-py3-none-any.whl.metadata (5.9 kB)
+Collecting aiosignal>=1.4.0 (from aiohttp<4.0.0,>=3.8.0->edge-tts)
+  Downloading aiosignal-1.4.0-py3-none-any.whl.metadata (3.7 kB)
+Collecting async-timeout<6.0,>=4.0 (from aiohttp<4.0.0,>=3.8.0->edge-tts)
+  Downloading async_timeout-5.0.1-py3-none-any.whl.metadata (5.1 kB)
+Collecting attrs>=17.3.0 (from aiohttp<4.0.0,>=3.8.0->edge-tts)
+  Downloading attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+Collecting frozenlist>=1.1.1 (from aiohttp<4.0.0,>=3.8.0->edge-tts)
+  Downloading frozenlist-1.8.0-cp310-cp310-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (20 kB)
+Collecting multidict<8.0,>=4.5 (from aiohttp<4.0.0,>=3.8.0->edge-tts)
+  Downloading multidict-7.1.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (6.2 kB)
+Collecting propcache>=0.2.0 (from aiohttp<4.0.0,>=3.8.0->edge-tts)
+  Downloading propcache-0.5.4-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (25 kB)
+Collecting yarl<2.0,>=1.25.1 (from aiohttp<4.0.0,>=3.8.0->edge-tts)
+  Downloading yarl-1.25.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (111 kB)
+Collecting exceptiongroup>=1.0.2 (from anyio>=4.10->httpx2<3,>=2.0.0->huggingface-hub>=0.13->faster-whisper==1.1.1)
+  Downloading exceptiongroup-1.3.1-py3-none-any.whl.metadata (6.7 kB)
+Collecting cloudpickle>=3.0 (from joblib>=0.14->librosa==0.9.2)
+  Downloading cloudpickle-3.1.2-py3-none-any.whl.metadata (7.1 kB)
+Collecting platformdirs>=2.5.0 (from pooch>=1.0->librosa==0.9.2)
+  Downloading platformdirs-4.12.4-py3-none-any.whl.metadata (5.5 kB)
+Requirement already satisfied: requests>=2.19.0 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from pooch>=1.0->librosa==0.9.2) (2.28.1)
+Requirement already satisfied: charset-normalizer<3,>=2 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from requests>=2.19.0->pooch>=1.0->librosa==0.9.2) (2.1.1)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from requests>=2.19.0->pooch>=1.0->librosa==0.9.2) (1.26.13)
+Collecting threadpoolctl>=3.1.0 (from scikit-learn>=0.19.1->librosa==0.9.2)
+  Downloading threadpoolctl-3.7.0-py3-none-any.whl.metadata (24 kB)
+Collecting cffi>=1.0 (from soundfile>=0.10.2->librosa==0.9.2)
+  Downloading cffi-2.1.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+Collecting pycparser (from cffi>=1.0->soundfile>=0.10.2->librosa==0.9.2)
+  Downloading pycparser-3.11-py3-none-any.whl.metadata (8.2 kB)
+Collecting humanfriendly>=9.1 (from coloredlogs->onnxruntime<2,>=1.14->faster-whisper==1.1.1)
+  Downloading humanfriendly-10.0-py2.py3-none-any.whl.metadata (9.2 kB)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from sympy->onnxruntime<2,>=1.14->faster-whisper==1.1.1) (1.3.0)
+Downloading numpy-1.23.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (17.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 17.1/17.1 MB 76.1 MB/s  0:00:00
+Downloading scipy-1.10.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (34.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 34.4/34.4 MB 102.3 MB/s  0:00:00
+Downloading librosa-0.9.2-py3-none-any.whl (214 kB)
+Downloading numba-0.57.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (3.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.6/3.6 MB 93.1 MB/s  0:00:00
+Downloading Pillow-9.5.0-cp310-cp310-manylinux_2_28_x86_64.whl (3.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 150.8 MB/s  0:00:00
+Downloading opencv_python_headless-4.8.1.78-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (49.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 49.1/49.1 MB 95.3 MB/s  0:00:00
+Downloading faster_whisper-1.1.1-py3-none-any.whl (1.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.1/1.1 MB 157.6 MB/s  0:00:00
+Downloading ctranslate2-4.8.3-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (39.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 39.9/39.9 MB 99.8 MB/s  0:00:00
+Downloading llvmlite-0.40.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (42.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.1/42.1 MB 65.8 MB/s  0:00:00
+Downloading onnxruntime-1.23.2-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (17.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 17.4/17.4 MB 93.1 MB/s  0:00:00
+Downloading pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (770 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 770.3/770.3 kB 217.3 MB/s  0:00:00
+Downloading tokenizers-0.23.3-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 167.4 MB/s  0:00:00
+Downloading huggingface_hub-2.2.0-py3-none-any.whl (839 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 839.9/839.9 kB 124.8 MB/s  0:00:00
+Downloading click-8.5.0-py3-none-any.whl (125 kB)
+Downloading hf_xet-1.7.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.2/4.2 MB 150.8 MB/s  0:00:00
+Downloading httpx2-2.14.0-py3-none-any.whl (96 kB)
+Downloading httpcore2-2.14.0-py3-none-any.whl (84 kB)
+Downloading tqdm-4.70.1-py3-none-any.whl (80 kB)
+Downloading edge_tts-7.3.1-py3-none-any.whl (38 kB)
+Downloading aiohttp-3.14.5-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (1.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.9/1.9 MB 385.7 MB/s  0:00:00
+Downloading async_timeout-5.0.1-py3-none-any.whl (6.2 kB)
+Downloading multidict-7.1.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (464 kB)
+Downloading tabulate-0.10.0-py3-none-any.whl (39 kB)
+Downloading yarl-1.25.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (118 kB)
+Downloading aiohappyeyeballs-2.7.1-py3-none-any.whl (15 kB)
+Downloading aiosignal-1.4.0-py3-none-any.whl (7.5 kB)
+Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+Downloading audioread-3.1.0-py3-none-any.whl (23 kB)
+Downloading av-17.1.0-cp310-cp310-manylinux_2_28_x86_64.whl (36.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 36.6/36.6 MB 94.8 MB/s  0:00:00
+Downloading certifi-2026.10.18-py3-none-any.whl (134 kB)
+Downloading decorator-5.3.1-py3-none-any.whl (10 kB)
+Downloading exceptiongroup-1.3.1-py3-none-any.whl (16 kB)
+Downloading frozenlist-1.8.0-cp310-cp310-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (219 kB)
+Downloading fsspec-2026.9.0-py3-none-any.whl (221 kB)
+Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+Downloading idna-3.20-py3-none-any.whl (69 kB)
+Downloading joblib-1.6.0-py3-none-any.whl (306 kB)
+Downloading cloudpickle-3.1.2-py3-none-any.whl (22 kB)
+Downloading pooch-1.9.0-py3-none-any.whl (67 kB)
+Downloading platformdirs-4.12.4-py3-none-any.whl (32 kB)
+Downloading propcache-0.5.4-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (224 kB)
+Downloading resampy-0.4.3-py3-none-any.whl (3.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 227.1 MB/s  0:00:00
+Downloading scikit_learn-1.7.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (9.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.7/9.7 MB 165.1 MB/s  0:00:00
+Downloading soundfile-0.14.0-py2.py3-none-manylinux_2_28_x86_64.whl (1.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 176.5 MB/s  0:00:00
+Downloading cffi-2.1.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (218 kB)
+Downloading threadpoolctl-3.7.0-py3-none-any.whl (26 kB)
+Downloading tomli-2.5.0-py3-none-any.whl (14 kB)
+Downloading truststore-0.10.5-py3-none-any.whl (19 kB)
+Downloading coloredlogs-15.0.1-py2.py3-none-any.whl (46 kB)
+Downloading humanfriendly-10.0-py2.py3-none-any.whl (86 kB)
+Downloading flatbuffers-25.12.19-py2.py3-none-any.whl (26 kB)
+Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+Downloading pycparser-3.11-py3-none-any.whl (51 kB)
+Installing collected packages: flatbuffers, truststore, tqdm, tomli, threadpoolctl, tabulate, pyyaml, pycparser, protobuf, propcache, platformdirs, pillow, numpy, multidict, llvmlite, idna, humanfriendly, hf-xet, h11, fsspec, frozenlist, exceptiongroup, decorator, cloudpickle, click, certifi, av, audioread, attrs, async-timeout, aiohappyeyeballs, yarl, scipy, opencv-python-headless, numba, joblib, httpcore2, ctranslate2, coloredlogs, cffi, anyio, aiosignal, soundfile, scikit-learn, resampy, pooch, onnxruntime, httpx2, aiohttp, librosa, huggingface-hub, edge-tts, tokenizers, faster-whisper
+  Attempting uninstall: pillow
+    Found existing installation: pillow 12.3.0
+    Uninstalling pillow-12.3.0:
+      Successfully uninstalled pillow-12.3.0
+  Attempting uninstall: numpy
+    Found existing installation: numpy 2.2.6
+    Uninstalling numpy-2.2.6:
+      Successfully uninstalled numpy-2.2.6
+  Attempting uninstall: idna
+    Found existing installation: idna 3.4
+    Uninstalling idna-3.4:
+      Successfully uninstalled idna-3.4
+  Attempting uninstall: certifi
+    Found existing installation: certifi 2022.12.7
+    Uninstalling certifi-2022.12.7:
+      Successfully uninstalled certifi-2022.12.7
+
+Successfully installed aiohappyeyeballs-2.7.1 aiohttp-3.14.5 aiosignal-1.4.0 anyio-4.15.1 async-timeout-5.0.1 attrs-26.1.0 audioread-3.1.0 av-17.1.0 certifi-2026.10.18 cffi-2.1.1 click-8.5.0 cloudpickle-3.1.2 coloredlogs-15.0.1 ctranslate2-4.8.3 decorator-5.3.1 edge-tts-7.3.1 exceptiongroup-1.3.1 faster-whisper-1.1.1 flatbuffers-25.12.19 frozenlist-1.8.0 fsspec-2026.9.0 h11-0.16.0 hf-xet-1.7.0 httpcore2-2.14.0 httpx2-2.14.0 huggingface-hub-2.2.0 humanfriendly-10.0 idna-3.20 joblib-1.6.0 librosa-0.9.2 llvmlite-0.40.1 multidict-7.1.0 numba-0.57.1 numpy-1.23.5 onnxruntime-1.23.2 opencv-python-headless-4.8.1.78 pillow-9.5.0 platformdirs-4.12.4 pooch-1.9.0 propcache-0.5.4 protobuf-7.36.2 pycparser-3.11 pyyaml-6.0.3 resampy-0.4.3 scikit-learn-1.7.2 scipy-1.10.1 soundfile-0.14.0 tabulate-0.10.0 threadpoolctl-3.7.0 tokenizers-0.23.3 tomli-2.5.0 tqdm-4.70.1 truststore-0.10.5 yarl-1.25.1
+Cloning into 'engines/Wav2Lip'...
+
+131 [00:06<00:20,  4.86it/s]
+ 25%|██▌       | 33/131 [00:07<00:20,  4.87it/s]
+ 26%|██▌       | 34/131 [00:07<00:20,  4.84it/s]
+ 27%|██▋       | 35/131 [00:07<00:19,  4.81it/s]
+ 27%|██▋       | 36/131 [00:07<00:19,  4.80it/s]
+ 28%|██▊       | 37/131 [00:07<00:19,  4.78it/s]
+ 29%|██▉       | 38/131 [00:08<00:19,  4.79it/s]
+ 30%|██▉       | 39/131 [00:08<00:19,  4.83it/s]
+ 31%|███       | 40/131 [00:08<00:18,  4.80it/s]
+ 31%|███▏      | 41/131 [00:08<00:18,  4.74it/s]
+ 32%|███▏      | 42/131 [00:09<00:18,  4.75it/s]
+ 33%|███▎      | 43/131 [00:09<00:18,  4.78it/s]
+ 34%|███▎      | 44/131 [00:09<00:18,  4.81it/s]
+ 34%|███▍      | 45/131 [00:09<00:17,  4.84it/s]
+ 35%|███▌      | 46/131 [00:09<00:17,  4.86it/s]
+ 36%|███▌      | 47/131 [00:10<00:17,  4.77it/s]
+ 37%|███▋      | 48/131 [00:10<00:17,  4.77it/s]
+ 37%|███▋      | 49/131 [00:10<00:17,  4.69it/s]
+ 38%|███▊      | 50/131 [00:10<00:17,  4.68it/s]
+ 39%|███▉      | 51/131 [00:10<00:17,  4.68it/s]
+ 40%|███▉      | 52/131 [00:11<00:16,  4.67it/s]
+ 40%|████      | 53/131 [00:11<00:16,  4.65it/s]
+ 41%|████      | 54/131 [00:11<00:16,  4.69it/s]
+ 42%|████▏     | 55/131 [00:11<00:16,  4.69it/s]
+ 43%|████▎     | 56/131 [00:11<00:16,  4.67it/s]
+ 44%|████▎     | 57/131 [00:12<00:15,  4.69it/s]
+ 44%|████▍     | 58/131 [00:12<00:15,  4.71it/s]
+ 45%|████▌     | 59/131 [00:12<00:15,  4.64it/s]
+ 46%|████▌     | 60/131 [00:12<00:15,  4.66it/s]
+ 47%|████▋     | 61/131 [00:13<00:15,  4.63it/s]
+ 47%|████▋     | 62/131 [00:13<00:14,  4.65it/s]
+ 48%|████▊     | 63/131 [00:13<00:14,  4.68it/s]
+ 49%|████▉     | 64/131 [00:13<00:14,  4.67it/s]
+ 50%|████▉     | 65/131 [00:13<00:14,  4.68it/s]
+ 50%|█████     | 66/131 [00:14<00:13,  4.70it/s]
+ 51%|█████     | 67/131 [00:14<00:13,  4.71it/s]
+ 52%|█████▏    | 68/131 [00:14<00:13,  4.74it/s]
+ 53%|█████▎    | 69/131 [00:14<00:12,  4.79it/s]
+ 53%|█████▎    | 70/131 [00:14<00:12,  4.77it/s]
+ 54%|█████▍    | 71/131 [00:15<00:12,  4.81it/s]
+ 55%|█████▍    | 72/131 [00:15<00:12,  4.85it/s]
+ 56%|█████▌    | 73/131 [00:15<00:12,  4.78it/s]
+ 56%|█████▋    | 74/131 [00:15<00:11,  4.76it/s]
+ 57%|█████▋    | 75/131 [00:16<00:11,  4.73it/s]
+ 58%|█████▊    | 76/131 [00:16<00:11,  4.68it/s]
+ 59%|█████▉    | 77/131 [00:16<00:11,  4.67it/s]
+ 60%|█████▉    | 78/131 [00:16<00:11,  4.76it/s]
+ 60%|██████    | 79/131 [00:16<00:10,  4.80it/s]
+ 61%|██████    | 80/131 [00:17<00:10,  4.76it/s]
+ 62%|██████▏   | 81/131 [00:17<00:10,  4.79it/s]
+ 63%|██████▎   | 82/131 [00:17<00:10,  4.76it/s]
+ 63%|██████▎   | 83/131 [00:17<00:10,  4.71it/s]
+ 64%|██████▍   | 84/131 [00:17<00:09,  4.73it/s]
+ 65%|██████▍   | 85/131 [00:18<00:09,  4.76it/s]
+ 66%|██████▌   | 86/131 [00:18<00:09,  4.70it/s]
+ 66%|██████▋   | 87/131 [00:18<00:09,  4.73it/s]
+ 67%|██████▋   | 88/131 [00:18<00:08,  4.79it/s]
+ 68%|██████▊   | 89/131 [00:18<00:08,  4.80it/s]
+ 69%|██████▊   | 90/131 [00:19<00:08,  4.81it/s]
+ 69%|██████▉   | 91/131 [00:19<00:08,  4.82it/s]
+ 70%|███████   | 92/131 [00:19<00:08,  4.83it/s]
+ 71%|███████   | 93/131 [00:19<00:07,  4.84it/s]
+ 72%|███████▏  | 94/131 [00:19<00:07,  4.86it/s]
+ 73%|███████▎  | 95/131 [00:20<00:07,  4.86it/s]
+ 73%|███████▎  | 96/131 [00:20<00:07,  4.83it/s]
+ 74%|███████▍  | 97/131 [00:20<00:07,  4.77it/s]
+ 75%|███████▍  | 98/131 [00:20<00:06,  4.79it/s]
+ 76%|███████▌  | 99/131 [00:21<00:06,  4.83it/s]
+ 76%|███████▋  | 100/131 [00:21<00:06,  4.78it/s]
+ 77%|███████▋  | 101/131 [00:21<00:06,  4.73it/s]
+ 78%|███████▊  | 102/131 [00:21<00:06,  4.67it/s]
+ 79%|███████▊  | 103/131 [00:21<00:06,  4.58it/s]
+ 79%|███████▉  | 104/131 [00:22<00:05,  4.54it/s]
+ 80%|████████  | 105/131 [00:22<00:05,  4.52it/s]
+ 81%|████████  | 106/131 [00:22<00:05,  4.49it/s]
+ 82%|████████▏ | 107/131 [00:22<00:05,  4.45it/s]
+ 82%|████████▏ | 108/131 [00:23<00:05,  4.45it/s]
+ 83%|████████▎ | 109/131 [00:23<00:05,  4.25it/s]
+ 84%|████████▍ | 110/131 [00:23<00:04,  4.29it/s]
+ 85%|████████▍ | 111/131 [00:23<00:04,  4.34it/s]
+ 85%|████████▌ | 112/131 [00:23<00:04,  4.35it/s]
+ 86%|████████▋ | 113/131 [00:24<00:04,  4.32it/s]
+ 87%|████████▋ | 114/131 [00:24<00:03,  4.35it/s]
+ 88%|████████▊ | 115/131 [00:24<00:03,  4.38it/s]
+ 89%|████████▊ | 116/131 [00:24<00:03,  4.46it/s]
+ 89%|████████▉ | 117/131 [00:25<00:03,  4.48it/s]
+ 90%|█████████ | 118/131 [00:25<00:02,  4.51it/s]
+ 91%|█████████ | 119/131 [00:25<00:02,  4.54it/s]
+ 92%|█████████▏| 120/131 [00:25<00:02,  4.58it/s]
+ 92%|█████████▏| 121/131 [00:25<00:02,  4.58it/s]
+ 93%|█████████▎| 122/131 [00:26<00:01,  4.58it/s]
+ 94%|█████████▍| 123/131 [00:26<00:01,  4.57it/s]
+ 95%|█████████▍| 124/131 [00:26<00:01,  4.57it/s]
+ 95%|█████████▌| 125/131 [00:26<00:01,  4.61it/s]
+ 96%|█████████▌| 126/131 [00:27<00:01,  4.68it/s]
+ 97%|█████████▋| 127/131 [00:27<00:00,  4.66it/s]
+ 98%|█████████▊| 128/131 [00:27<00:00,  4.61it/s]
+ 98%|█████████▊| 129/131 [00:27<00:00,  4.56it/s]
+ 99%|█████████▉| 130/131 [00:27<00:00,  4.50it/s]
+100%|██████████| 131/131 [00:28<00:00,  4.56it/s]
+100%|██████████| 131/131 [00:28<00:00,  4.66it/s]
+ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers
+  built with gcc 13 (Ubuntu 13.2.0-23ubuntu3)
+  configuration: --prefix=/usr --extra-version=3ubuntu5 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --disable-omx --enable-gnutls --enable-libaom --enable-libass --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libharfbuzz --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-openal --enable-opencl --enable-opengl --disable-sndio --enable-libvpl --disable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-ladspa --enable-libbluray --enable-libjack --enable-libpulse --enable-librabbitmq --enable-librist --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libx264 --enable-libzmq --enable-libzvbi --enable-lv2 --enable-sdl2 --enable-libplacebo --enable-librav1e --enable-pocketsphinx --enable-librsvg --enable-libjxl --enable-shared
+  libavutil      58. 29.100 / 58. 29.100
+  libavcodec     60. 31.102 / 60. 31.102
+  libavformat    60. 16.100 / 60. 16.100
+  libavdevice    60.  3.100 / 60.  3.100
+  libavfilter     9. 12.100 /  9. 12.100
+  libswscale      7.  5.100 /  7.  5.100
+  libswresample   4. 12.100 /  4. 12.100
+  libpostproc    57.  3.100 / 57.  3.100
+[aist#0:0/pcm_s16le @ 0x56523051b100] Guessed Channel Layout: mono
+Input #0, wav, from '/home/runner/work/execution-law-course/execution-law-course/rendered/unit-04/work/portrait-speech.wav':
+  Duration: 00:00:42.00, bitrate: 384 kb/s
+  Stream #0:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 24000 Hz, 1 channels, s16, 384 kb/s
+Input #1, avi, from 'temp/result.avi':
+  Metadata:
+    software        : Lavf59.27.100
+  Duration: 00:00:41.88, start: 0.000000, bitrate: 1470 kb/s
+  Stream #1:0: Video: mpeg4 (Simple Profile) (DIVX / 0x58564944), yuv420p, 866x1536 [SAR 1:1 DAR 433:768], 1466 kb/s, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #1:0 -> #0:0 (mpeg4 (native) -> h264 (libx264))
+  Stream #0:0 -> #0:1 (pcm_s16le (native) -> aac (native))
+Press [q] to stop, [?] for help
+[libx264 @ 0x565230543640] -qscale is ignored, -crf is recommended.
+[libx264 @ 0x565230543640] using SAR=1/1
+[libx264 @ 0x565230543640] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
+[libx264 @ 0x565230543640] profile High, level 4.0, 4:2:0, 8-bit
+[libx264 @ 0x565230543640] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+Output #0, mp4, to '/home/runner/work/execution-law-course/execution-law-course/rendered/unit-04/work/neural-portrait.mp4':
+  Metadata:
+    encoder         : Lavf60.16.100
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 866x1536 [SAR 1:1 DAR 433:768], q=2-31, 25 fps, 12800 tbn
+    Metadata:
+      encoder         : Lavc60.31.102 libx264
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+  Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 24000 Hz, mono, fltp, 69 kb/s
+    Metadata:
+      encoder         : Lavc60.31.102 aac
+frame=    0 fps=0.0 q=0.0 size=       0kB time=-00:00:00.04 bitrate=  -0.0kbits/s speed=N/A    
+frame=   61 fps=0.0 q=28.0 size=       0kB time=00:00:04.39 bitrate=   0.1kbits/s speed=8.58x    
+frame=  162 fps=160 q=28.0 size=     256kB time=00:00:08.40 bitrate= 249.5kbits/s speed= 8.3x    
+frame=  263 fps=174 q=28.0 size=     256kB time=00:00:12.50 bitrate= 167.8kbits/s speed=8.25x    
+frame=  378 fps=187 q=28.0 size=     512kB time=00:00:17.10 bitrate= 245.2kbits/s speed=8.46x    
+frame=  496 fps=196 q=25.0 size=     512kB time=00:00:21.71 bitrate= 193.1kbits/s speed=8.56x    
+frame=  609 fps=200 q=28.0 size=     768kB time=00:00:26.24 bitrate= 239.8kbits/s speed=8.63x    
+frame=  724 fps=204 q=28.0 size=     768kB time=00:00:30.93 bitrate= 203.4kbits/s speed=8.73x    
+frame=  833 fps=206 q=28.0 size=    1024kB time=00:00:35.28 bitrate= 237.7kbits/s speed=8.72x    
+frame=  948 fps=209 q=28.0 size=    1024kB time=00:00:39.89 bitrate= 210.3kbits/s speed=8.77x    
+[out#0/mp4 @ 0x565230528a00] video:943kB audio:385kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 2.012894%
+frame= 1047 fps=212 q=-1.0 Lsize=    1355kB time=00:00:41.98 bitrate= 264.4kbits/s speed=8.48x    
+[libx264 @ 0x565230543640] frame I:5     Avg QP:14.42  size: 83901
+[libx264 @ 0x565230543640] frame P:264   Avg QP:16.97  size:  1158
+[libx264 @ 0x565230543640] frame B:778   Avg QP:25.39  size:   308
+[libx264 @ 0x565230543640] consecutive B-frames:  0.7%  0.6%  0.6% 98.2%
+[libx264 @ 0x565230543640] mb I  I16..4: 15.1% 80.9%  4.0%
+[libx264 @ 0x565230543640] mb P  I16..4:  0.1%  0.3%  0.0%  P16..4:  3.1%  0.8%  0.5%  0.0%  0.0%    skip:95.3%
+[libx264 @ 0x565230543640] mb B  I16..4:  0.0%  0.1%  0.0%  B16..8:  3.2%  0.1%  0.0%  direct: 0.0%  skip:96.6%  L0:49.2% L1:50.0% BI: 0.8%
+[libx264 @ 0x565230543640] 8x8 transform intra:82.1% inter:92.1%
+[libx264 @ 0x565230543640] coded y,uvDC,uvAC intra: 69.0% 43.9% 15.3% inter: 0.4% 0.4% 0.0%
+[libx264 @ 0x565230543640] i16 v,h,dc,p: 69% 14% 12%  6%
+[libx264 @ 0x565230543640] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 34% 20% 29%  3%  2%  2%  2%  5%  3%
+[libx264 @ 0x565230543640] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 51% 29%  9%  2%  2%  2%  2%  2%  1%
+[libx264 @ 0x565230543640] i8c dc,h,v,p: 49% 17% 29%  5%
+[libx264 @ 0x565230543640] Weighted P-Frames: Y:0.0% UV:0.0%
+[libx264 @ 0x565230543640] ref P L0: 60.1%  7.6% 17.6% 14.7%
+[libx264 @ 0x565230543640] ref B L0: 76.1% 19.5%  4.4%
+[libx264 @ 0x565230543640] ref B L1: 92.9%  7.1%
+[libx264 @ 0x565230543640] kb/s:184.39
+[aac @ 0x56523055a700] Qavg: 5674.226
+Using the specified bounding box instead of face detection...
+Load checkpoint from: /home/runner/work/execution-law-course/execution-law-course/engines/Wav2Lip/checkpoints/wav2lip_gan.pth
+Model loaded
+[aist#5:0/pcm_s16le @ 0x559c9d75f940] Guessed Channel Layout: mono
+COMPLETE {"status": "PASS", "unit": 4, "title": "حجز ما للمدين لدى الغير", "durationSeconds": 1200.0, "videoDurationSeconds": 1200.0, "audioDurationSeconds": 1200.0, "frames": "30000", "resolution": [1920, 1080], "fps": 25, "voice": "ar-KW-FahedNeural", "naturalSpeechSeconds": 1327.992, "tempo": 1.131844, "plannedThinkingSeconds": 20, "captionCues": 232, "maximumDetectedSilenceSeconds": 10.9192, "fileBytes": 22053085, "source": "مقرر التنفيذ الجبري", "decodeCheck": "PASS", "sourceCommit": "0223b0b528068e91b1d04f07d9749e7396ed9e5c", "narrationProfile": {"id": "D", "voice": "ar-KW-FahedNeural", "rate": "-4%", "pitch": "+0Hz", "selectedBy": "course-owner"}, "pronunciationTerms": 23, "speakingPortrait": {"engine": "Wav2Lip", "mouthMotionDifferences": [5.491561398103454, 6.30757248981548], "faceBox": [152, 459, 300, 583], "actualNeuralPortraitSeconds": 42, "appearances": [{"start": 0, "seconds": 18}, {"start": 265.00325000000004, "seconds": 7}, {"start": 596.4344166666666, "seconds": 7}, {"start": 1165.8120833333328, "seconds": 10}]}}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+REVIEW {"unit": 4, "samples": [{"start": 12, "seconds": 18, "recognizedText": "تقل الى الامر وطريقة توقيع الحجز ونفسل بين توقيعه وبين اقتضاء الحق ثم نفحس التقرير بما في الذمة وجزاء الإفلال به مصدرنا هو عرض المقرر لتنفيذ الجبري بما يتضمنه من تمييز بين تنظيم الذي يناقشه المقرر وملاحظاتي النقدية"}, {"start": 550, "seconds": 18, "recognizedText": "كان طبيعيا أن يقع هذا الحجز دون أن تسبقه مقدمات تنفيذ المعروفة. فليس مطلوبا إعلان المدين ولا الغير مصبقا بالصدور أمر الحجز. ومن الواضح أن اتفاء المشرع بإعلان أمر الحجز لكي يحصل هذا الأثير وعدما اللجوء الانتقال القائم بالتنفيذ"}, {"start": 1025, "seconds": 18, "recognizedText": "مسؤولية شخصية حتى ولو لم يكن مدينا للمحجز عليه او كان مدينا له بدين اقل فضلا عن اتزامه للتعويد لان كان له محل. ولن يترتب هذا الجزاء بقوة القانون واننا بناءا على حكم قضائي يصدر في دعوة يرفعها الحاجز على المحجز لديه."}]}
