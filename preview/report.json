@@ -1,0 +1,19 @@
+{
+  "engine": "Wav2Lip",
+  "mouthMotionDifferences": [
+    5.042021841087261,
+    4.7896853924891305
+  ],
+  "faceBox": [
+    152,
+    459,
+    300,
+    583
+  ],
+  "status": "PASS",
+  "durationSeconds": 9.84,
+  "renderSeconds": 28.681315898895264,
+  "source": "مقرر التنفيذ الجبري",
+  "audioFile": "intro.wav",
+  "notHumanRecordedVoice": true
+}
