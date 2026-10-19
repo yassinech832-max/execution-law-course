@@ -1,0 +1,205 @@
+s in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from torch->face_alignment==1.3.5) (4.16.0)
+Requirement already satisfied: sympy in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from torch->face_alignment==1.3.5) (1.14.0)
+Requirement already satisfied: jinja2 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from torch->face_alignment==1.3.5) (3.1.6)
+Collecting matplotlib (from filterpy->facexlib==0.3.0)
+  Downloading matplotlib-3.10.9-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (52 kB)
+Requirement already satisfied: MarkupSafe>=2.0 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from jinja2->torch->face_alignment==1.3.5) (3.0.3)
+Collecting contourpy>=1.0.1 (from matplotlib->filterpy->facexlib==0.3.0)
+  Downloading contourpy-1.3.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.5 kB)
+Collecting cycler>=0.10 (from matplotlib->filterpy->facexlib==0.3.0)
+  Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.22.0 (from matplotlib->filterpy->facexlib==0.3.0)
+  Downloading fonttools-4.65.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (125 kB)
+Collecting kiwisolver>=1.3.1 (from matplotlib->filterpy->facexlib==0.3.0)
+  Downloading kiwisolver-1.5.1-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl.metadata (5.2 kB)
+Collecting pyparsing>=3 (from matplotlib->filterpy->facexlib==0.3.0)
+  Downloading pyparsing-3.3.3-py3-none-any.whl.metadata (5.9 kB)
+Collecting python-dateutil>=2.7 (from matplotlib->filterpy->facexlib==0.3.0)
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting six>=1.5 (from python-dateutil>=2.7->matplotlib->filterpy->facexlib==0.3.0)
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+INFO: pip is looking at multiple versions of opencv-python to determine which version is compatible with other requirements. This could take a while.
+Collecting opencv-python (from face_alignment==1.3.5)
+  Downloading opencv_python-4.14.0.94-cp37-abi3-manylinux_2_28_x86_64.whl.metadata (19 kB)
+  Downloading opencv_python-4.13.0.92-cp37-abi3-manylinux_2_28_x86_64.whl.metadata (19 kB)
+  Downloading opencv_python-4.13.0.90-cp37-abi3-manylinux_2_28_x86_64.whl.metadata (19 kB)
+  Downloading opencv_python-4.12.0.88-cp37-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (19 kB)
+  Downloading opencv_python-4.11.0.86-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (20 kB)
+Requirement already satisfied: charset-normalizer<3,>=2 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from requests->basicsr==1.4.2) (2.1.1)
+Requirement already satisfied: idna<4,>=2.5 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from requests->basicsr==1.4.2) (3.4)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from requests->basicsr==1.4.2) (1.26.13)
+Requirement already satisfied: certifi>=2017.4.17 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from requests->basicsr==1.4.2) (2022.12.7)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from sympy->torch->face_alignment==1.3.5) (1.3.0)
+Collecting absl-py>=0.4 (from tb-nightly->basicsr==1.4.2)
+  Downloading absl_py-2.5.1-py3-none-any.whl.metadata (3.3 kB)
+Collecting grpcio>=1.48.2 (from tb-nightly->basicsr==1.4.2)
+  Downloading grpcio-1.84.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (3.8 kB)
+Collecting markdown>=2.6.8 (from tb-nightly->basicsr==1.4.2)
+  Downloading markdown-3.10.3-py3-none-any.whl.metadata (5.1 kB)
+Collecting protobuf!=4.24.0,>=3.19.6 (from tb-nightly->basicsr==1.4.2)
+  Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+Requirement already satisfied: setuptools>=41.0.0 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from tb-nightly->basicsr==1.4.2) (69.5.1)
+Collecting tensorboard-data-server<0.8.0,>=0.7.0 (from tb-nightly->basicsr==1.4.2)
+  Downloading tensorboard_data_server-0.7.2-py3-none-manylinux_2_31_x86_64.whl.metadata (1.1 kB)
+Collecting werkzeug>=1.0.1 (from tb-nightly->basicsr==1.4.2)
+  Downloading werkzeug-3.1.9-py3-none-any.whl.metadata (4.1 kB)
+Requirement already satisfied: platformdirs>=3.5.1 in /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages (from yapf->basicsr==1.4.2) (4.12.4)
+Collecting tomli>=2.0.1 (from yapf->basicsr==1.4.2)
+  Downloading tomli-2.5.0-py3-none-any.whl.metadata (10 kB)
+Downloading face_alignment-1.3.5-py2.py3-none-any.whl (29 kB)
+Downloading imageio-2.19.3-py3-none-any.whl (3.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 72.8 MB/s  0:00:00
+Downloading imageio_ffmpeg-0.4.7-py3-none-manylinux2010_x86_64.whl (26.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 26.9/26.9 MB 170.9 MB/s  0:00:00
+Downloading resampy-0.3.1-py3-none-any.whl (3.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 303.0 MB/s  0:00:00
+Downloading pydub-0.25.1-py2.py3-none-any.whl (32 kB)
+Downloading kornia-0.6.8-py2.py3-none-any.whl (551 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 551.1/551.1 kB 104.4 MB/s  0:00:00
+Downloading joblib-1.1.0-py2.py3-none-any.whl (306 kB)
+Downloading scikit_image-0.19.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.9/13.9 MB 242.1 MB/s  0:00:00
+Downloading facexlib-0.3.0-py3-none-any.whl (59 kB)
+Downloading yacs-0.1.8-py3-none-any.whl (14 kB)
+Downloading pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (770 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 770.3/770.3 kB 168.2 MB/s  0:00:00
+Downloading gfpgan-1.3.8-py3-none-any.whl (52 kB)
+Downloading av-17.1.0-cp310-cp310-manylinux_2_28_x86_64.whl (36.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 36.6/36.6 MB 201.7 MB/s  0:00:00
+Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
+Downloading pywavelets-1.8.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 191.4 MB/s  0:00:00
+Downloading tifffile-2025.5.10-py3-none-any.whl (226 kB)
+Downloading addict-2.4.0-py3-none-any.whl (3.8 kB)
+Downloading future-1.0.0-py3-none-any.whl (491 kB)
+Downloading lmdb-3.0.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (560 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 560.9/560.9 kB 109.3 MB/s  0:00:00
+Downloading matplotlib-3.10.9-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (8.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.8/8.8 MB 341.1 MB/s  0:00:00
+Downloading contourpy-1.3.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (325 kB)
+Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading fonttools-4.65.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.3/5.3 MB 357.6 MB/s  0:00:00
+Downloading kiwisolver-1.5.1-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/1.6 MB 280.7 MB/s  0:00:00
+Downloading pyparsing-3.3.3-py3-none-any.whl (126 kB)
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading opencv_python-4.11.0.86-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (63.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.0/63.0 MB 392.2 MB/s  0:00:00
+Downloading tb_nightly-2.21.0a20251023-py3-none-any.whl (5.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.5/5.5 MB 221.0 MB/s  0:00:00
+Downloading tensorboard_data_server-0.7.2-py3-none-manylinux_2_31_x86_64.whl (6.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.6/6.6 MB 367.9 MB/s  0:00:00
+Downloading absl_py-2.5.1-py3-none-any.whl (137 kB)
+Downloading grpcio-1.84.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (7.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.2/7.2 MB 368.6 MB/s  0:00:00
+Downloading markdown-3.10.3-py3-none-any.whl (110 kB)
+Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+Downloading werkzeug-3.1.9-py3-none-any.whl (228 kB)
+Downloading yapf-0.43.0-py3-none-any.whl (256 kB)
+Downloading tomli-2.5.0-py3-none-any.whl (14 kB)
+Building wheels for collected packages: basicsr, filterpy
+  Building wheel for basicsr (pyproject.toml): started
+  Building wheel for basicsr (pyproject.toml): finished with status 'done'
+  Created wheel for basicsr: filename=basicsr-1.4.2-py3-none-any.whl size=214816 sha256=19c82a313e816cd6bcee26b48951484591e43691d6af80b5bcc0d0b820810821
+  Stored in directory: /home/runner/.cache/pip/wheels/38/83/99/2d8437cc652a01af27df5ff037a4075e95b52d67705c5f30ca
+  Building wheel for filterpy (pyproject.toml): started
+  Building wheel for filterpy (pyproject.toml): finished with status 'done'
+  Created wheel for filterpy: filename=filterpy-1.4.5-py3-none-any.whl size=110458 sha256=bfbe7a88ea24cc32aa4a78c0669705695123931afd752614197bf17a68280b47
+  Stored in directory: /home/runner/.cache/pip/wheels/0f/0c/ea/218f266af4ad626897562199fbbcba521b8497303200186102
+Successfully built basicsr filterpy
+Installing collected packages: pydub, addict, werkzeug, tomli, tifffile, tensorboard-data-server, six, safetensors, pyyaml, PyWavelets, pyparsing, protobuf, opencv-python, markdown, lmdb, kiwisolver, joblib, imageio-ffmpeg, imageio, grpcio, future, fonttools, cycler, contourpy, av, absl-py, yapf, yacs, tb-nightly, scikit-image, resampy, python-dateutil, matplotlib, kornia, face_alignment, filterpy, basicsr, facexlib, gfpgan
+  Attempting uninstall: joblib
+    Found existing installation: joblib 1.6.0
+    Uninstalling joblib-1.6.0:
+      Successfully uninstalled joblib-1.6.0
+  Attempting uninstall: resampy
+    Found existing installation: resampy 0.4.3
+    Uninstalling resampy-0.4.3:
+      Successfully uninstalled resampy-0.4.3
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+scikit-learn 1.7.2 requires joblib>=1.2.0, but you have joblib 1.1.0 which is incompatible.
+Successfully installed PyWavelets-1.8.0 absl-py-2.5.1 addict-2.4.0 av-17.1.0 basicsr-1.4.2 contourpy-1.3.2 cycler-0.12.1 face_alignment-1.3.5 facexlib-0.3.0 filterpy-1.4.5 fonttools-4.65.0 future-1.0.0 gfpgan-1.3.8 grpcio-1.84.0 imageio-2.19.3 imageio-ffmpeg-0.4.7 joblib-1.1.0 kiwisolver-1.5.1 kornia-0.6.8 lmdb-3.0.0 markdown-3.10.3 matplotlib-3.10.9 opencv-python-4.11.0.86 protobuf-7.36.2 pydub-0.25.1 pyparsing-3.3.3 python-dateutil-2.9.0.post0 pyyaml-6.0.3 resampy-0.3.1 safetensors-0.8.0 scikit-image-0.19.3 six-1.17.0 tb-nightly-2.21.0a20251023 tensorboard-data-server-0.7.2 tifffile-2025.5.10 tomli-2.5.0 werkzeug-3.1.9 yacs-0.1.8 yapf-0.43.0
+using safetensor as default
+3DMM Extraction for source image
+
+landmark Det::   0%|          | 0/1 [00:00<?, ?it/s]
+landmark Det:: 100%|██████████| 1/1 [00:00<00:00,  1.16it/s]
+landmark Det:: 100%|██████████| 1/1 [00:00<00:00,  1.16it/s]
+
+3DMM Extraction In Video::   0%|          | 0/1 [00:00<?, ?it/s]
+3DMM Extraction In Video:: 100%|██████████| 1/1 [00:00<00:00, 13.64it/s]
+
+mel::   0%|          | 0/246 [00:00<?, ?it/s]
+mel:: 100%|██████████| 246/246 [00:00<00:00, 87685.80it/s]
+
+audio2exp::   0%|          | 0/25 [00:00<?, ?it/s]
+audio2exp::  24%|██▍       | 6/25 [00:00<00:00, 55.09it/s]
+audio2exp::  52%|█████▏    | 13/25 [00:00<00:00, 62.05it/s]
+audio2exp::  80%|████████  | 20/25 [00:00<00:00, 65.11it/s]
+audio2exp:: 100%|██████████| 25/25 [00:00<00:00, 65.19it/s]
+
+Face Renderer::   0%|          | 0/246 [00:00<?, ?it/s]
+Face Renderer::   0%|          | 1/246 [00:29<1:58:45, 29.08s/it]
+Face Renderer::   1%|          | 2/246 [00:58<1:58:26, 29.13s/it]
+Face Renderer::   1%|          | 3/246 [01:27<1:57:38, 29.05s/it]
+Face Renderer::   2%|▏         | 4/246 [01:56<1:57:09, 29.05s/it]
+Face Renderer::   2%|▏         | 5/246 [02:25<1:56:39, 29.05s/it]
+Face Renderer::   2%|▏         | 6/246 [02:54<1:56:01, 29.01s/it]
+Face Renderer::   3%|▎         | 7/246 [03:23<1:55:25, 28.98s/it]
+Face Renderer::   3%|▎         | 8/246 [03:52<1:54:51, 28.96s/it]
+Face Renderer::   4%|▎         | 9/246 [04:20<1:54:16, 28.93s/it]
+Face Renderer::   4%|▍         | 10/246 [04:49<1:53:47, 28.93s/it]
+Face Renderer::   4%|▍         | 11/246 [05:18<1:53:19, 28.93s/it]
+Face Renderer::   5%|▍         | 12/246 [05:47<1:52:52, 28.94s/it]
+Face Renderer::   5%|▌         | 13/246 [06:16<1:52:18, 28.92s/it]
+Face Renderer::   6%|▌         | 14/246 [06:45<1:51:45, 28.90s/it]
+Face Renderer::   6%|▌         | 15/246 [07:14<1:51:19, 28.92s/it]
+Face Renderer::   7%|▋         | 16/246 [07:43<1:50:54, 28.93s/it]
+Face Renderer::   7%|▋         | 17/246 [08:12<1:50:29, 28.95s/it]
+Face Renderer::   7%|▋         | 18/246 [08:41<1:49:54, 28.92s/it]
+Face Renderer::   8%|▊         | 19/246 [09:10<1:49:33, 28.96s/it]
+Face Renderer::   8%|▊         | 20/246 [09:39<1:49:02, 28.95s/it]
+Face Renderer::   9%|▊         | 21/246 [10:08<1:48:27, 28.92s/it]
+Face Renderer::   9%|▉         | 22/246 [10:36<1:47:49, 28.88s/it]
+Face Renderer::   9%|▉         | 23/246 [11:05<1:47:14, 28.85s/it]
+Face Renderer::  10%|▉         | 24/246 [11:34<1:46:45, 28.85s/it]
+Face Renderer::  10%|█         | 25/246 [12:03<1:46:21, 28.87s/it]
+Face Renderer::  11%|█         | 26/246 [12:32<1:45:50, 28.86s/it]
+Face Renderer::  11%|█         | 27/246 [13:01<1:45:17, 28.85s/it]
+Face Renderer::  11%|█▏        | 28/246 [13:30<1:44:56, 28.88s/it]
+Face Renderer::  12%|█▏        | 29/246 [13:58<1:44:24, 28.87s/it]
+Face Renderer::  12%|█▏        | 30/246 [14:27<1:44:06, 28.92s/it]
+Face Renderer::  13%|█▎        | 31/246 [14:56<1:43:45, 28.96s/it]
+Face Renderer::  13%|█▎        | 32/246 [15:25<1:43:12, 28.93s/it]
+Face Renderer::  13%|█▎        | 33/246 [15:54<1:42:41, 28.93s/it]
+Face Renderer::  14%|█▍        | 34/246 [16:23<1:42:09, 28.91s/it]
+Face Renderer::  14%|█▍        | 35/246 [16:52<1:41:50, 28.96s/it]
+Face Renderer::  15%|█▍        | 36/246 [17:21<1:41:23, 28.97s/it]
+Face Renderer::  15%|█▌        | 37/246 [17:50<1:41:07, 29.03s/it]
+Face Renderer::  15%|█▌        | 38/246 [18:19<1:40:43, 29.05s/it]
+Face Renderer::  16%|█▌        | 39/246 [18:48<1:40:10, 29.04s/it]
+Face Renderer::  16%|█▋        | 40/246 [19:18<1:39:42, 29.04s/it]
+Face Renderer::  17%|█▋        | 41/246 [19:47<1:39:10, 29.02s/it]
+Face Renderer::  17%|█▋        | 42/246 [20:15<1:38:36, 29.00s/it]
+Face Renderer::  17%|█▋        | 43/246 [20:44<1:38:02, 28.98s/it]
+Face Renderer::  18%|█▊        | 44/246 [21:13<1:37:34, 28.98s/it]
+Face Renderer::  18%|█▊        | 45/246 [21:42<1:37:01, 28.96s/it]
+Face Renderer::  19%|█▊        | 46/246 [22:11<1:36:32, 28.96s/it]
+Face Renderer::  19%|█▉        | 47/246 [22:40<1:36:02, 28.95s/it]
+Face Renderer::  20%|█▉        | 48/246 [23:09<1:35:41, 29.00s/it]
+Face Renderer::  20%|█▉        | 49/246 [23:38<1:35:17, 29.02s/it]
+Face Renderer::  20%|██        | 50/246 [24:07<1:34:38, 28.97s/it]
+Face Renderer::  21%|██        | 51/246 [24:36<1:34:07, 28.96s/it]
+Face Renderer::  21%|██        | 52/246 [25:05<1:33:38, 28.96s/it]
+Face Renderer::  22%|██▏       | 53/246 [25:34<1:33:18, 29.01s/it]
+Face Renderer::  22%|██▏       | 54/246 [26:03<1:32:48, 29.00s/it]
+Face Renderer::  22%|██▏       | 55/246 [26:32<1:32:16, 28.99s/it]
+Face Renderer::  23%|██▎       | 56/246 [27:01<1:31:48, 28.99s/it]
+Face Renderer::  23%|██▎       | 57/246 [27:30<1:31:23, 29.01s/it]
+Face Renderer::  24%|██▎       | 58/246 [27:59<1:30:52, 29.00s/it]
+Face Renderer::  24%|██▍       | 59/246 [28:28<1:30:23, 29.00s/it]
+Face Renderer::  24%|██▍       | 60/246 [28:57<1:29:51, 28.98s/it]
+Face Renderer::  25%|██▍       | 61/246 [29:26<1:29:25, 29.00s/it]
