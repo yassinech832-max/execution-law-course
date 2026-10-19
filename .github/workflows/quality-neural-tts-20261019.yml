@@ -1,0 +1,32 @@
+name: Open Arabic voice quality comparison
+on:
+  push:
+    branches: [voice-portrait-trial-20261019]
+    paths: ['quality-trial-20261019/neural_voice.py', '.github/workflows/quality-neural-tts-20261019.yml']
+permissions:
+  contents: write
+  statuses: write
+jobs:
+  neural-tts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      TRIAL_MODE: neural-tts
+      OMP_NUM_THREADS: '4'
+      MKL_NUM_THREADS: '4'
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Prepare an open multilingual narration model
+        run: |
+          exec > >(tee trial.log) 2>&1
+          pip install torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install git+https://github.com/resemble-ai/chatterbox.git
+      - name: Generate the same Arabic legal passage
+        run: timeout 18m python quality-trial-20261019/neural_voice.py >> trial.log 2>&1
+      - name: Retain the real trial or its diagnostics
+        if: always()
+        run: python quality-trial-20261019/retain.py
