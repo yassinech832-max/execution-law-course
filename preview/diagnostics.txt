@@ -1,0 +1,215 @@
+ (36.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 36.6/36.6 MB 245.4 MB/s  0:00:00
+Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
+Downloading pywavelets-1.8.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 232.9 MB/s  0:00:00
+Downloading tifffile-2025.5.10-py3-none-any.whl (226 kB)
+Downloading addict-2.4.0-py3-none-any.whl (3.8 kB)
+Downloading future-1.0.0-py3-none-any.whl (491 kB)
+Downloading lmdb-3.0.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (560 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 560.9/560.9 kB 110.9 MB/s  0:00:00
+Downloading matplotlib-3.10.9-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (8.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.8/8.8 MB 197.5 MB/s  0:00:00
+Downloading contourpy-1.3.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (325 kB)
+Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading fonttools-4.65.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.3/5.3 MB 253.4 MB/s  0:00:00
+Downloading kiwisolver-1.5.1-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/1.6 MB 251.9 MB/s  0:00:00
+Downloading pyparsing-3.3.3-py3-none-any.whl (126 kB)
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading opencv_python-4.11.0.86-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (63.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.0/63.0 MB 177.0 MB/s  0:00:00
+Downloading tb_nightly-2.21.0a20251023-py3-none-any.whl (5.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.5/5.5 MB 179.7 MB/s  0:00:00
+Downloading tensorboard_data_server-0.7.2-py3-none-manylinux_2_31_x86_64.whl (6.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.6/6.6 MB 229.9 MB/s  0:00:00
+Downloading absl_py-2.5.1-py3-none-any.whl (137 kB)
+Downloading grpcio-1.84.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (7.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.2/7.2 MB 288.1 MB/s  0:00:00
+Downloading markdown-3.10.3-py3-none-any.whl (110 kB)
+Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+Downloading werkzeug-3.1.9-py3-none-any.whl (228 kB)
+Downloading yapf-0.43.0-py3-none-any.whl (256 kB)
+Downloading tomli-2.5.0-py3-none-any.whl (14 kB)
+Building wheels for collected packages: basicsr, filterpy
+  Building wheel for basicsr (pyproject.toml): started
+  Building wheel for basicsr (pyproject.toml): finished with status 'done'
+  Created wheel for basicsr: filename=basicsr-1.4.2-py3-none-any.whl size=214820 sha256=4108be7a138ec9552d54155db5a6f69be58b81419813ae1a873137142666857a
+  Stored in directory: /home/runner/.cache/pip/wheels/38/83/99/2d8437cc652a01af27df5ff037a4075e95b52d67705c5f30ca
+  Building wheel for filterpy (pyproject.toml): started
+  Building wheel for filterpy (pyproject.toml): finished with status 'done'
+  Created wheel for filterpy: filename=filterpy-1.4.5-py3-none-any.whl size=110458 sha256=b3721d593a25031ac9499b8e02535ddea8232bdcd96baa90923dd5696ece120c
+  Stored in directory: /home/runner/.cache/pip/wheels/0f/0c/ea/218f266af4ad626897562199fbbcba521b8497303200186102
+Successfully built basicsr filterpy
+Installing collected packages: pydub, addict, werkzeug, tomli, tifffile, tensorboard-data-server, six, safetensors, pyyaml, PyWavelets, pyparsing, protobuf, opencv-python, markdown, lmdb, kiwisolver, joblib, imageio-ffmpeg, imageio, grpcio, future, fonttools, cycler, contourpy, av, absl-py, yapf, yacs, tb-nightly, scikit-image, resampy, python-dateutil, matplotlib, kornia, face_alignment, filterpy, basicsr, facexlib, gfpgan
+  Attempting uninstall: joblib
+    Found existing installation: joblib 1.6.0
+    Uninstalling joblib-1.6.0:
+      Successfully uninstalled joblib-1.6.0
+  Attempting uninstall: resampy
+    Found existing installation: resampy 0.4.3
+    Uninstalling resampy-0.4.3:
+      Successfully uninstalled resampy-0.4.3
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+scikit-learn 1.7.2 requires joblib>=1.2.0, but you have joblib 1.1.0 which is incompatible.
+Successfully installed PyWavelets-1.8.0 absl-py-2.5.1 addict-2.4.0 av-17.1.0 basicsr-1.4.2 contourpy-1.3.2 cycler-0.12.1 face_alignment-1.3.5 facexlib-0.3.0 filterpy-1.4.5 fonttools-4.65.0 future-1.0.0 gfpgan-1.3.8 grpcio-1.84.0 imageio-2.19.3 imageio-ffmpeg-0.4.7 joblib-1.1.0 kiwisolver-1.5.1 kornia-0.6.8 lmdb-3.0.0 markdown-3.10.3 matplotlib-3.10.9 opencv-python-4.11.0.86 protobuf-7.36.2 pydub-0.25.1 pyparsing-3.3.3 python-dateutil-2.9.0.post0 pyyaml-6.0.3 resampy-0.3.1 safetensors-0.8.0 scikit-image-0.19.3 six-1.17.0 tb-nightly-2.21.0a20251023 tensorboard-data-server-0.7.2 tifffile-2025.5.10 tomli-2.5.0 werkzeug-3.1.9 yacs-0.1.8 yapf-0.43.0
+using safetensor as default
+3DMM Extraction for source image
+
+landmark Det::   0%|          | 0/1 [00:00<?, ?it/s]
+landmark Det:: 100%|██████████| 1/1 [00:00<00:00,  1.88it/s]
+landmark Det:: 100%|██████████| 1/1 [00:00<00:00,  1.88it/s]
+
+3DMM Extraction In Video::   0%|          | 0/1 [00:00<?, ?it/s]
+3DMM Extraction In Video:: 100%|██████████| 1/1 [00:00<00:00, 13.98it/s]
+
+mel::   0%|          | 0/246 [00:00<?, ?it/s]
+mel:: 100%|██████████| 246/246 [00:00<00:00, 49886.32it/s]
+
+audio2exp::   0%|          | 0/25 [00:00<?, ?it/s]
+audio2exp::  24%|██▍       | 6/25 [00:00<00:00, 54.85it/s]
+audio2exp::  52%|█████▏    | 13/25 [00:00<00:00, 63.01it/s]
+audio2exp::  84%|████████▍ | 21/25 [00:00<00:00, 66.45it/s]
+audio2exp:: 100%|██████████| 25/25 [00:00<00:00, 65.94it/s]
+
+Face Renderer::   0%|          | 0/26 [00:00<?, ?it/s]
+Face Renderer::   4%|▍         | 1/26 [00:07<03:05,  7.41s/it]
+Face Renderer::   8%|▊         | 2/26 [00:14<02:57,  7.39s/it]
+Face Renderer::  12%|█▏        | 3/26 [00:22<02:49,  7.38s/it]
+Face Renderer::  15%|█▌        | 4/26 [00:29<02:42,  7.39s/it]
+Face Renderer::  19%|█▉        | 5/26 [00:36<02:35,  7.38s/it]
+Face Renderer::  23%|██▎       | 6/26 [00:44<02:27,  7.39s/it]
+Face Renderer::  27%|██▋       | 7/26 [00:51<02:20,  7.40s/it]
+Face Renderer::  31%|███       | 8/26 [00:59<02:13,  7.40s/it]
+Face Renderer::  35%|███▍      | 9/26 [01:06<02:05,  7.40s/it]
+Face Renderer::  38%|███▊      | 10/26 [01:13<01:58,  7.40s/it]
+Face Renderer::  42%|████▏     | 11/26 [01:21<01:51,  7.41s/it]
+Face Renderer::  46%|████▌     | 12/26 [01:28<01:43,  7.40s/it]
+Face Renderer::  50%|█████     | 13/26 [01:36<01:36,  7.42s/it]
+Face Renderer::  54%|█████▍    | 14/26 [01:43<01:29,  7.44s/it]
+Face Renderer::  58%|█████▊    | 15/26 [01:51<01:21,  7.42s/it]
+Face Renderer::  62%|██████▏   | 16/26 [01:58<01:14,  7.42s/it]
+Face Renderer::  65%|██████▌   | 17/26 [02:05<01:06,  7.41s/it]
+Face Renderer::  69%|██████▉   | 18/26 [02:13<00:59,  7.40s/it]
+Face Renderer::  73%|███████▎  | 19/26 [02:20<00:51,  7.40s/it]
+Face Renderer::  77%|███████▋  | 20/26 [02:28<00:44,  7.40s/it]
+Face Renderer::  81%|████████  | 21/26 [02:35<00:37,  7.40s/it]
+Face Renderer::  85%|████████▍ | 22/26 [02:42<00:29,  7.41s/it]
+Face Renderer::  88%|████████▊ | 23/26 [02:50<00:22,  7.40s/it]
+Face Renderer::  92%|█████████▏| 24/26 [02:57<00:14,  7.40s/it]
+Face Renderer::  96%|█████████▌| 25/26 [03:05<00:07,  7.41s/it]
+Face Renderer:: 100%|██████████| 26/26 [03:12<00:00,  7.41s/it]
+Face Renderer:: 100%|██████████| 26/26 [03:12<00:00,  7.41s/it]
+The generated video is named /home/runner/work/execution-law-course/execution-law-course/quality-output/hybrid/neural/2026_10_19_19.49.39/portrait##intro.mp4
+The generated video is named: /home/runner/work/execution-law-course/execution-law-course/quality-output/hybrid/neural/2026_10_19_19.49.39.mp4
+/home/runner/work/execution-law-course/execution-law-course/engines/Wav2Lip/audio.py:100: FutureWarning: Pass sr=16000, n_fft=800 as keyword args. From version 0.10 passing these as positional arguments will result in an error
+  return librosa.filters.mel(hp.sample_rate, hp.n_fft, n_mels=hp.num_mels,
+Using cpu for inference.
+Reading video frames...
+Number of frames available for inference: 228
+(80, 788)
+Length of mel chunks: 243
+
+  0%|          | 0/31 [00:00<?, ?it/s]
+  3%|▎         | 1/31 [00:00<00:24,  1.20it/s]
+  6%|▋         | 2/31 [00:01<00:17,  1.65it/s]
+ 10%|▉         | 3/31 [00:01<00:14,  1.87it/s]
+ 13%|█▎        | 4/31 [00:02<00:13,  2.00it/s]
+ 16%|█▌        | 5/31 [00:02<00:12,  2.08it/s]
+ 19%|█▉        | 6/31 [00:03<00:11,  2.13it/s]
+ 23%|██▎       | 7/31 [00:03<00:11,  2.17it/s]
+ 26%|██▌       | 8/31 [00:03<00:10,  2.20it/s]
+ 29%|██▉       | 9/31 [00:04<00:09,  2.22it/s]
+ 32%|███▏      | 10/31 [00:04<00:09,  2.23it/s]
+ 35%|███▌      | 11/31 [00:05<00:08,  2.24it/s]
+ 39%|███▊      | 12/31 [00:05<00:08,  2.25it/s]
+ 42%|████▏     | 13/31 [00:06<00:07,  2.25it/s]
+ 45%|████▌     | 14/31 [00:06<00:07,  2.26it/s]
+ 48%|████▊     | 15/31 [00:07<00:07,  2.26it/s]
+ 52%|█████▏    | 16/31 [00:07<00:06,  2.26it/s]
+ 55%|█████▍    | 17/31 [00:07<00:06,  2.26it/s]
+ 58%|█████▊    | 18/31 [00:08<00:05,  2.26it/s]
+ 61%|██████▏   | 19/31 [00:08<00:05,  2.25it/s]
+ 65%|██████▍   | 20/31 [00:09<00:04,  2.26it/s]
+ 68%|██████▊   | 21/31 [00:09<00:04,  2.26it/s]
+ 71%|███████   | 22/31 [00:10<00:03,  2.26it/s]
+ 74%|███████▍  | 23/31 [00:10<00:03,  2.26it/s]
+ 77%|███████▋  | 24/31 [00:11<00:03,  2.26it/s]
+ 81%|████████  | 25/31 [00:11<00:02,  2.26it/s]
+ 84%|████████▍ | 26/31 [00:11<00:02,  2.26it/s]
+ 87%|████████▋ | 27/31 [00:12<00:01,  2.26it/s]
+ 90%|█████████ | 28/31 [00:12<00:01,  2.26it/s]
+ 94%|█████████▎| 29/31 [00:13<00:00,  2.26it/s]
+ 97%|█████████▋| 30/31 [00:13<00:00,  2.26it/s]
+100%|██████████| 31/31 [00:13<00:00,  2.74it/s]
+100%|██████████| 31/31 [00:13<00:00,  2.23it/s]
+ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers
+  built with gcc 13 (Ubuntu 13.2.0-23ubuntu3)
+  configuration: --prefix=/usr --extra-version=3ubuntu5 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --disable-omx --enable-gnutls --enable-libaom --enable-libass --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libharfbuzz --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-openal --enable-opencl --enable-opengl --disable-sndio --enable-libvpl --disable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-ladspa --enable-libbluray --enable-libjack --enable-libpulse --enable-librabbitmq --enable-librist --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libx264 --enable-libzmq --enable-libzvbi --enable-lv2 --enable-sdl2 --enable-libplacebo --enable-librav1e --enable-pocketsphinx --enable-librsvg --enable-libjxl --enable-shared
+  libavutil      58. 29.100 / 58. 29.100
+  libavcodec     60. 31.102 / 60. 31.102
+  libavformat    60. 16.100 / 60. 16.100
+  libavdevice    60.  3.100 / 60.  3.100
+  libavfilter     9. 12.100 /  9. 12.100
+  libswscale      7.  5.100 /  7.  5.100
+  libswresample   4. 12.100 /  4. 12.100
+  libpostproc    57.  3.100 / 57.  3.100
+[aist#0:0/pcm_s16le @ 0x564c00991040] Guessed Channel Layout: mono
+Input #0, wav, from '/home/runner/work/execution-law-course/execution-law-course/quality-output/audio/intro.wav':
+  Metadata:
+    encoder         : Lavf60.16.100
+  Duration: 00:00:09.84, bitrate: 256 kb/s
+  Stream #0:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 16000 Hz, 1 channels, s16, 256 kb/s
+Input #1, avi, from 'temp/result.avi':
+  Metadata:
+    software        : Lavf59.27.100
+  Duration: 00:00:09.72, start: 0.000000, bitrate: 230 kb/s
+  Stream #1:0: Video: mpeg4 (Simple Profile) (DIVX / 0x58564944), yuv420p, 256x256 [SAR 1:1 DAR 1:1], 221 kb/s, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #1:0 -> #0:0 (mpeg4 (native) -> h264 (libx264))
+  Stream #0:0 -> #0:1 (pcm_s16le (native) -> aac (native))
+Press [q] to stop, [?] for help
+[libx264 @ 0x564c009aef40] -qscale is ignored, -crf is recommended.
+[libx264 @ 0x564c009aef40] using SAR=1/1
+[libx264 @ 0x564c009aef40] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+[libx264 @ 0x564c009aef40] profile High, level 1.3, 4:2:0, 8-bit
+[libx264 @ 0x564c009aef40] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+Output #0, mp4, to '/home/runner/work/execution-law-course/execution-law-course/quality-output/hybrid/portrait.mp4':
+  Metadata:
+    encoder         : Lavf60.16.100
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 256x256 [SAR 1:1 DAR 1:1], q=2-31, 25 fps, 12800 tbn
+    Metadata:
+      encoder         : Lavc60.31.102 libx264
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+  Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 16000 Hz, mono, fltp, 69 kb/s
+    Metadata:
+      encoder         : Lavc60.31.102 aac
+frame=    0 fps=0.0 q=0.0 size=       0kB time=-00:00:00.06 bitrate=  -0.0kbits/s speed=N/A    
+[out#0/mp4 @ 0x564c00998b40] video:131kB audio:79kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 3.116357%
+frame=  243 fps=0.0 q=-1.0 Lsize=     216kB time=00:00:09.79 bitrate= 180.9kbits/s speed=26.4x    
+[libx264 @ 0x564c009aef40] frame I:1     Avg QP:22.70  size:  3852
+[libx264 @ 0x564c009aef40] frame P:179   Avg QP:23.35  size:   673
+[libx264 @ 0x564c009aef40] frame B:63    Avg QP:25.15  size:   147
+[libx264 @ 0x564c009aef40] consecutive B-frames: 58.4% 18.1%  8.6% 14.8%
+[libx264 @ 0x564c009aef40] mb I  I16..4:  9.8% 88.7%  1.6%
+[libx264 @ 0x564c009aef40] mb P  I16..4:  0.4%  1.6%  0.0%  P16..4: 32.2% 12.2%  6.2%  0.0%  0.0%    skip:47.5%
+[libx264 @ 0x564c009aef40] mb B  I16..4:  0.1%  0.4%  0.0%  B16..8: 26.3%  1.5%  0.2%  direct: 0.3%  skip:71.4%  L0:38.0% L1:59.1% BI: 2.9%
+[libx264 @ 0x564c009aef40] 8x8 transform intra:82.1% inter:81.0%
+[libx264 @ 0x564c009aef40] coded y,uvDC,uvAC intra: 58.1% 67.1% 9.1% inter: 12.6% 11.6% 0.0%
+[libx264 @ 0x564c009aef40] i16 v,h,dc,p: 68%  6% 16% 11%
+[libx264 @ 0x564c009aef40] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 37% 17% 28%  2%  2%  3%  3%  3%  4%
+[libx264 @ 0x564c009aef40] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 36% 20%  8%  3%  8%  9%  6%  5%  3%
+[libx264 @ 0x564c009aef40] i8c dc,h,v,p: 47% 14% 33%  7%
+[libx264 @ 0x564c009aef40] Weighted P-Frames: Y:0.0% UV:0.0%
+[libx264 @ 0x564c009aef40] ref P L0: 70.7% 17.1%  8.9%  3.2%
+[libx264 @ 0x564c009aef40] ref B L0: 87.7%  9.5%  2.8%
+[libx264 @ 0x564c009aef40] ref B L1: 98.1%  1.9%
+[libx264 @ 0x564c009aef40] kb/s:109.93
+[aac @ 0x564c009bdec0] Qavg: 43969.957
+Using the specified bounding box instead of face detection...
+Load checkpoint from: /home/runner/work/execution-law-course/execution-law-course/engines/Wav2Lip/checkpoints/wav2lip_gan.pth
+Model loaded
