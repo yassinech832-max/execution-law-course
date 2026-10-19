@@ -4,7 +4,7 @@
   const book = window.BOOK_INDEX;
   const videos = window.COURSE_VIDEOS || {};
   const mediaURL=(path,file)=>path+'/'+file+'?v=20261017-final';
-  const unitURL = id => `lesson.html?unit=${id}&v=20261017-final`;
+  const unitURL = id => `lesson.html?unit=${id}&v=20261019-clean`;
   const $ = id => document.getElementById(id);
   const el = (tag, cls, text) => {const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
   const link = (label, href, cls='') => {const a=el('a',cls,label);a.href=href;return a;};
@@ -54,8 +54,8 @@
     const captions=el('track');captions.kind='captions';captions.src=mediaURL(lecture.path,'captions.vtt');captions.srclang='ar';captions.label='العربية';captions.default=true;video.append(captions);
     const chaptersTrack=el('track');chaptersTrack.kind='chapters';chaptersTrack.src=mediaURL(lecture.path,'chapters.vtt');chaptersTrack.srclang='ar';chaptersTrack.label='فصول الفيديو';video.append(chaptersTrack);
     video.append(document.createTextNode('يمكنك فتح ملف الفيديو من رابط التنزيل أدناه.'));sec.append(video);
-    const message=el('p','fine','ملف فيديو جاهز مع ترجمة عربية قابلة للتشغيل من زر الترجمة. ظهور مرئي مع تحريك الشفاه بالذكاء الاصطناعي، وتعليق صوتي عربي اصطناعي.');message.setAttribute('role','status');sec.append(message);
-    video.addEventListener('error',()=>{message.textContent='تعذر تشغيل الفيديو في هذا المتصفح. استخدم رابط ملف MP4 أدناه لفتحه في مشغل آخر.';});
+    const message=el('p','fine');message.hidden=true;message.setAttribute('role','status');sec.append(message);
+    video.addEventListener('error',()=>{message.hidden=false;message.textContent='تعذر تشغيل الفيديو في هذا المتصفح. استخدم رابط ملف MP4 أدناه لفتحه في مشغل آخر.';});
     const downloads=el('div','video-downloads');const mp4=link(`تنزيل الفيديو · ${(lecture.fileBytes/1000000).toFixed(1)} MB`,mediaURL(lecture.path,'lecture.mp4'),'button small primary');mp4.download=`execution-law-unit-${String(id).padStart(2,'0')}.mp4`;
     downloads.append(mp4,link('النص المكتوب',mediaURL(lecture.path,'transcript.txt'),'button small'),link('ترجمة SRT',mediaURL(lecture.path,'captions.srt'),'button small'));sec.append(downloads);
     const chapters=el('details','more video-chapters');chapters.append(el('summary','','انتقل إلى فصل داخل الفيديو'));const list=el('div','chapter-list');
