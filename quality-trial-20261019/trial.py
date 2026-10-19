@@ -28,7 +28,9 @@ async def speak(text,voice,path,rate='+0%',pitch='+0Hz'):
    await asyncio.sleep(2)
 async def audio():
  out=OUT/'audio';out.mkdir(parents=True,exist_ok=True)
- configs=[('A','ar-SA-HamedNeural',PLAIN,'+4%','+0Hz'),('B','ar-SA-HamedNeural',CAREFUL,'-6%','-1Hz'),('C','ar-QA-MoazNeural',CAREFUL,'-4%','-1Hz'),('D','ar-KW-FahedNeural',CAREFUL,'-4%','+0Hz')]
+ baseline=PLAIN
+ for ordinary,spoken in [('السند التنفيذي','السَّنَد التَّنفيذي'),('التنفيذ الجبري','التَّنفيذ الجَبْري'),('الصيغة التنفيذية','الصِّيغة التَّنفيذية'),('الحجز التحفظي','الحَجْز التَّحَفُّظي'),('البيع الجبري','البَيع الجَبْري')]:baseline=baseline.replace(ordinary,spoken)
+ configs=[('A','ar-SA-HamedNeural',baseline,'+4%','+0Hz'),('B','ar-SA-HamedNeural',CAREFUL,'-6%','-1Hz'),('C','ar-QA-MoazNeural',CAREFUL,'-4%','-1Hz'),('D','ar-KW-FahedNeural',CAREFUL,'-4%','+0Hz')]
  report={'status':'PASS','source':'مقرر التنفيذ الجبري','sourceParagraphs':[37,38,40],'text':PLAIN,'candidates':[],'humanListeningReview':False,'note':'ASR checks word recovery; it does not prove correct vowels or naturalness.'}
  for label,voice,text,rate,pitch in configs:
   item={'id':label,'voice':voice,'rate':rate,'pitch':pitch}
