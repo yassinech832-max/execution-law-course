@@ -1,0 +1,86 @@
+name: Produce the selected D narration for all course units
+on:
+  push:
+    branches: [voice-d-production-20261020]
+    paths: ['video-production/narration-profile.json', 'video-production/produce_voice_d.py', '.github/workflows/produce-voice-d-20261020.yml']
+permissions:
+  contents: write
+  statuses: write
+concurrency:
+  group: execution-course-selected-d
+  cancel-in-progress: false
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      max-parallel: 7
+      matrix:
+        unit: [1, 2, 3, 4, 5, 6, 7]
+    env:
+      VIDEO_UNIT: ${{ matrix.unit }}
+      OUTPUT_BRANCH: voice-d-release-unit-${{ matrix.unit }}
+      OMP_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Load the published narration for preservation checks
+        run: git fetch origin main
+      - name: Prepare CPU narration and portrait synchronization
+        run: |
+          exec > >(tee production-setup.log) 2>&1
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg fonts-dejavu-core libgl1 libglib2.0-0
+          pip install setuptools==69.5.1 wheel
+          pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cpu
+          pip install numpy==1.23.5 scipy==1.10.1 librosa==0.9.2 numba==0.57.1 pillow==9.5.0 opencv-python-headless==4.8.1.78 tqdm edge-tts faster-whisper==1.1.1
+          mkdir -p engines
+          git clone --depth 1 https://github.com/Rudrabha/Wav2Lip.git engines/Wav2Lip
+      - name: Rebuild the complete lecture with the selected voice D
+        run: |
+          exec > >(tee production-render.log) 2>&1
+          python video-production/produce_voice_d.py "$VIDEO_UNIT"
+      - name: Retain the complete lecture and review evidence
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,os,shutil
+          from pathlib import Path
+          n=int(os.environ['VIDEO_UNIT']);name=f'unit-{n:02}';source=Path('rendered')/name;dest=Path('/tmp/selected-d-output')/name;dest.mkdir(parents=True,exist_ok=True)
+          if source.exists():
+            for file in source.iterdir():
+              if file.is_file() and file.suffix in ['.mp4','.srt','.vtt','.jpg','.txt','.json']:shutil.copy2(file,dest/file.name)
+          logs='\n'.join(p.read_text()[-14000:] for p in [Path('production-setup.log'),Path('production-render.log')] if p.exists())
+          (dest/'diagnostics.log').write_text(logs)
+          if not (dest/'report.json').exists():(dest/'report.json').write_text(json.dumps({'status':'FAIL','unit':n,'error':'Production did not complete'}))
+          PY
+          git fetch origin "$OUTPUT_BRANCH" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/$OUTPUT_BRANCH"; then
+            git checkout -B "$OUTPUT_BRANCH" "origin/$OUTPUT_BRANCH"
+          else
+            git checkout --orphan "$OUTPUT_BRANCH"
+            git rm -rf --cached .
+          fi
+          name=$(python -c 'import os;print("unit-"+os.environ["VIDEO_UNIT"].zfill(2))')
+          mkdir -p "media/$name"
+          cp -r "/tmp/selected-d-output/$name/." "media/$name/"
+          git add "media/$name"
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Retain the selected D lecture with synchronized portrait and captions'
+            git push origin "HEAD:$OUTPUT_BRANCH"
+          fi
+      - name: Record the measured result
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs=require('fs'),n=Number(process.env.VIDEO_UNIT),name=`unit-${String(n).padStart(2,'0')}`;
+            const file=`/tmp/selected-d-output/${name}/report.json`;
+            const r=fs.existsSync(file)?JSON.parse(fs.readFileSync(file,'utf8')):{status:'FAIL',error:'No production report'};
+            const ok=r.status==='PASS'&&r.voice==='ar-KW-FahedNeural'&&r.durationSeconds===1200&&r.publishedTextPreserved===true;
+            await github.rest.repos.createCommitStatus({...context.repo,sha:context.sha,state:ok?'success':'failure',context:`course/voice-d-${n}`,description:ok?`D narration; 20:00; ${r.captionCues} Arabic cues; original text preserved`:String(r.error||'Validation failed').slice(0,140)});

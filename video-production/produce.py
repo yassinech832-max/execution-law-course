@@ -27,8 +27,10 @@ W, H, FPS, SR, TARGET = 1920, 1080, 25, 24000, 1200
 INK, GOLD, PAPER, MUTED = '#10283f', '#b18a46', '#f8f7f2', '#647585'
 FONT = str(ROOT/'assets/fonts/Tajawal-Regular.ttf')
 BOLD = str(ROOT/'assets/fonts/Tajawal-Bold.ttf')
-VOICE='ar-SA-HamedNeural'
-SPEECH_RATE='+4%'
+NARRATION_PROFILE=json.loads((HERE/'narration-profile.json').read_text())
+VOICE=NARRATION_PROFILE['voice']
+SPEECH_RATE=NARRATION_PROFILE['rate']
+SPEECH_PITCH=NARRATION_PROFILE['pitch']
 
 def run(args, **kwargs):
     return subprocess.run([str(v) for v in args], check=True, **kwargs)
@@ -66,8 +68,9 @@ def speakable(text):
     return re.sub(r'\s+', ' ', text.replace('..','.').replace('"','').replace('،،','،')).strip()
 
 def narration_text(text):
-    for plain,spoken in [('السند التنفيذي','السَّنَد التَّنفيذي'),('التنفيذ الجبري','التَّنفيذ الجَبْري'),('الصيغة التنفيذية','الصِّيغة التَّنفيذية'),('الحجز التحفظي','الحَجْز التَّحَفُّظي'),('البيع الجبري','البَيع الجَبْري')]:
-        text=text.replace(plain,spoken)
+    for plain,spoken in sorted(NARRATION_PROFILE['terms'],key=lambda item:len(item[0]),reverse=True):
+        pattern=''.join(re.escape(char)+r'[\u064b-\u065f\u0670]*' for char in plain)+r'(?![\u0621-\u064a])'
+        text=re.sub(pattern,lambda match:spoken,text)
     return text
 
 def assemble(unit):
@@ -176,7 +179,7 @@ async def speak(text, path):
     boundaries=[]
     for attempt in range(2):
         try:
-            communicate=edge_tts.Communicate(text,VOICE,rate=SPEECH_RATE,boundary='WordBoundary',receive_timeout=120)
+            communicate=edge_tts.Communicate(text,VOICE,rate=SPEECH_RATE,pitch=SPEECH_PITCH,boundary='WordBoundary',receive_timeout=120)
             with path.open('wb') as audio:
                 async for chunk in communicate.stream():
                     if chunk['type']=='audio':audio.write(chunk['data'])
@@ -247,7 +250,7 @@ async def produce(unit, out):
             if text is None:
                 parts.append({'hold':scene['hold']});continue
             if not text.strip():continue
-            digest=hashlib.sha256((VOICE+SPEECH_RATE+text).encode()).hexdigest()[:12]
+            digest=hashlib.sha256((VOICE+SPEECH_RATE+SPEECH_PITCH+text).encode()).hexdigest()[:12]
             path=cache/f'speech-{i:02}-{n:02}-{digest}.mp3'
             words=await speak(text,path)
             wav=path.with_suffix('.wav')
@@ -345,6 +348,8 @@ async def produce(unit, out):
     assert max(lengths,default=0)<18,'Unplanned prolonged silence detected'
     report={'status':'PASS','unit':unit['id'],'title':unit['title'],'durationSeconds':float(info['format']['duration']),'videoDurationSeconds':float(video['duration']),'audioDurationSeconds':float(sound['duration']),'frames':video.get('nb_frames'),'resolution':[W,H],'fps':25,'voice':VOICE,'naturalSpeechSeconds':round(raw_total,3),'tempo':round(tempo,6),'plannedThinkingSeconds':hold_total,'captionCues':len(cues),'maximumDetectedSilenceSeconds':max(lengths,default=0),'fileBytes':int(info['format']['size']),'source':'مقرر التنفيذ الجبري','chapters':timeline,'loudnessMeasurement':measured,'decodeCheck':'PASS'}
     report['sourceCommit']=os.environ.get('GITHUB_SHA')
+    report['narrationProfile']={key:NARRATION_PROFILE[key] for key in ['id','voice','rate','pitch','selectedBy']}
+    report['pronunciationTerms']=len(NARRATION_PROFILE['terms'])
     report['speakingPortrait']=portrait_evidence
     run(['ffmpeg','-v','error','-y','-ss','2','-i',out/'lecture.mp4','-frames:v','1',out/'poster.jpg'])
     assert not any(name in transcript for name in ['أحمد خليل','ياسين شامي','شامي ياسين'])
