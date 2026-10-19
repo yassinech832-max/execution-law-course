@@ -1,5 +1,48 @@
 {
   "status": "FAIL",
+  "source": "مقرر التنفيذ الجبري",
+  "sourceParagraphs": [
+    37,
+    38,
+    40
+  ],
+  "text": "السند التنفيذي مصدر الحق في التنفيذ الجبري. ونميز بين الحق الموضوعي والحق في التنفيذ. ومن مصطلحات المقرر: الصيغة التنفيذية، ومحل التنفيذ، وحجز ما للمدين لدى الغير، والبيع الجبري، وتوزيع حصيلة التنفيذ.",
+  "candidates": [
+    {
+      "id": "A",
+      "voice": "ar-SA-HamedNeural",
+      "rate": "+4%",
+      "pitch": "+0Hz",
+      "status": "FAIL",
+      "error": "[Errno 2] No such file or directory: 'ffmpeg'"
+    },
+    {
+      "id": "B",
+      "voice": "ar-SA-HamedNeural",
+      "rate": "-6%",
+      "pitch": "-1Hz",
+      "status": "FAIL",
+      "error": "[Errno 2] No such file or directory: 'ffmpeg'"
+    },
+    {
+      "id": "C",
+      "voice": "ar-QA-MoazNeural",
+      "rate": "-4%",
+      "pitch": "-1Hz",
+      "status": "FAIL",
+      "error": "[Errno 2] No such file or directory: 'ffmpeg'"
+    },
+    {
+      "id": "D",
+      "voice": "ar-KW-FahedNeural",
+      "rate": "-4%",
+      "pitch": "+0Hz",
+      "status": "FAIL",
+      "error": "[Errno 2] No such file or directory: 'ffmpeg'"
+    }
+  ],
+  "humanListeningReview": false,
+  "note": "ASR checks word recovery; it does not prove correct vowels or naturalness.",
   "engine": "audio",
   "error": "No alternative narration completed",
   "traceback": "Traceback (most recent call last):\n  File \"/home/runner/work/execution-law-course/execution-law-course/quality-trial-20261019/trial.py\", line 91, in <module>\n    if mode=='audio':asyncio.run(audio())\n  File \"/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/asyncio/runners.py\", line 44, in run\n    return loop.run_until_complete(main)\n  File \"/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/asyncio/base_events.py\", line 649, in run_until_complete\n    return future.result()\n  File \"/home/runner/work/execution-law-course/execution-law-course/quality-trial-20261019/trial.py\", line 52, in audio\n    assert eligible,'No alternative narration completed'\nAssertionError: No alternative narration completed\n"
