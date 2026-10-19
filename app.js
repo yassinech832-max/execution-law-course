@@ -3,8 +3,8 @@
   const units = window.COURSE_UNITS;
   const book = window.BOOK_INDEX;
   const videos = window.COURSE_VIDEOS || {};
-  const mediaURL=(path,file)=>path+'/'+file+'?v=20261017-final';
-  const unitURL = id => `lesson.html?unit=${id}&v=20261019-clean`;
+  const mediaURL=(path,file)=>path+'/'+file+'?v=20261020-voice-d';
+  const unitURL = id => `lesson.html?unit=${id}&v=20261020-voice-d`;
   const $ = id => document.getElementById(id);
   const el = (tag, cls, text) => {const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
   const link = (label, href, cls='') => {const a=el('a',cls,label);a.href=href;return a;};
