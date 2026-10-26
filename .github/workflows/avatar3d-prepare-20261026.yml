@@ -1,0 +1,48 @@
+name: Prepare the independent 3D professor lesson sample
+on:
+  push:
+    branches: [avatar3d-trial-20261026]
+    paths: ['avatar3d-trial-20261026/prepare.py', 'avatar3d-trial-20261026/convert.py', '.github/workflows/avatar3d-prepare-20261026.yml']
+permissions:
+  contents: write
+  statuses: write
+jobs:
+  prepare:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+      OMP_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Prepare free conversion and narration tools
+        run: |
+          exec > >(tee preparation.log) 2>&1
+          sudo apt-get update -qq
+          sudo apt-get install -y blender ffmpeg
+          pip install numpy pillow edge-tts
+      - name: Prepare the rigged professor, narration D and phonetic mouth cues
+        run: python avatar3d-trial-20261026/prepare.py >> preparation.log 2>&1
+      - name: Retain prepared assets and diagnostics separately from the live site
+        if: always()
+        run: |
+          mkdir -p /tmp/avatar3d-prepared
+          if [ -d avatar3d-output/prepared ]; then cp -r avatar3d-output/prepared/. /tmp/avatar3d-prepared/; fi
+          tail -c 24000 preparation.log > /tmp/avatar3d-prepared/diagnostics.log
+          git fetch origin avatar3d-assets-20261026 || true
+          if git show-ref --verify --quiet refs/remotes/origin/avatar3d-assets-20261026; then
+            git checkout -B avatar3d-assets-20261026 origin/avatar3d-assets-20261026
+          else
+            git checkout --orphan avatar3d-assets-20261026
+            git rm -rf --cached .
+          fi
+          mkdir -p preview
+          cp -r /tmp/avatar3d-prepared/. preview/
+          git add preview
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Retain licensed 3D professor assets and source-grounded narration for review'
+            git push origin HEAD:avatar3d-assets-20261026
+          fi
