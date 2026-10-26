@@ -17,7 +17,7 @@
   "plannedThinkingSeconds": 20,
   "captionCues": 219,
   "maximumDetectedSilenceSeconds": 11.023,
-  "fileBytes": 21863376,
+  "fileBytes": 25823276,
   "source": "مقرر التنفيذ الجبري",
   "chapters": [
     {
@@ -224,7 +224,7 @@
     "target_offset": "0.42"
   },
   "decodeCheck": "PASS",
-  "sourceCommit": "0223b0b528068e91b1d04f07d9749e7396ed9e5c",
+  "sourceCommit": "98f9fc9d0573df331a91f62454c96d77d2b5d4c5",
   "narrationProfile": {
     "id": "D",
     "voice": "ar-KW-FahedNeural",
@@ -233,67 +233,150 @@
     "selectedBy": "course-owner"
   },
   "pronunciationTerms": 23,
-  "speakingPortrait": {
-    "engine": "Wav2Lip",
-    "mouthMotionDifferences": [
-      3.7797233918729245,
-      3.2746225736879944
+  "publishedTextPreserved": true,
+  "normalizedTranscriptSHA256": "124e26edb2ac12b2400a484cfa5fc65d46d438ba4c1b90c46346c2c159fe5abe",
+  "sourceMain": "32ac469a40b3aacaa31a1ff184fee7f69e55e1c9",
+  "style": "approved-3d-professor-20261027",
+  "true3D": true,
+  "avatar": {
+    "bones": 81,
+    "vertices": 23430,
+    "morphTargets": 15,
+    "visemeMapping": {
+      "A": [
+        "blendShape1.AA_VI_01_PP"
+      ],
+      "B": [
+        "blendShape1.AA_VI_07_SS"
+      ],
+      "C": [
+        "blendShape1.AA_VI_11_E"
+      ],
+      "D": [
+        "blendShape1.AA_VI_10_aa"
+      ],
+      "E": [
+        "blendShape1.AA_VI_13_O"
+      ],
+      "F": [
+        "blendShape1.AA_VI_14_U"
+      ],
+      "G": [
+        "blendShape1.AA_VI_02_FF"
+      ],
+      "H": [
+        "blendShape1.AA_VI_08_nn"
+      ],
+      "X": []
+    },
+    "animations": [
+      {
+        "name": "lecture_talk",
+        "seconds": 35.56666564941406,
+        "tracks": 81
+      },
+      {
+        "name": "lecture_explain",
+        "seconds": 25.100000381469727,
+        "tracks": 81
+      }
     ],
-    "faceBox": [
-      152,
-      459,
-      300,
-      583
-    ],
-    "actualNeuralPortraitSeconds": 42,
+    "true3D": true,
     "appearances": [
       {
+        "index": 0,
         "start": 0,
-        "seconds": 18
+        "seconds": 18,
+        "offset": 0
       },
       {
+        "index": 4,
         "start": 198.3547916666667,
-        "seconds": 7
+        "seconds": 7,
+        "offset": 18
       },
       {
+        "index": 9,
         "start": 532.754,
-        "seconds": 7
+        "seconds": 7,
+        "offset": 25
       },
       {
+        "index": 17,
         "start": 1156.7889166666662,
-        "seconds": 10
+        "seconds": 10,
+        "offset": 32
+      }
+    ],
+    "renderedFrames": 1050,
+    "mouthCues": 319,
+    "frameEvidence": [
+      {
+        "time": 2,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "B",
+        "morphPeak": 0.8,
+        "head": [
+          -0.03623168594214282,
+          0.0010837576194652595,
+          -0.023595050605742008,
+          0.9990642361982195
+        ],
+        "appearance": 0,
+        "lessonTime": 2
+      },
+      {
+        "time": 20,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "E",
+        "morphPeak": 0.10096021947876682,
+        "head": [
+          -0.00212748998682542,
+          -0.03952981208910183,
+          -0.0235361316228827,
+          0.9989388852140852
+        ],
+        "appearance": 1,
+        "lessonTime": 200.3547916666667
+      },
+      {
+        "time": 27,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "X",
+        "morphPeak": 0.05,
+        "head": [
+          -0.006904670443494633,
+          -0.004478501681037221,
+          -0.03734108881585386,
+          0.9992686847757458
+        ],
+        "appearance": 2,
+        "lessonTime": 534.754
+      },
+      {
+        "time": 34,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "B",
+        "morphPeak": 0.9898214418809379,
+        "head": [
+          -0.032763435832220134,
+          0.058142605586649625,
+          -0.06832215054508772,
+          0.9954285729948521
+        ],
+        "appearance": 3,
+        "lessonTime": 1158.7889166666662
       }
     ]
   },
-  "publishedTextPreserved": true,
-  "normalizedTranscriptSHA256": "124e26edb2ac12b2400a484cfa5fc65d46d438ba4c1b90c46346c2c159fe5abe",
-  "sampleRecognition": [
-    {
-      "start": 12,
-      "seconds": 18,
-      "recognizedText": "شروط المال ثم الأموال التي يمتنع الحجز عليها ثم اختيار المال وتناسب والإداع وقصر الحجز لا يكفي أن تجد مالا له قيمة يجب أن تحدد مالكة وقابليته لتصرف وحدود الحماية التي يعرضها الكتاب"
-    },
-    {
-      "start": 550,
-      "seconds": 18,
-      "recognizedText": "ونفاذ الشرط في الفئة الثانية. ويرد على قاعدة السادقة استثناء واحد يجوز بمقتضاه الحجز على النفقة من أجل نفقة. فلدائن بنفقة مقررت أن يحجز على مبلغ النفقة الذي تحت يدي مدينة وعلى أن يكون ذلك في حدود الربي فقط."
-    },
-    {
-      "start": 1025,
-      "seconds": 18,
-      "recognizedText": "في الاداع بدون حكم يجوز لكل ذي مصلحة قبل رصول مزاد اداع مبلغ مساون للديون والمصروفات. وتترتب اثره دون حاجة الى موافقة قضائية على النحو الذي يشرحه المصدر. اما الاداع بناء على حوالي."
-    }
-  ],
-  "finalVideoFrameSamples": [
-    2,
-    30,
-    250,
-    535,
-    760,
-    905,
-    1020,
-    1165
-  ],
+  "originalAudioPreserved": true,
+  "originalAudioHash": "SHA256=88ddb2ec2c9b941c4e73eb89371447c0c331ffeab03602fbd95a5c78f1e0d576",
+  "sidecarsPreserved": true,
+  "sha256": "db77c0d3e872d40d24413babffe93c0eafcf5425b6c666de11bbaea379d4d840",
   "visualReviewContactSheet": "qa-frames.jpg",
-  "reviewCommit": "0223b0b528068e91b1d04f07d9749e7396ed9e5c"
+  "humanListeningReview": false
 }

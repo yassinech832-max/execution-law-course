@@ -35,16 +35,45 @@ jobs:
         with:
           path: ~/.cache/ms-playwright
           key: avatar3d-chromium-1.62.1
-      - name: Prepare the approved offline renderer
+      - name: Ensure FFmpeg is available
+        timeout-minutes: 6
         run: |
-          if ! command -v ffmpeg > /dev/null; then
-            sudo apt-get update -qq -o Acquire::Retries=2 -o Acquire::http::Timeout=30
-            sudo apt-get install -y ffmpeg
+          exec > >(tee -a avatar3d-setup.log) 2>&1
+          python3 video-production/avatar3d/setup_status.py "Preparing the verified FFmpeg runtime"
+          if ! command -v ffmpeg > /dev/null || ! command -v ffprobe > /dev/null; then
+            mkdir -p avatar3d-runtime/ffmpeg
+            curl --fail --location --connect-timeout 10 --max-time 120 --retry 1 https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2026-10-26-14-25/ffmpeg-n8.1.3-24-g92611900bb-linux64-gpl-shared-8.1.tar.xz -o /tmp/avatar3d-ffmpeg.tar.xz
+            echo 'e847ad1f629524fc6f7c2e08316a4e563321d11c462742673c6b56cb1120afaa  /tmp/avatar3d-ffmpeg.tar.xz' | sha256sum -c -
+            tar -xJf /tmp/avatar3d-ffmpeg.tar.xz -C avatar3d-runtime/ffmpeg --strip-components=1
+            echo "$PWD/avatar3d-runtime/ffmpeg/bin" >> "$GITHUB_PATH"
+            echo "LD_LIBRARY_PATH=$PWD/avatar3d-runtime/ffmpeg/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" >> "$GITHUB_ENV"
+            LD_LIBRARY_PATH="$PWD/avatar3d-runtime/ffmpeg/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" avatar3d-runtime/ffmpeg/bin/ffmpeg -version
+            LD_LIBRARY_PATH="$PWD/avatar3d-runtime/ffmpeg/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" avatar3d-runtime/ffmpeg/bin/ffprobe -version
           fi
-          pip install --timeout 60 pillow numpy
-          npm install --fetch-timeout=60000 --fetch-retries=2 --prefix avatar3d-runtime --ignore-scripts --package-lock=false three@0.180.0 playwright@1.62.1
+      - name: Install Python rendering dependencies
+        timeout-minutes: 3
+        run: |
+          exec > >(tee -a avatar3d-setup.log) 2>&1
+          python3 video-production/avatar3d/setup_status.py "Installing Python rendering packages"
+          pip install --timeout 30 --retries 2 pillow numpy
+      - name: Install the approved browser renderer
+        timeout-minutes: 4
+        run: |
+          exec > >(tee -a avatar3d-setup.log) 2>&1
+          python3 video-production/avatar3d/setup_status.py "Installing the Three.js renderer"
+          npm install --fetch-timeout=30000 --fetch-retries=2 --prefix avatar3d-runtime --ignore-scripts --package-lock=false three@0.180.0 playwright@1.62.1
+      - name: Prepare Chromium
+        timeout-minutes: 4
+        run: |
+          exec > >(tee -a avatar3d-setup.log) 2>&1
+          python3 video-production/avatar3d/setup_status.py "Preparing Chromium for offline 3D rendering"
           avatar3d-runtime/node_modules/.bin/playwright install chromium
-          curl --fail --location --connect-timeout 15 --max-time 120 --retry 2 https://github.com/DanielSWolf/rhubarb-lip-sync/releases/download/v1.14.0/Rhubarb-Lip-Sync-1.14.0-Linux.zip -o /tmp/rhubarb.zip
+      - name: Prepare phonetic lip synchronization
+        timeout-minutes: 4
+        run: |
+          exec > >(tee -a avatar3d-setup.log) 2>&1
+          python3 video-production/avatar3d/setup_status.py "Preparing the phonetic lip synchronizer"
+          curl --fail --location --connect-timeout 10 --max-time 60 --retry 2 https://github.com/DanielSWolf/rhubarb-lip-sync/releases/download/v1.14.0/Rhubarb-Lip-Sync-1.14.0-Linux.zip -o /tmp/rhubarb.zip
           unzip -q /tmp/rhubarb.zip -d /tmp/rhubarb
           mv /tmp/rhubarb/Rhubarb-Lip-Sync-1.14.0-Linux avatar3d-runtime/rhubarb
           chmod +x avatar3d-runtime/rhubarb/rhubarb
@@ -70,4 +99,4 @@ jobs:
         run: python3 video-production/avatar3d/produce.py compose "$VIDEO_UNIT"
       - name: Retain output for review before updating the live platform
         if: always()
-        run: python3 video-production/avatar3d/produce.py retain "$VIDEO_UNIT"
+        run: python3 video-production/avatar3d/retain.py "$VIDEO_UNIT"

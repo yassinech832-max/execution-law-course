@@ -17,7 +17,7 @@
   "plannedThinkingSeconds": 20,
   "captionCues": 232,
   "maximumDetectedSilenceSeconds": 10.9192,
-  "fileBytes": 22053085,
+  "fileBytes": 26826216,
   "source": "مقرر التنفيذ الجبري",
   "chapters": [
     {
@@ -234,7 +234,7 @@
     "target_offset": "0.41"
   },
   "decodeCheck": "PASS",
-  "sourceCommit": "0223b0b528068e91b1d04f07d9749e7396ed9e5c",
+  "sourceCommit": "94a339c3bda7881dbbc71946c1d3f66b5e68576e",
   "narrationProfile": {
     "id": "D",
     "voice": "ar-KW-FahedNeural",
@@ -243,67 +243,150 @@
     "selectedBy": "course-owner"
   },
   "pronunciationTerms": 23,
-  "speakingPortrait": {
-    "engine": "Wav2Lip",
-    "mouthMotionDifferences": [
-      5.491561398103454,
-      6.30757248981548
+  "publishedTextPreserved": true,
+  "normalizedTranscriptSHA256": "d4b91b9fb50df40c3e6aeda7ffb80b0f209ff2f4277e93117d193276999bf614",
+  "sourceMain": "32ac469a40b3aacaa31a1ff184fee7f69e55e1c9",
+  "style": "approved-3d-professor-20261027",
+  "true3D": true,
+  "avatar": {
+    "bones": 81,
+    "vertices": 23430,
+    "morphTargets": 15,
+    "visemeMapping": {
+      "A": [
+        "blendShape1.AA_VI_01_PP"
+      ],
+      "B": [
+        "blendShape1.AA_VI_07_SS"
+      ],
+      "C": [
+        "blendShape1.AA_VI_11_E"
+      ],
+      "D": [
+        "blendShape1.AA_VI_10_aa"
+      ],
+      "E": [
+        "blendShape1.AA_VI_13_O"
+      ],
+      "F": [
+        "blendShape1.AA_VI_14_U"
+      ],
+      "G": [
+        "blendShape1.AA_VI_02_FF"
+      ],
+      "H": [
+        "blendShape1.AA_VI_08_nn"
+      ],
+      "X": []
+    },
+    "animations": [
+      {
+        "name": "lecture_talk",
+        "seconds": 35.56666564941406,
+        "tracks": 81
+      },
+      {
+        "name": "lecture_explain",
+        "seconds": 25.100000381469727,
+        "tracks": 81
+      }
     ],
-    "faceBox": [
-      152,
-      459,
-      300,
-      583
-    ],
-    "actualNeuralPortraitSeconds": 42,
+    "true3D": true,
     "appearances": [
       {
+        "index": 0,
         "start": 0,
-        "seconds": 18
+        "seconds": 18,
+        "offset": 0
       },
       {
+        "index": 4,
         "start": 265.00325000000004,
-        "seconds": 7
+        "seconds": 7,
+        "offset": 18
       },
       {
+        "index": 9,
         "start": 596.4344166666666,
-        "seconds": 7
+        "seconds": 7,
+        "offset": 25
       },
       {
+        "index": 18,
         "start": 1165.8120833333328,
-        "seconds": 10
+        "seconds": 10,
+        "offset": 32
+      }
+    ],
+    "renderedFrames": 1050,
+    "mouthCues": 321,
+    "frameEvidence": [
+      {
+        "time": 2,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "D",
+        "morphPeak": 0.33360768175583044,
+        "head": [
+          -0.03623168594214282,
+          0.0010837576194652595,
+          -0.023595050605742008,
+          0.9990642361982195
+        ],
+        "appearance": 0,
+        "lessonTime": 2
+      },
+      {
+        "time": 20,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "B",
+        "morphPeak": 0.05,
+        "head": [
+          -0.00212748998682542,
+          -0.03952981208910183,
+          -0.0235361316228827,
+          0.9989388852140852
+        ],
+        "appearance": 1,
+        "lessonTime": 267.00325000000004
+      },
+      {
+        "time": 27,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "B",
+        "morphPeak": 0.05,
+        "head": [
+          -0.006904670443494633,
+          -0.004478501681037221,
+          -0.03734108881585386,
+          0.9992686847757458
+        ],
+        "appearance": 2,
+        "lessonTime": 598.4344166666666
+      },
+      {
+        "time": 34,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "A",
+        "morphPeak": 0.9898214418809379,
+        "head": [
+          -0.0012299395763884682,
+          -0.024071340234034507,
+          -0.009366966457331125,
+          0.9996655992527268
+        ],
+        "appearance": 3,
+        "lessonTime": 1167.8120833333328
       }
     ]
   },
-  "publishedTextPreserved": true,
-  "normalizedTranscriptSHA256": "d4b91b9fb50df40c3e6aeda7ffb80b0f209ff2f4277e93117d193276999bf614",
-  "sampleRecognition": [
-    {
-      "start": 12,
-      "seconds": 18,
-      "recognizedText": "تقل الى الامر وطريقة توقيع الحجز ونفسل بين توقيعه وبين اقتضاء الحق ثم نفحس التقرير بما في الذمة وجزاء الإفلال به مصدرنا هو عرض المقرر لتنفيذ الجبري بما يتضمنه من تمييز بين تنظيم الذي يناقشه المقرر وملاحظاتي النقدية"
-    },
-    {
-      "start": 550,
-      "seconds": 18,
-      "recognizedText": "كان طبيعيا أن يقع هذا الحجز دون أن تسبقه مقدمات تنفيذ المعروفة. فليس مطلوبا إعلان المدين ولا الغير مصبقا بالصدور أمر الحجز. ومن الواضح أن اتفاء المشرع بإعلان أمر الحجز لكي يحصل هذا الأثير وعدما اللجوء الانتقال القائم بالتنفيذ"
-    },
-    {
-      "start": 1025,
-      "seconds": 18,
-      "recognizedText": "مسؤولية شخصية حتى ولو لم يكن مدينا للمحجز عليه او كان مدينا له بدين اقل فضلا عن اتزامه للتعويد لان كان له محل. ولن يترتب هذا الجزاء بقوة القانون واننا بناءا على حكم قضائي يصدر في دعوة يرفعها الحاجز على المحجز لديه."
-    }
-  ],
-  "finalVideoFrameSamples": [
-    2,
-    30,
-    250,
-    535,
-    760,
-    905,
-    1020,
-    1165
-  ],
+  "originalAudioPreserved": true,
+  "originalAudioHash": "SHA256=2917777a6c7c205de7bad79678d67ed6d0436c965bb5b11393853adcbef1317e",
+  "sidecarsPreserved": true,
+  "sha256": "75f2b9ccec71a7385ee7fddc40bfb1ab359482d6ac81f4ff8094d6eb1f5e62cc",
   "visualReviewContactSheet": "qa-frames.jpg",
-  "reviewCommit": "0223b0b528068e91b1d04f07d9749e7396ed9e5c"
+  "humanListeningReview": false
 }

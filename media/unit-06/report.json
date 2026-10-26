@@ -17,7 +17,7 @@
   "plannedThinkingSeconds": 10,
   "captionCues": 245,
   "maximumDetectedSilenceSeconds": 10.9114,
-  "fileBytes": 22603659,
+  "fileBytes": 26768822,
   "source": "مقرر التنفيذ الجبري",
   "chapters": [
     {
@@ -259,7 +259,7 @@
     "target_offset": "0.51"
   },
   "decodeCheck": "PASS",
-  "sourceCommit": "0223b0b528068e91b1d04f07d9749e7396ed9e5c",
+  "sourceCommit": "98f9fc9d0573df331a91f62454c96d77d2b5d4c5",
   "narrationProfile": {
     "id": "D",
     "voice": "ar-KW-FahedNeural",
@@ -268,67 +268,150 @@
     "selectedBy": "course-owner"
   },
   "pronunciationTerms": 23,
-  "speakingPortrait": {
-    "engine": "Wav2Lip",
-    "mouthMotionDifferences": [
-      6.393892711649721,
-      6.30668241415905
+  "publishedTextPreserved": true,
+  "normalizedTranscriptSHA256": "7f44ed4460af93b677aa5c863d941e499f4fcc3852c54c4ba65f99d5afc98daa",
+  "sourceMain": "32ac469a40b3aacaa31a1ff184fee7f69e55e1c9",
+  "style": "approved-3d-professor-20261027",
+  "true3D": true,
+  "avatar": {
+    "bones": 81,
+    "vertices": 23430,
+    "morphTargets": 15,
+    "visemeMapping": {
+      "A": [
+        "blendShape1.AA_VI_01_PP"
+      ],
+      "B": [
+        "blendShape1.AA_VI_07_SS"
+      ],
+      "C": [
+        "blendShape1.AA_VI_11_E"
+      ],
+      "D": [
+        "blendShape1.AA_VI_10_aa"
+      ],
+      "E": [
+        "blendShape1.AA_VI_13_O"
+      ],
+      "F": [
+        "blendShape1.AA_VI_14_U"
+      ],
+      "G": [
+        "blendShape1.AA_VI_02_FF"
+      ],
+      "H": [
+        "blendShape1.AA_VI_08_nn"
+      ],
+      "X": []
+    },
+    "animations": [
+      {
+        "name": "lecture_talk",
+        "seconds": 35.56666564941406,
+        "tracks": 81
+      },
+      {
+        "name": "lecture_explain",
+        "seconds": 25.100000381469727,
+        "tracks": 81
+      }
     ],
-    "faceBox": [
-      152,
-      459,
-      300,
-      583
-    ],
-    "actualNeuralPortraitSeconds": 42,
+    "true3D": true,
     "appearances": [
       {
+        "index": 0,
         "start": 0,
-        "seconds": 18
+        "seconds": 18,
+        "offset": 0
       },
       {
+        "index": 4,
         "start": 235.72512500000002,
-        "seconds": 7
+        "seconds": 7,
+        "offset": 18
       },
       {
+        "index": 9,
         "start": 514.4905,
-        "seconds": 7
+        "seconds": 7,
+        "offset": 25
       },
       {
+        "index": 21,
         "start": 1165.2483749999997,
-        "seconds": 10
+        "seconds": 10,
+        "offset": 32
+      }
+    ],
+    "renderedFrames": 1050,
+    "mouthCues": 299,
+    "frameEvidence": [
+      {
+        "time": 2,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "B",
+        "morphPeak": 0.10096021947873408,
+        "head": [
+          -0.03623168594214282,
+          0.0010837576194652595,
+          -0.023595050605742008,
+          0.9990642361982195
+        ],
+        "appearance": 0,
+        "lessonTime": 2
+      },
+      {
+        "time": 20,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "F",
+        "morphPeak": 0.33360768175581873,
+        "head": [
+          -0.00212748998682542,
+          -0.03952981208910183,
+          -0.0235361316228827,
+          0.9989388852140852
+        ],
+        "appearance": 1,
+        "lessonTime": 237.72512500000002
+      },
+      {
+        "time": 27,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "A",
+        "morphPeak": 0.10096021947876682,
+        "head": [
+          -0.006904670443494633,
+          -0.004478501681037221,
+          -0.03734108881585386,
+          0.9992686847757458
+        ],
+        "appearance": 2,
+        "lessonTime": 516.4905
+      },
+      {
+        "time": 34,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "X",
+        "morphPeak": 0.9898214418809379,
+        "head": [
+          -0.007585863401306072,
+          0.006823245831746484,
+          -0.03357522787922963,
+          0.9993841129800028
+        ],
+        "appearance": 3,
+        "lessonTime": 1167.2483749999997
       }
     ]
   },
-  "publishedTextPreserved": true,
-  "normalizedTranscriptSHA256": "7f44ed4460af93b677aa5c863d941e499f4fcc3852c54c4ba65f99d5afc98daa",
-  "sampleRecognition": [
-    {
-      "start": 12,
-      "seconds": 18,
-      "recognizedText": "الحماية الوقتية التي تحفظ المال ثم نتابع الأمر بالحجز والاختصاص وتظلم ودعوى ثبوت الحق. يقرأ الإحالات التشريعية والموعد التي نفكرها بوصفها عرضاً لما ورد في المرجع المرفق. هدفنا أن نفهم وظيفة الإجراء وتسلسله وأن نبني إجابة قانونية تستندو إلى"
-    },
-    {
-      "start": 550,
-      "seconds": 18,
-      "recognizedText": "الى التنفيذ فوجود السند واصدار امر الحجز واستكمال طريق الاقتضائي مسائل متمايزة يفتح المرجع تظلما لطالب الامر اذا غفض طلبه ولمن صدر عليه ولغيرهما من ذوي الشأن وقد يتعلق الاعتراض بموجبات الامر او بموضوع"
-    },
-    {
-      "start": 1025,
-      "seconds": 18,
-      "recognizedText": "الحجز تحفظي القواعد والإجراءات المنصوص عليها في المود المتعلقة بالحجز على المنقول أو المتعلقة بالحجز على العقار بحسب الأحوال عدا ما يتعلق منها بالبيع. والتي سبق لنا التعرف عليها تفصيلا. اتباع قواعد توقيع الحجز لا يعني السماح ببيعه في هذه المرحلة."
-    }
-  ],
-  "finalVideoFrameSamples": [
-    2,
-    30,
-    250,
-    535,
-    760,
-    905,
-    1020,
-    1165
-  ],
+  "originalAudioPreserved": true,
+  "originalAudioHash": "SHA256=3f7723732a1188daa872fa608ba2521ad55c7505e6f3980b212a062cb69c4f32",
+  "sidecarsPreserved": true,
+  "sha256": "20a586c4cdba9a48160b2f99cde4ad32649ea95dc1cc4a9e3dd213b5df79fe27",
   "visualReviewContactSheet": "qa-frames.jpg",
-  "reviewCommit": "0223b0b528068e91b1d04f07d9749e7396ed9e5c"
+  "humanListeningReview": false
 }

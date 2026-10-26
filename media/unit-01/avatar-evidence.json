@@ -1,0 +1,135 @@
+{
+  "bones": 81,
+  "vertices": 23430,
+  "morphTargets": 15,
+  "visemeMapping": {
+    "A": [
+      "blendShape1.AA_VI_01_PP"
+    ],
+    "B": [
+      "blendShape1.AA_VI_07_SS"
+    ],
+    "C": [
+      "blendShape1.AA_VI_11_E"
+    ],
+    "D": [
+      "blendShape1.AA_VI_10_aa"
+    ],
+    "E": [
+      "blendShape1.AA_VI_13_O"
+    ],
+    "F": [
+      "blendShape1.AA_VI_14_U"
+    ],
+    "G": [
+      "blendShape1.AA_VI_02_FF"
+    ],
+    "H": [
+      "blendShape1.AA_VI_08_nn"
+    ],
+    "X": []
+  },
+  "animations": [
+    {
+      "name": "lecture_talk",
+      "seconds": 35.56666564941406,
+      "tracks": 81
+    },
+    {
+      "name": "lecture_explain",
+      "seconds": 25.100000381469727,
+      "tracks": 81
+    }
+  ],
+  "true3D": true,
+  "appearances": [
+    {
+      "index": 0,
+      "start": 0,
+      "seconds": 18,
+      "offset": 0
+    },
+    {
+      "index": 4,
+      "start": 248.87966666666665,
+      "seconds": 7,
+      "offset": 18
+    },
+    {
+      "index": 9,
+      "start": 647.6164999999999,
+      "seconds": 7,
+      "offset": 25
+    },
+    {
+      "index": 15,
+      "start": 1130.514208333333,
+      "seconds": 10,
+      "offset": 32
+    }
+  ],
+  "renderedFrames": 1050,
+  "mouthCues": 320,
+  "frameEvidence": [
+    {
+      "time": 2,
+      "triangles": 8186,
+      "gesture": 0,
+      "mouth": "B",
+      "morphPeak": 0.8,
+      "head": [
+        -0.03623168594214282,
+        0.0010837576194652595,
+        -0.023595050605742008,
+        0.9990642361982195
+      ],
+      "appearance": 0,
+      "lessonTime": 2
+    },
+    {
+      "time": 20,
+      "triangles": 8186,
+      "gesture": 0,
+      "mouth": "A",
+      "morphPeak": 0.10096021947876682,
+      "head": [
+        -0.00212748998682542,
+        -0.03952981208910183,
+        -0.0235361316228827,
+        0.9989388852140852
+      ],
+      "appearance": 1,
+      "lessonTime": 250.87966666666665
+    },
+    {
+      "time": 27,
+      "triangles": 8186,
+      "gesture": 0,
+      "mouth": "A",
+      "morphPeak": 0.8,
+      "head": [
+        -0.006904670443494633,
+        -0.004478501681037221,
+        -0.03734108881585386,
+        0.9992686847757458
+      ],
+      "appearance": 2,
+      "lessonTime": 649.6164999999999
+    },
+    {
+      "time": 34,
+      "triangles": 8186,
+      "gesture": 0,
+      "mouth": "D",
+      "morphPeak": 0.9898214418809379,
+      "head": [
+        -0.03291910956222943,
+        -0.0022720017825379503,
+        -0.03495341030279577,
+        0.9988440393147099
+      ],
+      "appearance": 3,
+      "lessonTime": 1132.514208333333
+    }
+  ]
+}
