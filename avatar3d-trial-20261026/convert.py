@@ -2,6 +2,18 @@
 import bpy,sys,json,re,math
 from pathlib import Path
 args=sys.argv[sys.argv.index('--')+1:];asset,out=map(Path,args)
+# Some distribution builds expose only Linear/sRGB. Keep FBX scalar maps linear.
+probe=bpy.data.images.new('colorspace-probe',1,1)
+try:probe.colorspace_settings.name='Non-Color';noncolor='Non-Color'
+except TypeError:
+ noncolor='Linear'
+ from bpy_extras import node_shader_utils
+ cls=node_shader_utils.ShaderImageTextureWrapper;old_property=cls.image
+ def safe_image_set(self,image):
+  if self.colorspace_name=='Non-Color':self.colorspace_name='Linear'
+  return old_property.fset(self,image)
+ cls.image=property(old_property.fget,safe_image_set)
+bpy.data.images.remove(probe)
 bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
 bpy.ops.import_scene.fbx(filepath=str(asset/'Export/Business_Male_03_facial.fbx'),use_anim=False)
 rigs=[o for o in bpy.context.scene.objects if o.type=='ARMATURE'];assert rigs,'Character has no skeleton'
@@ -22,7 +34,7 @@ for mat in bpy.data.materials:
   mat.node_tree.links.new(tex.outputs['Alpha'],p.inputs['Alpha']);mat.blend_method='HASHED';mat.use_backface_culling=False
  normal=asset/f'Textures/m020_{part}_normal.tga'
  if normal.exists():
-  im=bpy.data.images.load(str(normal),check_existing=True);im.scale(min(im.size[0],1024),min(im.size[1],1024));im.colorspace_settings.name='Non-Color';im.file_format='PNG';im.filepath_raw=str(out/(part+'-normal.png'));im.save()
+  im=bpy.data.images.load(str(normal),check_existing=True);im.scale(min(im.size[0],1024),min(im.size[1],1024));im.colorspace_settings.name=noncolor;im.file_format='PNG';im.filepath_raw=str(out/(part+'-normal.png'));im.save()
   nt=nodes.new('ShaderNodeTexImage');nt.image=im;nm=nodes.new('ShaderNodeNormalMap');nm.inputs['Strength'].default_value=.35;mat.node_tree.links.new(nt.outputs['Color'],nm.inputs['Color']);mat.node_tree.links.new(nm.outputs['Normal'],p.inputs['Normal'])
 motions=[]
 for filename,label in [('m_gestic_talk_neutral_01.max.fbx','lecture_talk'),('m_gestic_presentation_right_01.max.fbx','lecture_explain')]:

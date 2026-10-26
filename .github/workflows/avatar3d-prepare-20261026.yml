@@ -6,6 +6,7 @@ on:
 permissions:
   contents: write
   statuses: write
+  actions: write
 jobs:
   prepare:
     runs-on: ubuntu-22.04
@@ -18,14 +19,21 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
+      - name: Stop the superseded slow archive download
+        run: |
+          python - <<'PY'
+          import os,urllib.request,urllib.error
+          req=urllib.request.Request('https://api.github.com/repos/'+os.environ['GITHUB_REPOSITORY']+'/actions/runs/40381905584/cancel',data=b'',headers={'Authorization':'Bearer '+os.environ['GITHUB_TOKEN']},method='POST')
+          try:
+            with urllib.request.urlopen(req,timeout=20) as r:print(r.status)
+          except urllib.error.HTTPError as exc:
+            if exc.code not in (409,422):raise
+          PY
       - name: Prepare free conversion and narration tools
         run: |
           exec > >(tee preparation.log) 2>&1
           sudo apt-get update -qq
-          sudo apt-get install -y ffmpeg libgl1 libxi6 libxrender1 libxfixes3 libxkbcommon0 libsm6 libice6 libxxf86vm1
-          curl --fail --location https://download.blender.org/release/Blender3.6/blender-3.6.23-linux-x64.tar.xz --output /tmp/avatar3d-blender.tar.xz
-          tar -xf /tmp/avatar3d-blender.tar.xz -C /tmp
-          echo /tmp/blender-3.6.23-linux-x64 >> "$GITHUB_PATH"
+          sudo apt-get install -y blender ffmpeg
           pip install numpy pillow edge-tts
       - name: Prepare the rigged professor, narration D and phonetic mouth cues
         run: python avatar3d-trial-20261026/prepare.py >> preparation.log 2>&1

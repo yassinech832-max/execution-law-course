@@ -34,9 +34,10 @@ async def main():
  motions=['m_gestic_talk_neutral_01.max.fbx','m_gestic_presentation_right_01.max.fbx']
  for name in motions:download(BASE+'Assets/Animations/all_animations_max_motextr_static/'+name,asset/name)
  download(BASE+'LICENSE.md',OUT/'THIRD_PARTY_LICENSE.txt')
- blender=Path(shutil.which('blender')).resolve();env=dict(os.environ);env['OCIO']=str(blender.parent/'3.6/datafiles/colormanagement/config.ocio')
+ blender=Path(shutil.which('blender')).resolve();env=dict(os.environ);env.pop('OCIO',None)
  run([blender,'--background','--factory-startup','--python-exit-code','1','--python',HERE/'convert.py','--',asset,OUT],stdout=sys.stdout,stderr=sys.stderr,env=env)
  assert (OUT/'professor.glb').exists() and (OUT/'model-report.json').exists(),'3D conversion did not produce a rigged model'
+ model=json.loads((OUT/'model-report.json').read_text());assert len(model['bones'])>20 and any(len(m['shapeKeys'])>8 for m in model['meshes']),'The character must have a real rig and facial controls'
  status('Generating voice D with source-grounded lesson text and word timings')
  raw=[];total=0
  for i,text in enumerate(PARTS):
