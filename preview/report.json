@@ -1,0 +1,227 @@
+{
+  "status": "PASS",
+  "durationSeconds": 90,
+  "frames": 2250,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "voice": "D",
+  "voiceId": "ar-KW-FahedNeural",
+  "true3D": true,
+  "bones": 81,
+  "vertices": 23430,
+  "morphTargets": 15,
+  "mouthCues": 532,
+  "animations": [
+    {
+      "name": "lecture_talk",
+      "seconds": 35.56666564941406,
+      "tracks": 81
+    },
+    {
+      "name": "lecture_explain",
+      "seconds": 25.100000381469727,
+      "tracks": 81
+    }
+  ],
+  "frameEvidence": [
+    {
+      "time": 3,
+      "triangles": 8186,
+      "gesture": 0,
+      "mouth": "B",
+      "morphPeak": 0.8,
+      "head": [
+        0.0042731245098327035,
+        -0.030235620853035036,
+        -0.023552710190298237,
+        0.9992561219217605
+      ]
+    },
+    {
+      "time": 18,
+      "triangles": 8186,
+      "gesture": 1,
+      "mouth": "F",
+      "morphPeak": 0.8,
+      "head": [
+        -0.06288267552136328,
+        0.019809639080028144,
+        -0.053850225324752934,
+        0.996370163852899
+      ]
+    },
+    {
+      "time": 34,
+      "triangles": 8186,
+      "gesture": 0,
+      "mouth": "D",
+      "morphPeak": 0.9898214418809379,
+      "head": [
+        0.019878042832416065,
+        -0.08337087830760385,
+        0.018114345315514643,
+        0.9961556218491812
+      ]
+    },
+    {
+      "time": 46,
+      "triangles": 8186,
+      "gesture": 0,
+      "mouth": "B",
+      "morphPeak": 0.33360768175591227,
+      "head": [
+        0.0115898282265178,
+        0.013840289141155402,
+        -0.05157828912674071,
+        0.9985057968940382
+      ]
+    },
+    {
+      "time": 64,
+      "triangles": 8186,
+      "gesture": 0,
+      "mouth": "X",
+      "morphPeak": 0.05,
+      "head": [
+        -0.02145641351208222,
+        0.06756428429090207,
+        -0.05735784219462409,
+        0.9958337088434328
+      ]
+    },
+    {
+      "time": 82,
+      "triangles": 8186,
+      "gesture": 0,
+      "mouth": "B",
+      "morphPeak": 0.8,
+      "head": [
+        -0.030749917398862934,
+        -0.018061945667459108,
+        -0.10458315042718865,
+        0.9938765348068048
+      ]
+    }
+  ],
+  "fileBytes": 14466017,
+  "sha256": "8fa3964f4126507f8251b088aabcea95844416bfd8769c59c9722af3fb41731e",
+  "parts": [
+    {
+      "name": "movie-part-000.bin",
+      "bytes": 700000,
+      "sha256": "9cdf827de10482a333a79038c1c387407296af1b87c4db27d85f4e1eea26aa89"
+    },
+    {
+      "name": "movie-part-001.bin",
+      "bytes": 700000,
+      "sha256": "5ef72f4e58fb9616893f6e816d48de59e7ea8cf49445de679bf9b8f7066e086c"
+    },
+    {
+      "name": "movie-part-002.bin",
+      "bytes": 700000,
+      "sha256": "8191397252b73b1f06ea739033f56e78b288427878ff5277b5960f5d8b3a16ee"
+    },
+    {
+      "name": "movie-part-003.bin",
+      "bytes": 700000,
+      "sha256": "37ca1fe10c909c7010890dd68311ac2cb2db87c7116fdde6977ed1b227a80a6f"
+    },
+    {
+      "name": "movie-part-004.bin",
+      "bytes": 700000,
+      "sha256": "aff47d97de9965ee5931f519788238bea90c3b030a2eeef10b57200e77eb6800"
+    },
+    {
+      "name": "movie-part-005.bin",
+      "bytes": 700000,
+      "sha256": "d71c309eebcae5a471cb8dc58f8351fc136a982f179d27eab2cf9a2bdc4080cb"
+    },
+    {
+      "name": "movie-part-006.bin",
+      "bytes": 700000,
+      "sha256": "77c04db733fae6172bf107f9c400252c71bed8c8677a1d0789688c87f35d47ba"
+    },
+    {
+      "name": "movie-part-007.bin",
+      "bytes": 700000,
+      "sha256": "bed3c8dcafcc25e781c2232a02b59a034bd1c9c4abe02d9bd2af71f244274d0c"
+    },
+    {
+      "name": "movie-part-008.bin",
+      "bytes": 700000,
+      "sha256": "3d65b542c81f2c26f8378038dabba0a871961a1eea8d75909a817655f20afa80"
+    },
+    {
+      "name": "movie-part-009.bin",
+      "bytes": 700000,
+      "sha256": "24703da4bc5807f4c7615045dab8115d761e1561e312a5aeb7e533e936d5edcf"
+    },
+    {
+      "name": "movie-part-010.bin",
+      "bytes": 700000,
+      "sha256": "323f038495cbec54d4e3e7df4408d0797b8af1965f0ba2d4c188cd49e0c20899"
+    },
+    {
+      "name": "movie-part-011.bin",
+      "bytes": 700000,
+      "sha256": "f2eb63dffc81c6d0dee4f47c35dda6ae2918736a4754a7e4cf6808b4906e3fb0"
+    },
+    {
+      "name": "movie-part-012.bin",
+      "bytes": 700000,
+      "sha256": "64ce45c6f7755d7052261d4926ee8b83477d9a56a88d5e79440c9613e54956eb"
+    },
+    {
+      "name": "movie-part-013.bin",
+      "bytes": 700000,
+      "sha256": "e9cb211b01531e0e2030219ad2094ea6da2752a4e411d4dcf4df8cf02d9360d9"
+    },
+    {
+      "name": "movie-part-014.bin",
+      "bytes": 700000,
+      "sha256": "0db8ddd5305708e70eac72bf7038cd954c76e9be8db756b7c5c43bb0490592f6"
+    },
+    {
+      "name": "movie-part-015.bin",
+      "bytes": 700000,
+      "sha256": "abc44928e9edf20cf942d850706ca65209f7e2717738eb74ed3b3d2839cf459c"
+    },
+    {
+      "name": "movie-part-016.bin",
+      "bytes": 700000,
+      "sha256": "4389e6b753a242902afe0537a49258e602485c028d0b71fdbf7587ec67c2a548"
+    },
+    {
+      "name": "movie-part-017.bin",
+      "bytes": 700000,
+      "sha256": "6dfbb88f8f9eb9c95f656c5de0deb96ae69540de9b93a4244beeec924a5d28e3"
+    },
+    {
+      "name": "movie-part-018.bin",
+      "bytes": 700000,
+      "sha256": "0fd85732674ab3eb04b72359173b65e7b427b094c20b6f4a88405f4abbc3ac22"
+    },
+    {
+      "name": "movie-part-019.bin",
+      "bytes": 700000,
+      "sha256": "146983ba2ea440f41822b4617bd70b6b883a4f33fca20872c604ccccdb39ec71"
+    },
+    {
+      "name": "movie-part-020.bin",
+      "bytes": 466017,
+      "sha256": "41cdf3a0241739d7b4947571f2d1d0b6f54228db552f3e7a8d1072a415a5bb06"
+    }
+  ],
+  "sourceParagraphs": [
+    37,
+    38,
+    40
+  ],
+  "decodeCheck": "PASS",
+  "livePlatformModified": false,
+  "renderSeconds": 915.106,
+  "sourceCommit": "8d849a63d7df0e34538add0829f58714175a72e2",
+  "humanListeningReview": false
+}

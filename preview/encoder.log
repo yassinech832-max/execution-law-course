@@ -1,0 +1,5 @@
+[aist#1:0/pcm_s16le @ 0x5595c5eaa1c0] Guessed Channel Layout: mono
+[in#0/image2pipe @ 0x5595c5e4b1c0] Thread message queue blocking; consider raising the thread_queue_size option (current value: 8)
+[swscaler @ 0x5595c5fe3940] deprecated pixel format used, make sure you did set range correctly
+[swscaler @ 0x5595c6430c40] deprecated pixel format used, make sure you did set range correctly
+    Last message repeated 2 times
