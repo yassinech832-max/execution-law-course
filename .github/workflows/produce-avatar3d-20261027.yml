@@ -8,7 +8,7 @@ permissions:
   statuses: write
 concurrency:
   group: execution-course-approved-avatar3d
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   render:
     runs-on: ubuntu-latest
@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       max-parallel: 7
       matrix:
-        unit: [1, 2, 3, 4, 5, 6, 7]
+        unit: [4, 5]
     env:
       VIDEO_UNIT: ${{ matrix.unit }}
       SOURCE_MAIN: 32ac469a40b3aacaa31a1ff184fee7f69e55e1c9
@@ -37,12 +37,14 @@ jobs:
           key: avatar3d-chromium-1.62.1
       - name: Prepare the approved offline renderer
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y ffmpeg
-          pip install pillow numpy
-          npm install --prefix avatar3d-runtime --ignore-scripts --package-lock=false three@0.180.0 playwright@1.62.1
-          avatar3d-runtime/node_modules/.bin/playwright install --with-deps chromium
-          curl --fail --location --retry 2 https://github.com/DanielSWolf/rhubarb-lip-sync/releases/download/v1.14.0/Rhubarb-Lip-Sync-1.14.0-Linux.zip -o /tmp/rhubarb.zip
+          if ! command -v ffmpeg > /dev/null; then
+            sudo apt-get update -qq -o Acquire::Retries=2 -o Acquire::http::Timeout=30
+            sudo apt-get install -y ffmpeg
+          fi
+          pip install --timeout 60 pillow numpy
+          npm install --fetch-timeout=60000 --fetch-retries=2 --prefix avatar3d-runtime --ignore-scripts --package-lock=false three@0.180.0 playwright@1.62.1
+          avatar3d-runtime/node_modules/.bin/playwright install chromium
+          curl --fail --location --connect-timeout 15 --max-time 120 --retry 2 https://github.com/DanielSWolf/rhubarb-lip-sync/releases/download/v1.14.0/Rhubarb-Lip-Sync-1.14.0-Linux.zip -o /tmp/rhubarb.zip
           unzip -q /tmp/rhubarb.zip -d /tmp/rhubarb
           mv /tmp/rhubarb/Rhubarb-Lip-Sync-1.14.0-Linux avatar3d-runtime/rhubarb
           chmod +x avatar3d-runtime/rhubarb/rhubarb
