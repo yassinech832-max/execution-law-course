@@ -1,0 +1,71 @@
+name: Produce the approved 3D professor for all seven course units
+on:
+  push:
+    branches: [avatar3d-production-20261027]
+    paths: ['video-production/avatar3d/**', '.github/workflows/produce-avatar3d-20261027.yml']
+permissions:
+  contents: write
+  statuses: write
+concurrency:
+  group: execution-course-approved-avatar3d
+  cancel-in-progress: false
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      max-parallel: 7
+      matrix:
+        unit: [1, 2, 3, 4, 5, 6, 7]
+    env:
+      VIDEO_UNIT: ${{ matrix.unit }}
+      SOURCE_MAIN: 32ac469a40b3aacaa31a1ff184fee7f69e55e1c9
+      GITHUB_TOKEN: ${{ github.token }}
+      OMP_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: avatar3d-chromium-1.62.1
+      - name: Prepare the approved offline renderer
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          pip install pillow numpy
+          npm install --prefix avatar3d-runtime --ignore-scripts --package-lock=false three@0.180.0 playwright@1.62.1
+          avatar3d-runtime/node_modules/.bin/playwright install --with-deps chromium
+          curl --fail --location --retry 2 https://github.com/DanielSWolf/rhubarb-lip-sync/releases/download/v1.14.0/Rhubarb-Lip-Sync-1.14.0-Linux.zip -o /tmp/rhubarb.zip
+          unzip -q /tmp/rhubarb.zip -d /tmp/rhubarb
+          mv /tmp/rhubarb/Rhubarb-Lip-Sync-1.14.0-Linux avatar3d-runtime/rhubarb
+          chmod +x avatar3d-runtime/rhubarb/rhubarb
+      - name: Load the exact licensed rig used in the approved sample
+        run: |
+          git fetch origin avatar3d-assets-20261026
+          mkdir -p avatar3d-output/runtime
+          python3 - <<'PY'
+          import subprocess
+          from pathlib import Path
+          out=Path('avatar3d-output/runtime')
+          files=subprocess.check_output(['git','ls-tree','-r','--name-only','origin/avatar3d-assets-20261026'],text=True).splitlines()
+          for full in files:
+            name=full.removeprefix('preview/')
+            if name.endswith(('.fbx','.png')) or name in ['model-report.json','THIRD_PARTY_LICENSE.txt']:
+              (out/name).write_bytes(subprocess.check_output(['git','show','origin/avatar3d-assets-20261026:'+full]))
+          PY
+      - name: Preserve the published D audio and build improved Arabic boards
+        run: python3 video-production/avatar3d/produce.py prepare "$VIDEO_UNIT"
+      - name: Render synchronized 3D introductions, transitions and conclusions
+        run: node video-production/avatar3d/render.mjs
+      - name: Compose and validate the complete 20 minute lecture
+        run: python3 video-production/avatar3d/produce.py compose "$VIDEO_UNIT"
+      - name: Retain output for review before updating the live platform
+        if: always()
+        run: python3 video-production/avatar3d/produce.py retain "$VIDEO_UNIT"
