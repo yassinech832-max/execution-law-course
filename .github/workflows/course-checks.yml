@@ -1,7 +1,7 @@
 name: Course content and browser checks
 on:
   push:
-    branches: [main, voice-d-course-review-20261020]
+    branches: [main, voice-d-course-review-20261020, avatar3d-course-review-20261027]
   workflow_dispatch:
 permissions:
   contents: write
@@ -34,6 +34,11 @@ jobs:
         run: npm run test:browser
         env:
           COURSE_TEST_URL: http://127.0.0.1:8765/execution-law-course/
+      - name: Verify the published independent platform after deployment
+        if: github.ref == 'refs/heads/main'
+        run: node tests/public_smoke.cjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:

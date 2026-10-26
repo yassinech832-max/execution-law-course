@@ -3,8 +3,8 @@
   const units = window.COURSE_UNITS;
   const book = window.BOOK_INDEX;
   const videos = window.COURSE_VIDEOS || {};
-  const mediaURL=(path,file)=>path+'/'+file+'?v=20261020-voice-d';
-  const unitURL = id => `lesson.html?unit=${id}&v=20261020-voice-d`;
+  const mediaURL=(path,file)=>path+'/'+file+'?v=20261027-avatar3d';
+  const unitURL = id => `lesson.html?unit=${id}&v=20261027-avatar3d`;
   const $ = id => document.getElementById(id);
   const el = (tag, cls, text) => {const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
   const link = (label, href, cls='') => {const a=el('a',cls,label);a.href=href;return a;};
@@ -49,6 +49,7 @@
   if(lecture?.status==='ready'){
     const sec=el('section','lecture-player');sec.id='lecture';sec.setAttribute('aria-label','فيديو الوحدة');
     const heading=el('div','video-heading');heading.append(el('h2','','شاهد شرح الوحدة'),el('span','tag warm','20:00 دقيقة · 1080p'));sec.append(heading);
+    const tools=el('div','video-tools');const wide=el('button','button small video-wide','عرض موسّع');wide.type='button';wide.setAttribute('aria-pressed','false');wide.setAttribute('aria-controls','lecture-video');wide.addEventListener('click',()=>{const active=document.querySelector('.container').classList.toggle('lesson-wide');wide.setAttribute('aria-pressed',String(active));wide.textContent=active?'العرض الاعتيادي':'عرض موسّع';sec.scrollIntoView({behavior:'auto',block:'start'});});tools.append(wide);sec.append(tools);
     const video=el('video');video.id='lecture-video';video.controls=true;video.preload='metadata';video.playsInline=true;video.poster=mediaURL(lecture.path,'poster.jpg');video.setAttribute('aria-label','شرح '+u.title);
     const source=el('source');source.src=mediaURL(lecture.path,'lecture.mp4');source.type='video/mp4';video.append(source);
     const captions=el('track');captions.kind='captions';captions.src=mediaURL(lecture.path,'captions.vtt');captions.srclang='ar';captions.label='العربية';captions.default=true;video.append(captions);
@@ -58,8 +59,11 @@
     video.addEventListener('error',()=>{message.hidden=false;message.textContent='تعذر تشغيل الفيديو في هذا المتصفح. استخدم رابط ملف MP4 أدناه لفتحه في مشغل آخر.';});
     const downloads=el('div','video-downloads');const mp4=link(`تنزيل الفيديو · ${(lecture.fileBytes/1000000).toFixed(1)} MB`,mediaURL(lecture.path,'lecture.mp4'),'button small primary');mp4.download=`execution-law-unit-${String(id).padStart(2,'0')}.mp4`;
     downloads.append(mp4,link('النص المكتوب',mediaURL(lecture.path,'transcript.txt'),'button small'),link('ترجمة SRT',mediaURL(lecture.path,'captions.srt'),'button small'));sec.append(downloads);
+    const currentChapter=el('p','current-chapter');currentChapter.textContent='المحور الحالي: '+lecture.chapters[0].title;sec.append(currentChapter);
+    const chapterButtons=[];
     const chapters=el('details','more video-chapters');chapters.append(el('summary','','انتقل إلى فصل داخل الفيديو'));const list=el('div','chapter-list');
-    for(const chapter of lecture.chapters){const b=el('button','chapter-button');b.type='button';const stamp=el('span','chapter-time',`${Math.floor(chapter.start/60).toString().padStart(2,'0')}:${Math.floor(chapter.start%60).toString().padStart(2,'0')}`);stamp.dir='ltr';b.append(stamp,el('span','',chapter.title));b.addEventListener('click',()=>{const seek=()=>{video.currentTime=Math.min(chapter.start,Math.max(0,video.duration-.1));video.focus();};if(video.readyState)seek();else{video.addEventListener('loadedmetadata',seek,{once:true});video.load();}video.scrollIntoView({behavior:'auto',block:'center'});});list.append(b);}
+    for(const chapter of lecture.chapters){const b=el('button','chapter-button');b.type='button';const stamp=el('span','chapter-time',`${Math.floor(chapter.start/60).toString().padStart(2,'0')}:${Math.floor(chapter.start%60).toString().padStart(2,'0')}`);stamp.dir='ltr';b.append(stamp,el('span','',chapter.title));b.addEventListener('click',()=>{const seek=()=>{video.currentTime=Math.min(chapter.start,Math.max(0,video.duration-.1));video.focus();};if(video.readyState)seek();else{video.addEventListener('loadedmetadata',seek,{once:true});video.load();}video.scrollIntoView({behavior:'auto',block:'center'});});list.append(b);chapterButtons.push(b);}
+    const updateChapter=()=>{let active=0;lecture.chapters.forEach((c,i)=>{if(c.start<=video.currentTime)active=i;});chapterButtons.forEach((b,i)=>{if(i===active)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current');});currentChapter.textContent='المحور الحالي: '+lecture.chapters[active].title;};video.addEventListener('timeupdate',updateChapter);video.addEventListener('seeked',updateChapter);updateChapter();
     chapters.append(list);sec.append(chapters);root.append(sec);
   }
   if(u.supplementary)root.append(el('p','notice','محاضرة مكملة للمسار الأساسي، تجمع شرح الفيديو والقراءات الأصلية وأسئلة التحليل. ارجع إلى النص عند دراسة الشروط والمواعيد.'));

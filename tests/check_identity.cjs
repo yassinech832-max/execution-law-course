@@ -15,7 +15,10 @@ for(let unit=1;unit<=7;unit++){
  assert.equal(report.durationSeconds,1200);assert.equal(report.source,'مقرر التنفيذ الجبري');
  assert.equal(report.voice,voiceProfile.voice);assert.equal(report.narrationProfile.id,'D');
  assert.equal(report.narrationProfile.rate,'-4%');assert.equal(report.narrationProfile.pitch,'+0Hz');
- assert.equal(report.publishedTextPreserved,true);assert.ok(report.speakingPortrait.actualNeuralPortraitSeconds>=20);
+ assert.equal(report.publishedTextPreserved,true);assert.equal(report.true3D,true);assert.equal(report.originalAudioPreserved,true);assert.equal(report.sidecarsPreserved,true);
+ assert.ok(report.avatar.bones>=20);assert.ok(report.avatar.morphTargets>=10);assert.equal(report.avatar.appearances.length,4);
+ assert.ok(report.avatar.appearances.reduce((sum,item)=>sum+item.seconds,0)>=40);assert.ok(report.avatar.frameEvidence.length>=4);
+ assert.equal(report.style,'approved-3d-professor-20261027');
  const transcript=fs.readFileSync(path.join(root,`media/unit-${String(unit).padStart(2,'0')}/transcript.txt`),'utf8');
  const normalized=transcript.replace(/[\u064b-\u065f\u0670\u0640]/g,'').replace(/\s+/g,' ').trim();
  assert.equal(crypto.createHash('sha256').update(normalized).digest('hex'),report.normalizedTranscriptSHA256);
