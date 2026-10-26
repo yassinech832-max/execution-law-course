@@ -1,0 +1,22 @@
+{
+  "sourceFormat": "FBX",
+  "actor": "Business Male 03",
+  "sourceRepository": "microsoft/Microsoft-Rocketbox",
+  "sourceCommit": "0943055db6ec570bcef9f2c8b41c9e5467c808f9",
+  "license": "MIT",
+  "motions": [
+    "talk.fbx",
+    "explain.fbx"
+  ],
+  "textures": [
+    "m020_head_specular.png",
+    "m020_head_color.png",
+    "m020_opacity_color.png",
+    "m020_body_color.png",
+    "m020_head_normal.png",
+    "m020_body_specular.png",
+    "m020_body_normal.png"
+  ],
+  "status": "PASS",
+  "preparationCommit": "efb62b36c4c2ba8069a03e2f5b53416651a9d894"
+}
