@@ -1,0 +1,49 @@
+name: Render the independent 3D professor lesson sample
+on:
+  push:
+    branches: [avatar3d-trial-20261026]
+    paths: ['avatar3d-trial-20261026/viewer.html', 'avatar3d-trial-20261026/render.mjs', 'avatar3d-trial-20261026/render-config.json', 'avatar3d-trial-20261026/retain.py', '.github/workflows/avatar3d-render-20261026.yml']
+permissions:
+  contents: write
+  statuses: write
+concurrency:
+  group: avatar3d-independent-preview
+  cancel-in-progress: true
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: avatar3d-chromium-1.62.1
+      - name: Prepare the offline 3D renderer
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          npm install --prefix avatar3d-runtime --ignore-scripts --package-lock=false three@0.180.0 playwright@1.62.1
+          avatar3d-runtime/node_modules/.bin/playwright install --with-deps chromium
+      - name: Load the prepared rig and actual Arabic audio
+        run: |
+          for attempt in $(seq 1 40); do
+            git fetch origin avatar3d-assets-20261026
+            if git cat-file -e origin/avatar3d-assets-20261026:preview/professor.glb 2>/dev/null; then break; fi
+            sleep 15
+          done
+          mkdir -p avatar3d-output/runtime
+          python3 - <<'PY'
+          import subprocess
+          from pathlib import Path
+          out=Path('avatar3d-output/runtime')
+          for name in ['professor.glb','model-report.json','lesson.json','mouth.json','narration.wav','captions.srt','captions.vtt','transcript.txt','THIRD_PARTY_LICENSE.txt']:
+            (out/name).write_bytes(subprocess.check_output(['git','show','origin/avatar3d-assets-20261026:preview/'+name]))
+          PY
+      - name: Render and retain real 3D preview frames and the requested sample
+        run: node avatar3d-trial-20261026/render.mjs
