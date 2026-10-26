@@ -11,7 +11,9 @@ try{
  await page.goto('http://127.0.0.1:8787/avatar3d-trial-20261026/viewer.html');await page.waitForFunction(()=>window.ready===true,null,{timeout:120000});
  const meta=await page.evaluate(()=>window.avatarMetadata);fs.writeFileSync(path.join(OUT,'avatar-metadata.json'),JSON.stringify(meta,null,2));
  if(meta.bones<20||meta.vertices<1000||meta.morphNames.length<8)throw Error('Character does not provide a complete 3D rig and facial controls');
+ if(Object.entries(meta.visemeMapping).some(([code,names])=>code!=='X'&&!names.length))throw Error('Incomplete phonetic mouth-shape mapping');
  const evidence=[];for(const t of [3,18,34,46,64,82]){evidence.push(await page.evaluate(t=>window.setFrame(t),t));await page.screenshot({path:path.join(OUT,`probe-${String(t).padStart(2,'0')}.jpg`),type:'jpeg',quality:90});}
+ fs.writeFileSync(path.join(OUT,'student-visible.txt'),await page.locator('body').innerText());
  fs.writeFileSync(path.join(OUT,'probe-report.json'),JSON.stringify({status:'PROBE',true3D:true,metadata:meta,evidence,errors},null,2));
  execFileSync('python3',['avatar3d-trial-20261026/retain.py'],{cwd:ROOT,stdio:'inherit'});
  const config=JSON.parse(fs.readFileSync('avatar3d-trial-20261026/render-config.json','utf8'));
