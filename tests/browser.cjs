@@ -65,6 +65,7 @@ const url = p => new URL(p, base).href;
         await page.waitForFunction(()=>document.getElementById('lecture-video').readyState>=1,null,{timeout:30000});
         assert.equal(await page.locator('#lecture-video').evaluate(v=>v.duration),1200);
         assert.equal(await page.locator('#lecture-video').evaluate(v=>v.videoWidth),1920);
+        if(unit===1){const originalWidth=await page.locator('#lecture-video').evaluate(v=>v.getBoundingClientRect().width);const wide=page.locator('.video-wide');await wide.click();assert.equal(await wide.getAttribute('aria-pressed'),'true');assert.ok(await page.locator('#lecture-video').evaluate(v=>v.getBoundingClientRect().width)>originalWidth);await noOverflow();await wide.click();assert.equal(await wide.getAttribute('aria-pressed'),'false');}
         const captions=page.locator('#lecture-video track[kind=captions]');
         assert.equal(await captions.getAttribute('srclang'),'ar');
         await page.waitForFunction(()=>document.querySelector('track[kind=captions]').readyState===2);
@@ -76,6 +77,8 @@ const url = p => new URL(p, base).href;
         await page.locator('#lecture-video').evaluate(async v=>{v.muted=true;await v.play();});
         await page.waitForFunction(start=>document.getElementById('lecture-video').currentTime>start+.1,expected);
         await page.locator('#lecture-video').evaluate(v=>v.pause());
+        assert.equal(await page.locator('.chapter-button[aria-current="true"]').count(),1);
+        assert.equal(await page.locator('.chapter-button').nth(1).getAttribute('aria-current'),'true');
         testedVideos++;
       }
       await noOverflow();
