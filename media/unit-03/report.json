@@ -1,0 +1,382 @@
+{
+  "status": "PASS",
+  "unit": 3,
+  "title": "محل التنفيذ",
+  "durationSeconds": 1200.0,
+  "videoDurationSeconds": 1200.0,
+  "audioDurationSeconds": 1200.0,
+  "frames": "30000",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "fps": 25,
+  "voice": "ar-KW-FahedNeural",
+  "naturalSpeechSeconds": 1237.92,
+  "tempo": 1.054806,
+  "plannedThinkingSeconds": 20,
+  "captionCues": 219,
+  "maximumDetectedSilenceSeconds": 11.023,
+  "fileBytes": 25823276,
+  "source": "مقرر التنفيذ الجبري",
+  "chapters": [
+    {
+      "start": 0,
+      "end": 39.958499999999994,
+      "holds": [],
+      "title": "على أي مال يجوز التنفيذ؟",
+      "refs": [
+        679,
+        811
+      ]
+    },
+    {
+      "start": 39.958499999999994,
+      "end": 88.563125,
+      "holds": [],
+      "title": "التنفيذ المباشر والتنفيذ بطريق الحجز",
+      "refs": [
+        682,
+        687
+      ]
+    },
+    {
+      "start": 88.563125,
+      "end": 143.01529166666668,
+      "holds": [],
+      "title": "الحقوق المالية وحقوق الشخصية",
+      "refs": [
+        690,
+        695
+      ]
+    },
+    {
+      "start": 143.01529166666668,
+      "end": 198.3547916666667,
+      "holds": [],
+      "title": "تحديد المالك والذمة المالية",
+      "refs": [
+        697,
+        700
+      ]
+    },
+    {
+      "start": 198.3547916666667,
+      "end": 274.7863333333334,
+      "holds": [],
+      "title": "الضمان العام وحدود شرط الملكية",
+      "refs": [
+        705,
+        712
+      ]
+    },
+    {
+      "start": 274.7863333333334,
+      "end": 331.2635000000001,
+      "holds": [],
+      "title": "القابلية للتصرف تسبق البيع",
+      "refs": [
+        714,
+        725
+      ]
+    },
+    {
+      "start": 331.2635000000001,
+      "end": 398.18429166666675,
+      "holds": [],
+      "title": "الشرط المانع من التصرف",
+      "refs": [
+        728,
+        730
+      ]
+    },
+    {
+      "start": 398.18429166666675,
+      "end": 443.5807500000001,
+      "holds": [],
+      "title": "أنواع المنع من الحجز",
+      "refs": [
+        732,
+        735
+      ]
+    },
+    {
+      "start": 443.5807500000001,
+      "end": 532.754,
+      "holds": [],
+      "title": "السكن وضرورات المعيشة",
+      "refs": [
+        739,
+        747
+      ]
+    },
+    {
+      "start": 532.754,
+      "end": 616.30725,
+      "holds": [],
+      "title": "النفقة وشرط عدم الحجز",
+      "refs": [
+        752,
+        760
+      ]
+    },
+    {
+      "start": 616.30725,
+      "end": 711.8627499999999,
+      "holds": [
+        [
+          628.0477916666666,
+          638.0477916666666
+        ]
+      ],
+      "title": "أدوات المهنة والاعتبار الشخصي",
+      "refs": [
+        761,
+        765
+      ]
+    },
+    {
+      "start": 711.8627499999999,
+      "end": 812.6399999999999,
+      "holds": [],
+      "title": "الأجر والنظام الذي ينظمه",
+      "refs": [
+        768,
+        775
+      ]
+    },
+    {
+      "start": 812.6399999999999,
+      "end": 873.8497916666665,
+      "holds": [],
+      "title": "موانع أخرى يوردها المرجع",
+      "refs": [
+        749,
+        777
+      ]
+    },
+    {
+      "start": 873.8497916666665,
+      "end": 940.5658333333331,
+      "holds": [],
+      "title": "العقار بالتخصيص",
+      "refs": [
+        778,
+        782
+      ]
+    },
+    {
+      "start": 940.5658333333331,
+      "end": 1012.5377916666664,
+      "holds": [],
+      "title": "حرية الاختيار وقاعدة التناسب",
+      "refs": [
+        785,
+        792
+      ]
+    },
+    {
+      "start": 1012.5377916666664,
+      "end": 1072.0638749999996,
+      "holds": [],
+      "title": "الإيداع بطريقين مختلفين",
+      "refs": [
+        794,
+        807
+      ]
+    },
+    {
+      "start": 1072.0638749999996,
+      "end": 1156.7889166666662,
+      "holds": [
+        [
+          1087.3538749999996,
+          1097.3538749999996
+        ]
+      ],
+      "title": "قصر الحجز وإخراج بعض الأموال",
+      "refs": [
+        808,
+        811
+      ]
+    },
+    {
+      "start": 1156.7889166666662,
+      "end": 1198.9999583333329,
+      "holds": [],
+      "title": "طريقة الفحص في أي واقعة",
+      "refs": [
+        679,
+        811
+      ]
+    }
+  ],
+  "loudnessMeasurement": {
+    "input_i": "-21.97",
+    "input_tp": "-2.03",
+    "input_lra": "3.40",
+    "input_thresh": "-32.21",
+    "output_i": "-16.42",
+    "output_tp": "-1.50",
+    "output_lra": "3.30",
+    "output_thresh": "-26.67",
+    "normalization_type": "dynamic",
+    "target_offset": "0.42"
+  },
+  "decodeCheck": "PASS",
+  "sourceCommit": "98f9fc9d0573df331a91f62454c96d77d2b5d4c5",
+  "narrationProfile": {
+    "id": "D",
+    "voice": "ar-KW-FahedNeural",
+    "rate": "-4%",
+    "pitch": "+0Hz",
+    "selectedBy": "course-owner"
+  },
+  "pronunciationTerms": 23,
+  "publishedTextPreserved": true,
+  "normalizedTranscriptSHA256": "124e26edb2ac12b2400a484cfa5fc65d46d438ba4c1b90c46346c2c159fe5abe",
+  "sourceMain": "32ac469a40b3aacaa31a1ff184fee7f69e55e1c9",
+  "style": "approved-3d-professor-20261027",
+  "true3D": true,
+  "avatar": {
+    "bones": 81,
+    "vertices": 23430,
+    "morphTargets": 15,
+    "visemeMapping": {
+      "A": [
+        "blendShape1.AA_VI_01_PP"
+      ],
+      "B": [
+        "blendShape1.AA_VI_07_SS"
+      ],
+      "C": [
+        "blendShape1.AA_VI_11_E"
+      ],
+      "D": [
+        "blendShape1.AA_VI_10_aa"
+      ],
+      "E": [
+        "blendShape1.AA_VI_13_O"
+      ],
+      "F": [
+        "blendShape1.AA_VI_14_U"
+      ],
+      "G": [
+        "blendShape1.AA_VI_02_FF"
+      ],
+      "H": [
+        "blendShape1.AA_VI_08_nn"
+      ],
+      "X": []
+    },
+    "animations": [
+      {
+        "name": "lecture_talk",
+        "seconds": 35.56666564941406,
+        "tracks": 81
+      },
+      {
+        "name": "lecture_explain",
+        "seconds": 25.100000381469727,
+        "tracks": 81
+      }
+    ],
+    "true3D": true,
+    "appearances": [
+      {
+        "index": 0,
+        "start": 0,
+        "seconds": 18,
+        "offset": 0
+      },
+      {
+        "index": 4,
+        "start": 198.3547916666667,
+        "seconds": 7,
+        "offset": 18
+      },
+      {
+        "index": 9,
+        "start": 532.754,
+        "seconds": 7,
+        "offset": 25
+      },
+      {
+        "index": 17,
+        "start": 1156.7889166666662,
+        "seconds": 10,
+        "offset": 32
+      }
+    ],
+    "renderedFrames": 1050,
+    "mouthCues": 319,
+    "frameEvidence": [
+      {
+        "time": 2,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "B",
+        "morphPeak": 0.8,
+        "head": [
+          -0.03623168594214282,
+          0.0010837576194652595,
+          -0.023595050605742008,
+          0.9990642361982195
+        ],
+        "appearance": 0,
+        "lessonTime": 2
+      },
+      {
+        "time": 20,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "E",
+        "morphPeak": 0.10096021947876682,
+        "head": [
+          -0.00212748998682542,
+          -0.03952981208910183,
+          -0.0235361316228827,
+          0.9989388852140852
+        ],
+        "appearance": 1,
+        "lessonTime": 200.3547916666667
+      },
+      {
+        "time": 27,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "X",
+        "morphPeak": 0.05,
+        "head": [
+          -0.006904670443494633,
+          -0.004478501681037221,
+          -0.03734108881585386,
+          0.9992686847757458
+        ],
+        "appearance": 2,
+        "lessonTime": 534.754
+      },
+      {
+        "time": 34,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "B",
+        "morphPeak": 0.9898214418809379,
+        "head": [
+          -0.032763435832220134,
+          0.058142605586649625,
+          -0.06832215054508772,
+          0.9954285729948521
+        ],
+        "appearance": 3,
+        "lessonTime": 1158.7889166666662
+      }
+    ]
+  },
+  "originalAudioPreserved": true,
+  "originalAudioHash": "SHA256=88ddb2ec2c9b941c4e73eb89371447c0c331ffeab03602fbd95a5c78f1e0d576",
+  "sidecarsPreserved": true,
+  "sha256": "db77c0d3e872d40d24413babffe93c0eafcf5425b6c666de11bbaea379d4d840",
+  "visualReviewContactSheet": "qa-frames.jpg",
+  "humanListeningReview": false
+}
