@@ -1,0 +1,417 @@
+{
+  "status": "PASS",
+  "unit": 6,
+  "title": "مقدمات التنفيذ والحجز التحفظي",
+  "durationSeconds": 1200.0,
+  "videoDurationSeconds": 1200.0,
+  "audioDurationSeconds": 1200.0,
+  "frames": "30000",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "fps": 25,
+  "voice": "ar-KW-FahedNeural",
+  "naturalSpeechSeconds": 1402.272,
+  "tempo": 1.185954,
+  "plannedThinkingSeconds": 10,
+  "captionCues": 245,
+  "maximumDetectedSilenceSeconds": 10.9114,
+  "fileBytes": 26768822,
+  "source": "مقرر التنفيذ الجبري",
+  "chapters": [
+    {
+      "start": 0,
+      "end": 36.76683333333333,
+      "holds": [],
+      "title": "قبل الحجز: أي طريق نريد؟",
+      "refs": [
+        826,
+        857
+      ]
+    },
+    {
+      "start": 36.76683333333333,
+      "end": 106.60070833333332,
+      "holds": [],
+      "title": "السند ركن، والمقدمات إجراءات لاحقة",
+      "refs": [
+        827,
+        830
+      ]
+    },
+    {
+      "start": 106.60070833333332,
+      "end": 179.510625,
+      "holds": [],
+      "title": "طلب التنفيذ يحرك سلطة القضاء",
+      "refs": [
+        832,
+        838
+      ]
+    },
+    {
+      "start": 179.510625,
+      "end": 235.72512500000002,
+      "holds": [],
+      "title": "إعلان السند: علم ورقابة وفرصة وفاء",
+      "refs": [
+        839,
+        847
+      ]
+    },
+    {
+      "start": 235.72512500000002,
+      "end": 280.6676666666667,
+      "holds": [],
+      "title": "التكليف بالوفاء يحدد المطلوب",
+      "refs": [
+        848,
+        852
+      ]
+    },
+    {
+      "start": 280.6676666666667,
+      "end": 338.0356666666667,
+      "holds": [],
+      "title": "المهلة توازن الوفاء مع خطر التهريب",
+      "refs": [
+        853,
+        857
+      ]
+    },
+    {
+      "start": 338.0356666666667,
+      "end": 406.4125000000001,
+      "holds": [],
+      "title": "الحجز التحفظي لا يفتح البيع بذاته",
+      "refs": [
+        1076,
+        1080
+      ]
+    },
+    {
+      "start": 406.4125000000001,
+      "end": 473.4334583333334,
+      "holds": [],
+      "title": "أمر مخصوص وعريضة مستوفاة",
+      "refs": [
+        1081,
+        1091
+      ]
+    },
+    {
+      "start": 473.4334583333334,
+      "end": 514.4905,
+      "holds": [],
+      "title": "الاختصاص يتبع الفرض الإجرائي",
+      "refs": [
+        1092,
+        1107
+      ]
+    },
+    {
+      "start": 514.4905,
+      "end": 558.0569166666667,
+      "holds": [],
+      "title": "لماذا يطلب حامل السند حجزاً تحفظياً؟",
+      "refs": [
+        1104,
+        1107
+      ]
+    },
+    {
+      "start": 558.0569166666667,
+      "end": 611.7215416666667,
+      "holds": [],
+      "title": "التظلم رقابة على الأمر والحجز",
+      "refs": [
+        1108,
+        1119
+      ]
+    },
+    {
+      "start": 611.7215416666667,
+      "end": 652.0905416666666,
+      "holds": [],
+      "title": "حكم التظلم لا يحسم دعوى الحق",
+      "refs": [
+        1120,
+        1146
+      ]
+    },
+    {
+      "start": 652.0905416666666,
+      "end": 723.0981666666665,
+      "holds": [],
+      "title": "الحالة العامة: خشية فقد الضمان",
+      "refs": [
+        1147,
+        1156
+      ]
+    },
+    {
+      "start": 723.0981666666665,
+      "end": 766.0169999999998,
+      "holds": [],
+      "title": "الحالات الخاصة وشروط كل حالة",
+      "refs": [
+        1157,
+        1167
+      ]
+    },
+    {
+      "start": 766.0169999999998,
+      "end": 818.9935833333332,
+      "holds": [],
+      "title": "الحجز الاستحقاقي غايته استرداد الشيء",
+      "refs": [
+        1168,
+        1171
+      ]
+    },
+    {
+      "start": 818.9935833333332,
+      "end": 892.5712916666664,
+      "holds": [],
+      "title": "ظاهر الحق وحدود التخفيف",
+      "refs": [
+        1172,
+        1176
+      ]
+    },
+    {
+      "start": 892.5712916666664,
+      "end": 938.6268749999997,
+      "holds": [],
+      "title": "دعوى ثبوت الحق تكمل الحماية الوقتية",
+      "refs": [
+        1177,
+        1184
+      ]
+    },
+    {
+      "start": 938.6268749999997,
+      "end": 1002.4504166666663,
+      "holds": [],
+      "title": "بداية ميعاد الدعوى جزء من القاعدة",
+      "refs": [
+        1185,
+        1188
+      ]
+    },
+    {
+      "start": 1002.4504166666663,
+      "end": 1043.2039166666664,
+      "holds": [],
+      "title": "توقيع الحجز دون إجراءات البيع",
+      "refs": [
+        1194,
+        1197
+      ]
+    },
+    {
+      "start": 1043.2039166666664,
+      "end": 1118.4815416666663,
+      "holds": [],
+      "title": "مصير الحجز: زوال أو انتقال",
+      "refs": [
+        1189,
+        1200
+      ]
+    },
+    {
+      "start": 1118.4815416666663,
+      "end": 1165.2483749999997,
+      "holds": [
+        [
+          1137.2208749999998,
+          1147.2208749999998
+        ]
+      ],
+      "title": "تطبيق: الأمر لا يساوي حكماً بالدين",
+      "refs": [
+        1177,
+        1200
+      ]
+    },
+    {
+      "start": 1165.2483749999997,
+      "end": 1198.9999166666662,
+      "holds": [],
+      "title": "خريطة المراجعة قبل الوحدة الأخيرة",
+      "refs": [
+        826,
+        1200
+      ]
+    }
+  ],
+  "loudnessMeasurement": {
+    "input_i": "-22.14",
+    "input_tp": "-1.93",
+    "input_lra": "3.30",
+    "input_thresh": "-32.39",
+    "output_i": "-16.51",
+    "output_tp": "-1.50",
+    "output_lra": "3.20",
+    "output_thresh": "-26.77",
+    "normalization_type": "dynamic",
+    "target_offset": "0.51"
+  },
+  "decodeCheck": "PASS",
+  "sourceCommit": "98f9fc9d0573df331a91f62454c96d77d2b5d4c5",
+  "narrationProfile": {
+    "id": "D",
+    "voice": "ar-KW-FahedNeural",
+    "rate": "-4%",
+    "pitch": "+0Hz",
+    "selectedBy": "course-owner"
+  },
+  "pronunciationTerms": 23,
+  "publishedTextPreserved": true,
+  "normalizedTranscriptSHA256": "7f44ed4460af93b677aa5c863d941e499f4fcc3852c54c4ba65f99d5afc98daa",
+  "sourceMain": "32ac469a40b3aacaa31a1ff184fee7f69e55e1c9",
+  "style": "approved-3d-professor-20261027",
+  "true3D": true,
+  "avatar": {
+    "bones": 81,
+    "vertices": 23430,
+    "morphTargets": 15,
+    "visemeMapping": {
+      "A": [
+        "blendShape1.AA_VI_01_PP"
+      ],
+      "B": [
+        "blendShape1.AA_VI_07_SS"
+      ],
+      "C": [
+        "blendShape1.AA_VI_11_E"
+      ],
+      "D": [
+        "blendShape1.AA_VI_10_aa"
+      ],
+      "E": [
+        "blendShape1.AA_VI_13_O"
+      ],
+      "F": [
+        "blendShape1.AA_VI_14_U"
+      ],
+      "G": [
+        "blendShape1.AA_VI_02_FF"
+      ],
+      "H": [
+        "blendShape1.AA_VI_08_nn"
+      ],
+      "X": []
+    },
+    "animations": [
+      {
+        "name": "lecture_talk",
+        "seconds": 35.56666564941406,
+        "tracks": 81
+      },
+      {
+        "name": "lecture_explain",
+        "seconds": 25.100000381469727,
+        "tracks": 81
+      }
+    ],
+    "true3D": true,
+    "appearances": [
+      {
+        "index": 0,
+        "start": 0,
+        "seconds": 18,
+        "offset": 0
+      },
+      {
+        "index": 4,
+        "start": 235.72512500000002,
+        "seconds": 7,
+        "offset": 18
+      },
+      {
+        "index": 9,
+        "start": 514.4905,
+        "seconds": 7,
+        "offset": 25
+      },
+      {
+        "index": 21,
+        "start": 1165.2483749999997,
+        "seconds": 10,
+        "offset": 32
+      }
+    ],
+    "renderedFrames": 1050,
+    "mouthCues": 299,
+    "frameEvidence": [
+      {
+        "time": 2,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "B",
+        "morphPeak": 0.10096021947873408,
+        "head": [
+          -0.03623168594214282,
+          0.0010837576194652595,
+          -0.023595050605742008,
+          0.9990642361982195
+        ],
+        "appearance": 0,
+        "lessonTime": 2
+      },
+      {
+        "time": 20,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "F",
+        "morphPeak": 0.33360768175581873,
+        "head": [
+          -0.00212748998682542,
+          -0.03952981208910183,
+          -0.0235361316228827,
+          0.9989388852140852
+        ],
+        "appearance": 1,
+        "lessonTime": 237.72512500000002
+      },
+      {
+        "time": 27,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "A",
+        "morphPeak": 0.10096021947876682,
+        "head": [
+          -0.006904670443494633,
+          -0.004478501681037221,
+          -0.03734108881585386,
+          0.9992686847757458
+        ],
+        "appearance": 2,
+        "lessonTime": 516.4905
+      },
+      {
+        "time": 34,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "X",
+        "morphPeak": 0.9898214418809379,
+        "head": [
+          -0.007585863401306072,
+          0.006823245831746484,
+          -0.03357522787922963,
+          0.9993841129800028
+        ],
+        "appearance": 3,
+        "lessonTime": 1167.2483749999997
+      }
+    ]
+  },
+  "originalAudioPreserved": true,
+  "originalAudioHash": "SHA256=3f7723732a1188daa872fa608ba2521ad55c7505e6f3980b212a062cb69c4f32",
+  "sidecarsPreserved": true,
+  "sha256": "20a586c4cdba9a48160b2f99cde4ad32649ea95dc1cc4a9e3dd213b5df79fe27",
+  "visualReviewContactSheet": "qa-frames.jpg",
+  "humanListeningReview": false
+}
