@@ -28,13 +28,13 @@ for mat in bpy.data.materials:
  mat.use_nodes=True;nodes=mat.node_tree.nodes;nodes.clear();p=nodes.new('ShaderNodeBsdfPrincipled');output=nodes.new('ShaderNodeOutputMaterial');mat.node_tree.links.new(p.outputs['BSDF'],output.inputs['Surface'])
  p.inputs['Metallic'].default_value=0;p.inputs['Roughness'].default_value=.72 if part=='body' else .58
  if 'Specular' in p.inputs:p.inputs['Specular'].default_value=.25
- image=bpy.data.images.load(str(color),check_existing=True);image.scale(min(image.size[0],2048),min(image.size[1],2048));image.file_format='PNG';image.filepath_raw=str(out/(part+'-color.png'));image.save()
+ image=bpy.data.images.load(str(color),check_existing=False);image.scale(min(image.size[0],2048),min(image.size[1],2048));image.file_format='PNG';image.filepath_raw=str(out/(part+'-color.png'));image.save()
  tex=nodes.new('ShaderNodeTexImage');tex.image=image;mat.node_tree.links.new(tex.outputs['Color'],p.inputs['Base Color'])
  if part=='opacity':
   mat.node_tree.links.new(tex.outputs['Alpha'],p.inputs['Alpha']);mat.blend_method='HASHED';mat.use_backface_culling=False
  normal=asset/f'Textures/m020_{part}_normal.tga'
  if normal.exists():
-  im=bpy.data.images.load(str(normal),check_existing=True);im.scale(min(im.size[0],1024),min(im.size[1],1024));im.colorspace_settings.name=noncolor;im.file_format='PNG';im.filepath_raw=str(out/(part+'-normal.png'));im.save()
+  im=bpy.data.images.load(str(normal),check_existing=False);im.scale(min(im.size[0],1024),min(im.size[1],1024));im.colorspace_settings.name=noncolor;im.file_format='PNG';im.filepath_raw=str(out/(part+'-normal.png'));im.save()
   nt=nodes.new('ShaderNodeTexImage');nt.image=im;nm=nodes.new('ShaderNodeNormalMap');nm.inputs['Strength'].default_value=.35;mat.node_tree.links.new(nt.outputs['Color'],nm.inputs['Color']);mat.node_tree.links.new(nm.outputs['Normal'],p.inputs['Normal'])
 motions=[]
 for filename,label in [('m_gestic_talk_neutral_01.max.fbx','lecture_talk'),('m_gestic_presentation_right_01.max.fbx','lecture_explain')]:
