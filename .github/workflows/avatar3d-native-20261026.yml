@@ -1,0 +1,54 @@
+name: Prepare the native licensed 3D professor
+on:
+  push:
+    branches: [avatar3d-trial-20261026]
+    paths: ['avatar3d-trial-20261026/prepare_native.py', '.github/workflows/avatar3d-native-20261026.yml']
+permissions:
+  contents: write
+  statuses: write
+  actions: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Stop the superseded converter preparation
+        run: |
+          python - <<'PY'
+          import os,time,json,urllib.request,urllib.error
+          url='https://api.github.com/repos/'+os.environ['GITHUB_REPOSITORY']+'/actions/runs/40384048280'
+          headers={'Authorization':'Bearer '+os.environ['GITHUB_TOKEN']}
+          try:
+            with urllib.request.urlopen(urllib.request.Request(url+'/cancel',data=b'',headers=headers,method='POST'),timeout=20) as r:print(r.status)
+          except urllib.error.HTTPError as exc:
+            if exc.code not in (409,422):raise
+          for attempt in range(18):
+            with urllib.request.urlopen(urllib.request.Request(url,headers=headers),timeout=20) as r:d=json.load(r)
+            if d['status']=='completed':break
+            time.sleep(3)
+          PY
+      - run: pip install pillow
+      - name: Prepare the native rig, textures and existing D narration
+        run: python avatar3d-trial-20261026/prepare_native.py > native-prepare.log 2>&1
+      - name: Retain the complete prepared package
+        if: always()
+        run: |
+          mkdir -p /tmp/avatar3d-native
+          if [ -d avatar3d-output/prepared ]; then cp -r avatar3d-output/prepared/. /tmp/avatar3d-native/; fi
+          if [ -f native-prepare.log ]; then cp native-prepare.log /tmp/avatar3d-native/diagnostics.log; fi
+          git fetch origin avatar3d-assets-20261026
+          git checkout -B avatar3d-assets-20261026 origin/avatar3d-assets-20261026
+          git rm -r --ignore-unmatch preview
+          mkdir -p preview
+          cp -r /tmp/avatar3d-native/. preview/
+          git add preview
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Retain the native licensed 3D rig with verified 90-second D narration'
+            git push origin HEAD:avatar3d-assets-20261026
+          fi

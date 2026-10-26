@@ -34,7 +34,7 @@ jobs:
         run: |
           for attempt in $(seq 1 40); do
             git fetch origin avatar3d-assets-20261026
-            if git cat-file -e origin/avatar3d-assets-20261026:preview/professor.glb 2>/dev/null; then break; fi
+            if git cat-file -e origin/avatar3d-assets-20261026:preview/ready.json 2>/dev/null; then break; fi
             sleep 15
           done
           mkdir -p avatar3d-output/runtime
@@ -42,7 +42,8 @@ jobs:
           import subprocess
           from pathlib import Path
           out=Path('avatar3d-output/runtime')
-          for name in ['professor.glb','model-report.json','lesson.json','mouth.json','narration.wav','captions.srt','captions.vtt','transcript.txt','THIRD_PARTY_LICENSE.txt']:
+          files=subprocess.check_output(['git','ls-tree','-r','--name-only','origin/avatar3d-assets-20261026'],text=True).splitlines()
+          for name in [p.removeprefix('preview/') for p in files if p.startswith('preview/')]:
             (out/name).write_bytes(subprocess.check_output(['git','show','origin/avatar3d-assets-20261026:preview/'+name]))
           PY
       - name: Render and retain real 3D preview frames and the requested sample
