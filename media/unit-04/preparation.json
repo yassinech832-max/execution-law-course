@@ -1,0 +1,38 @@
+{
+  "unit": 4,
+  "sourceCommit": "32ac469a40b3aacaa31a1ff184fee7f69e55e1c9",
+  "appearances": [
+    {
+      "index": 0,
+      "start": 0,
+      "seconds": 18,
+      "offset": 0
+    },
+    {
+      "index": 4,
+      "start": 265.00325000000004,
+      "seconds": 7,
+      "offset": 18
+    },
+    {
+      "index": 9,
+      "start": 596.4344166666666,
+      "seconds": 7,
+      "offset": 25
+    },
+    {
+      "index": 18,
+      "start": 1165.8120833333328,
+      "seconds": 10,
+      "offset": 32
+    }
+  ],
+  "audioSource": "/home/runner/work/execution-law-course/execution-law-course/media/unit-04/lecture.mp4",
+  "publishedTextPreserved": true,
+  "sidecarHashes": {
+    "transcript.txt": "024a2280dcbda9627f09f55ef15558e6780b597f74379b366072da7c471f57b9",
+    "captions.srt": "6334a0d81e1b6be81e52d0abdc32d6d71d8b668d459c254c218ffbea0ef1c558",
+    "captions.vtt": "caa48d9319cc8b792e0ac0d493e60da996a14eaf27b51ced4d3a6673559779e0",
+    "chapters.vtt": "468b36b779ecb56aa533a8d15c974e994a39e5a14622f4abd4c0b21e178a5edc"
+  }
+}

@@ -1,0 +1,392 @@
+{
+  "status": "PASS",
+  "unit": 4,
+  "title": "حجز ما للمدين لدى الغير",
+  "durationSeconds": 1200.0,
+  "videoDurationSeconds": 1200.0,
+  "audioDurationSeconds": 1200.0,
+  "frames": "30000",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "fps": 25,
+  "voice": "ar-KW-FahedNeural",
+  "naturalSpeechSeconds": 1327.992,
+  "tempo": 1.131844,
+  "plannedThinkingSeconds": 20,
+  "captionCues": 232,
+  "maximumDetectedSilenceSeconds": 10.9192,
+  "fileBytes": 26826216,
+  "source": "مقرر التنفيذ الجبري",
+  "chapters": [
+    {
+      "start": 0,
+      "end": 36.813874999999996,
+      "holds": [],
+      "title": "عندما يكون مال المدين لدى شخص آخر",
+      "refs": [
+        1201,
+        1289
+      ]
+    },
+    {
+      "start": 36.813874999999996,
+      "end": 115.76079166666666,
+      "holds": [],
+      "title": "رسم العلاقة بين ثلاثة أطراف",
+      "refs": [
+        1203,
+        1205
+      ]
+    },
+    {
+      "start": 115.76079166666666,
+      "end": 185.99270833333333,
+      "holds": [],
+      "title": "لماذا تختلف طريقة الإجراء؟",
+      "refs": [
+        1204,
+        1204
+      ]
+    },
+    {
+      "start": 185.99270833333333,
+      "end": 265.00325000000004,
+      "holds": [],
+      "title": "الحجز يبدأ تحفظياً",
+      "refs": [
+        1207,
+        1209
+      ]
+    },
+    {
+      "start": 265.00325000000004,
+      "end": 319.8620416666667,
+      "holds": [],
+      "title": "الأمر القضائي ضرورة مستقلة",
+      "refs": [
+        1212,
+        1213
+      ]
+    },
+    {
+      "start": 319.8620416666667,
+      "end": 402.68933333333337,
+      "holds": [],
+      "title": "الجهة المختصة وبيانات الأمر",
+      "refs": [
+        1215,
+        1218
+      ]
+    },
+    {
+      "start": 402.68933333333337,
+      "end": 464.3759166666667,
+      "holds": [],
+      "title": "الحق عند المحافظة والحق عند الاقتضاء",
+      "refs": [
+        1220,
+        1221
+      ]
+    },
+    {
+      "start": 464.3759166666667,
+      "end": 510.3500833333334,
+      "holds": [],
+      "title": "التظلم في تحليل المقرر",
+      "refs": [
+        1223,
+        1224
+      ]
+    },
+    {
+      "start": 510.3500833333334,
+      "end": 596.4344166666666,
+      "holds": [
+        [
+          523.0302916666667,
+          533.0302916666667
+        ]
+      ],
+      "title": "كيف يحصل الحجز؟",
+      "refs": [
+        1226,
+        1227
+      ]
+    },
+    {
+      "start": 596.4344166666666,
+      "end": 663.6553333333333,
+      "holds": [],
+      "title": "مقتضيات التحول إلى التنفيذ",
+      "refs": [
+        1229,
+        1233
+      ]
+    },
+    {
+      "start": 663.6553333333333,
+      "end": 713.7007083333332,
+      "holds": [],
+      "title": "أربعة أوضاع مع وجود السند السابق",
+      "refs": [
+        1234,
+        1241
+      ]
+    },
+    {
+      "start": 713.7007083333332,
+      "end": 759.2295833333332,
+      "holds": [],
+      "title": "عند غياب السند التنفيذي",
+      "refs": [
+        1243,
+        1247
+      ]
+    },
+    {
+      "start": 759.2295833333332,
+      "end": 837.0102499999998,
+      "holds": [],
+      "title": "التقرير يكشف حقيقة العلاقة",
+      "refs": [
+        1250,
+        1254
+      ]
+    },
+    {
+      "start": 837.0102499999998,
+      "end": 911.4406249999997,
+      "holds": [],
+      "title": "ما الذي يغني عن التقرير؟",
+      "refs": [
+        1253,
+        1258
+      ]
+    },
+    {
+      "start": 911.4406249999997,
+      "end": 1005.5062499999997,
+      "holds": [],
+      "title": "التقرير وشكله والمنازعة فيه",
+      "refs": [
+        1260,
+        1269
+      ]
+    },
+    {
+      "start": 1005.5062499999997,
+      "end": 1076.310708333333,
+      "holds": [],
+      "title": "المسؤولية الشخصية لا تقع تلقائياً",
+      "refs": [
+        1271,
+        1276
+      ]
+    },
+    {
+      "start": 1076.310708333333,
+      "end": 1122.3272916666663,
+      "holds": [],
+      "title": "شروط الدعوى وحدود أثرها",
+      "refs": [
+        1275,
+        1285
+      ]
+    },
+    {
+      "start": 1122.3272916666663,
+      "end": 1165.8120833333328,
+      "holds": [
+        [
+          1145.1643749999996,
+          1155.1643749999996
+        ]
+      ],
+      "title": "تطبيق يجمع المراحل دون خلط",
+      "refs": [
+        1203,
+        1285
+      ]
+    },
+    {
+      "start": 1165.8120833333328,
+      "end": 1199.000041666666,
+      "holds": [],
+      "title": "خلاصة الطريق الإجرائي",
+      "refs": [
+        1201,
+        1289
+      ]
+    }
+  ],
+  "loudnessMeasurement": {
+    "input_i": "-22.13",
+    "input_tp": "-2.43",
+    "input_lra": "3.50",
+    "input_thresh": "-32.36",
+    "output_i": "-16.41",
+    "output_tp": "-1.50",
+    "output_lra": "3.20",
+    "output_thresh": "-26.64",
+    "normalization_type": "dynamic",
+    "target_offset": "0.41"
+  },
+  "decodeCheck": "PASS",
+  "sourceCommit": "94a339c3bda7881dbbc71946c1d3f66b5e68576e",
+  "narrationProfile": {
+    "id": "D",
+    "voice": "ar-KW-FahedNeural",
+    "rate": "-4%",
+    "pitch": "+0Hz",
+    "selectedBy": "course-owner"
+  },
+  "pronunciationTerms": 23,
+  "publishedTextPreserved": true,
+  "normalizedTranscriptSHA256": "d4b91b9fb50df40c3e6aeda7ffb80b0f209ff2f4277e93117d193276999bf614",
+  "sourceMain": "32ac469a40b3aacaa31a1ff184fee7f69e55e1c9",
+  "style": "approved-3d-professor-20261027",
+  "true3D": true,
+  "avatar": {
+    "bones": 81,
+    "vertices": 23430,
+    "morphTargets": 15,
+    "visemeMapping": {
+      "A": [
+        "blendShape1.AA_VI_01_PP"
+      ],
+      "B": [
+        "blendShape1.AA_VI_07_SS"
+      ],
+      "C": [
+        "blendShape1.AA_VI_11_E"
+      ],
+      "D": [
+        "blendShape1.AA_VI_10_aa"
+      ],
+      "E": [
+        "blendShape1.AA_VI_13_O"
+      ],
+      "F": [
+        "blendShape1.AA_VI_14_U"
+      ],
+      "G": [
+        "blendShape1.AA_VI_02_FF"
+      ],
+      "H": [
+        "blendShape1.AA_VI_08_nn"
+      ],
+      "X": []
+    },
+    "animations": [
+      {
+        "name": "lecture_talk",
+        "seconds": 35.56666564941406,
+        "tracks": 81
+      },
+      {
+        "name": "lecture_explain",
+        "seconds": 25.100000381469727,
+        "tracks": 81
+      }
+    ],
+    "true3D": true,
+    "appearances": [
+      {
+        "index": 0,
+        "start": 0,
+        "seconds": 18,
+        "offset": 0
+      },
+      {
+        "index": 4,
+        "start": 265.00325000000004,
+        "seconds": 7,
+        "offset": 18
+      },
+      {
+        "index": 9,
+        "start": 596.4344166666666,
+        "seconds": 7,
+        "offset": 25
+      },
+      {
+        "index": 18,
+        "start": 1165.8120833333328,
+        "seconds": 10,
+        "offset": 32
+      }
+    ],
+    "renderedFrames": 1050,
+    "mouthCues": 321,
+    "frameEvidence": [
+      {
+        "time": 2,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "D",
+        "morphPeak": 0.33360768175583044,
+        "head": [
+          -0.03623168594214282,
+          0.0010837576194652595,
+          -0.023595050605742008,
+          0.9990642361982195
+        ],
+        "appearance": 0,
+        "lessonTime": 2
+      },
+      {
+        "time": 20,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "B",
+        "morphPeak": 0.05,
+        "head": [
+          -0.00212748998682542,
+          -0.03952981208910183,
+          -0.0235361316228827,
+          0.9989388852140852
+        ],
+        "appearance": 1,
+        "lessonTime": 267.00325000000004
+      },
+      {
+        "time": 27,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "B",
+        "morphPeak": 0.05,
+        "head": [
+          -0.006904670443494633,
+          -0.004478501681037221,
+          -0.03734108881585386,
+          0.9992686847757458
+        ],
+        "appearance": 2,
+        "lessonTime": 598.4344166666666
+      },
+      {
+        "time": 34,
+        "triangles": 8186,
+        "gesture": 0,
+        "mouth": "A",
+        "morphPeak": 0.9898214418809379,
+        "head": [
+          -0.0012299395763884682,
+          -0.024071340234034507,
+          -0.009366966457331125,
+          0.9996655992527268
+        ],
+        "appearance": 3,
+        "lessonTime": 1167.8120833333328
+      }
+    ]
+  },
+  "originalAudioPreserved": true,
+  "originalAudioHash": "SHA256=2917777a6c7c205de7bad79678d67ed6d0436c965bb5b11393853adcbef1317e",
+  "sidecarsPreserved": true,
+  "sha256": "75f2b9ccec71a7385ee7fddc40bfb1ab359482d6ac81f4ff8094d6eb1f5e62cc",
+  "visualReviewContactSheet": "qa-frames.jpg",
+  "humanListeningReview": false
+}
